@@ -1,0 +1,23 @@
+<html>
+<title>
+Planets Today
+</title>
+
+<table>
+	<tr>
+		<th>Planet</th>
+		<th>Sign</th>
+		<th>Degree</th>
+	</tr>
+	
+	{% for p in all_objs %}
+	<tr>
+		<td>{{p.id}}</td>
+		<td>{{p.sign}}</td>
+		<td>{{p.lon|round(2, 'floor')}}</td>
+	</tr>
+	
+		{% endfor %}
+</table>
+
+	</html>
