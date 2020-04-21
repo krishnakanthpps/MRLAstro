@@ -14,7 +14,7 @@ def index():
 def user(name):
 	return '<h1>Hello, {}!</h1>'.format(name)
 
-@app.route('/today')	
+@app.route('/ephemeris')	
 def getChart():
 	date = Datetime('2020/04/21', '12:06', '-07:00')
 	pos = GeoPos('38n32', '8w54')
@@ -36,7 +36,7 @@ def getChart():
 	#sun.id, sun.lon, sun.sign, son.signlon, sun.lonspeed
 
 	#pass chart object to template
-	return render_template('planets.html', all_objs=all_objs)
+	return render_template('ephemeris.html', all_objs=all_objs)
 
 
 	
