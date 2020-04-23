@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>Your horoscope</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      
+      .container {
+  		position: fixed;
+  		top: 10;
+  		left: 10;
+  		width: 300px;
+        border: 5px solid #F08080;
+      }
+
+    </style>
+
+<body>
+
+<!-- print chart data -->
+ <div class="container">
+
+<b>Your details:</b>
+<br>
+<br>
+Name: {{ birth_name }}
+<br>
+Date of Birth: {{ dob }}
+<br>
+Place of Birth: {{ city }}
+<br>
+Time of Birth: {{ tob }}
+<br>
+Time Zone: {{ tz }}
+<br>
+<br>
+{{ planets_dict['Sun'][0]  }}
+
+</div>
+
+
+</body>
+
+	</html>

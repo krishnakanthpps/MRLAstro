@@ -32,7 +32,7 @@ def showchart():
 	country = request.form['country']
 	city = request.form['city']
 	state = request.form['state']
-
+	
 	day = request.form['dob_day']
 	month = request.form['dob_month']
 	year = request.form['dob_year']
@@ -51,17 +51,19 @@ def showchart():
 
 	#get all the planetary and house positions
 	#pass all parameters generated above
-	planets_dict, houses_dict = calc_allpos()
+	planets_dict, houses_dict = calc_allpos(dob, tob, city, tz)
 	#sun = planets_dict['Sun'][0]
 
 	## DEBUG ##
+	city_lat, city_lon = get_lat_lon(city)
 	print("Name: "+birth_name)
 	print("DOB: "+dob)
-	print("Place: "+country)
-	print("Time: "+tob)
+	print("City: "+city+" "+str(city_lat)+" "+str(city_lon))
+	print("Time: "+str(tob))
 	print("Timezone: "+tz)
+
 	#return redirect(url_for('showchart'))
-	#return render_template('enterdetails.html', planets_dict=planets_dict, houses_dict=houses_dict)
+	return render_template('display_chart.html', planets_dict=planets_dict, houses_dict=houses_dict, birth_name=birth_name, dob=dob, city=city, tob=tob, tz=tz)
 
 
 @app.route('/user/<name>')

@@ -2,6 +2,7 @@ from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
 from flatlib.chart import Chart
 from flatlib import const
+from geopy.geocoders import Nominatim
 
 # Convert 23d 30' 30" to 23.508333 degrees
 from_dms = lambda degs, mins, secs: degs + mins/60 + secs/3600
@@ -24,14 +25,27 @@ def decdeg2dms(dd):
 	deg,mnt = divmod(mnt,60)
 	return deg,mnt,sec
 
+#convert
+
+#Get the latitude and longitude
+def get_lat_lon(city):
+	geolocator = Nominatim(user_agent="mrlastro")
+	location = geolocator.geocode(city)
+	lat = location.latitude
+	lon = location.longitude
+
+	return lat, lon
+
 #create and return the chart dict
-def calc_allpos():
+#calc_allpos(dob, tob, city_lat_lon, tz)
+def calc_allpos(dob, tob, city, tz):
 	#declare an empty dict to store chart objs
 	planets_dict = {}
 	houses_dict = {}
 
-	date = Datetime('2020/04/22', '19:14', '-07:00')
-	geopos = GeoPos('33n60', '117w80')
+	date = Datetime(dob, tob, tz)
+	city_lat, city_lon = get_lat_lon(city)
+	geopos = GeoPos(city_lat, city_lon)
 	chart = Chart(date, geopos, hsys=const.HOUSES_PLACIDUS, IDs=const.LIST_OBJECTS)
 
 	sun = chart.getObject(const.SUN)
@@ -85,7 +99,11 @@ def calc_allpos():
 
 
 if __name__ == "__main__":
-	planets,houses = calc_allpos()
-
-	print(planets['Sun'])
+	
+	#planets,houses = calc_allpos()
+	print(get_lat_lon('Bangalore'))
+	print(get_lat_lon('Visakhapatnam'))
+	print(get_lat_lon('hyderabad'))
+	print(get_lat_lon('sydney'))
+	#print(planets['Sun'])
 
