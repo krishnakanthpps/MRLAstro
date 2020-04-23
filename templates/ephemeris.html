@@ -11,12 +11,19 @@
   		width: 300px;
         border: 5px solid #F08080;
       }
+       .horoscope-form {
+  		position: fixed;
+  		top: 300;
+  		left: 10;
+  		width: 300px;
+        border: 5px solid #F08080;
+      }
     </style>
 
 <body>
 
+<!-- print ephemeris data -->
  <div class="container">
-
 <table>
 	<tr>
 		<th>Planet</th>
@@ -33,11 +40,32 @@
 	
 		{% endfor %}
 </table>
-
-
 </div>
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- horoscope form -->
+<div class="horoscope-form">
+<form action="/createchart" method="post">
+
+  <select name="country" class="countries order-alpha limit-pop-5000 presel-byip " id="countryId">
+    <option value="">Select Country</option>
+	</select>
+	<select name="state" class="states order-alpha" id="stateId">
+    <option value="">Select State</option>
+	</select>
+	<select name="city" class="cities order-alpha" id="cityId">
+    <option value="">Select City</option>
+	</select>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+	<script src="//geodata.solutions/includes/countrystatecity.js"></script>
+
+	<input type="submit" value="Submit"></input>
+
+
+</form>
+</div>
+
 
 </body>
 
