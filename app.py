@@ -20,39 +20,43 @@ def enterdetails():
 	#shows horoscope details entry form
 	return render_template('enterdetails.html')
 
-#Chart creation page
+# Display the chart
 @app.route('/showchart', methods=['GET','POST'])
 def showchart():
 	
-	#get the date and tob from form
-	#get the pob from form, html input formats below
-	#Time: 3 03 03
-	#Timezone: -6
+	#Get name, location from form
 	birth_name = request.form['birth_name']
 	country = request.form['country']
 	city = request.form['city']
 	state = request.form['state']
 	
+	#generate dob in yyyy/mm/dd format
 	day = request.form['dob_day']
 	month = request.form['dob_month']
 	year = request.form['dob_year']
-	#generate dob in yyyy/mm/dd format
 	dob = year+'/'+month+'/'+day
 
+	#generate tob in hh:mm format
 	hour = request.form['tob_hour']
 	minute = request.form['tob_minute']
 	second = request.form['tob_second']
-	#generate tob in hh:mm format
 	tob = hour+":"+minute
 
-	tz = request.form['timezone']
 	#generate tz in +/-hh:mm format
+	tz = request.form['timezone']
 	tz = tz+":"+"00"
 
-	#get all the planetary and house positions
-	#pass all parameters generated above
+	#get all the planetary and house positions for loc without formatting
 	planets_dict, houses_dict = calc_allpos(dob, tob, city, tz)
-	#sun = planets_dict['Sun'][0]
+	
+	#Get objects per each zodiac sign
+	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
+	
+	p_and_h_dict = {}
+
+	#Generate dict for jinja2 with planets, houses and their positions
+	for sign in zs_list:
+		p_and_h_dict[sign] = getPrintableObjects(sign, planets_dict, houses_dict)
 
 	## DEBUG ##
 	city_lat, city_lon = get_lat_lon(city)
@@ -61,15 +65,12 @@ def showchart():
 	print("City: "+city+" "+str(city_lat)+" "+str(city_lon))
 	print("Time: "+str(tob))
 	print("Timezone: "+tz)
+	print("############# P, H POSITIONS ##########")
+	print(p_and_h_dict)
 
-	#return redirect(url_for('showchart'))
-	return render_template('display_chart.html', planets_dict=planets_dict, houses_dict=houses_dict, birth_name=birth_name, dob=dob, city=city, tob=tob, tz=tz)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict)
 
-
-@app.route('/user/<name>')
-def user(name):
-	return '<h1>Hello, {}!</h1>'.format(name)
-
+#Displays current planetary positions
 @app.route('/ephemeris')	
 def ephemeris():
 	date = Datetime('2020/04/21', '12:06', '-07:00')

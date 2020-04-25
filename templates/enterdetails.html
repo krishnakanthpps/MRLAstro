@@ -37,7 +37,7 @@ Enter your details to generate your horoscope.
 Day:
 <select id="form_dob_day" name="dob_day">
   <option value="-">-</option>
-  <option value="1">1</option>
+  <option value="1" selected>1</option>
   <option value="2">2</option>
   <option value="3">3</option>
   <option value="4">4</option>
@@ -73,7 +73,7 @@ Day:
 Month:
 <select id="form_dob_month" name="dob_month">
   <option value="-">-</option>
-  <option value="1">January</option>
+  <option value="1" selected>January</option>
   <option value="2">Febuary</option>
   <option value="3">March</option>
   <option value="4">April</option>
@@ -107,7 +107,7 @@ document.getElementById("form_dob_year").innerHTML = options;
 Hours:
 <select id="form_tob_hour" name="tob_hour">
   <option value="-">-</option>
-  <option value="0">00</option>
+  <option value="0" selected>00</option>
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -134,7 +134,7 @@ Hours:
 </select>
 Minutes: 
 <select id="form_tob_minute" name="tob_minute">
-<option value="00">00</option>
+<option value="00" selected>00</option>
 <option value="01">01</option>
 <option value="02">02</option>
 <option value="03">03</option>
@@ -197,7 +197,7 @@ Minutes:
 </select>
 Seconds:
 <select id="form_tob_second" name="tob_second">
-<option value="00">00</option>
+<option value="00" selected>00</option>
 <option value="01">01</option>
 <option value="02">02</option>
 <option value="03">03</option>
@@ -262,7 +262,7 @@ Seconds:
 Timezone:
 <select id="form_timezone" name="timezone">
   <option value="-12">(GMT-12:00) International Date Line West</option>
-  <option value="-11">(GMT-11:00) Midway Island, Samoa</option>
+  <option value="-11" selected>(GMT-11:00) Midway Island, Samoa</option>
   <option value="-10">(GMT-10:00) Hawaii</option>
   <option value="-9">(GMT-09:00) Alaska</option>
   <option value="-8">(GMT-08:00) Pacific Time (US & Canada)</option>
@@ -348,18 +348,17 @@ Timezone:
 <br>
 <b>Select place of birth:</b>
 <br>
-
-  <select name="country" class="countries order-alpha limit-pop-5000 presel-byip " id="countryId">
+<select name="country" class="countries order-alpha limit-pop-1000000 presel-US" id="countryId">
     <option value="">Select Country</option>
-  </select>
-  <select name="state" class="states order-alpha" id="stateId">
+</select>
+<select name="state" class="states order-alpha" id="stateId">
     <option value="">Select State</option>
-  </select>
-  <select name="city" class="cities order-alpha" id="cityId">
+</select>
+<select name="city" class="cities order-alpha" id="cityId">
     <option value="">Select City</option>
-  </select>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-  <script src="//geodata.solutions/includes/countrystatecity.js"></script>
+</select>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script src="//geodata.solutions/includes/countrystatecity.js"></script>
 <br>
 <br>
   <input type="submit" value="Submit"></input>

@@ -29,10 +29,12 @@ def decdeg2dms(dd):
 
 #Get the latitude and longitude
 def get_lat_lon(city):
-	geolocator = Nominatim(user_agent="mrlastro")
-	location = geolocator.geocode(city)
-	lat = location.latitude
-	lon = location.longitude
+	#geolocator = Nominatim(user_agent="mrlastro")
+	#location = geolocator.geocode(city)
+	#lat = location.latitude
+	#lon = location.longitude
+	lat = "000"
+	lon = "000"
 
 	return lat, lon
 
@@ -73,6 +75,8 @@ def calc_allpos(dob, tob, city, tz):
 			planets_dict[p.id] = [p.sign, to_dms_prec(p.signlon)]
 
 
+	print(planets_dict)
+
 	#Get the house positions
 	house1 = chart.get(const.HOUSE1)
 	house2 = chart.get(const.HOUSE2)
@@ -96,6 +100,42 @@ def calc_allpos(dob, tob, city, tz):
 
 	#return planets_dict and houses_dict
 	return planets_dict, houses_dict
+
+#Get lists per zodiac sign that we can inject into jinja2 template
+def getPrintableObjects(sign, planets_dict, houses_dict):
+	#print('in funcs, zsign is: '+sign)
+	p_list = []
+	h_list = []
+	house_chars_dict = {'House1': 'I','House2': 'II','House3': 'III','House4': 'IV','House5': 'V','House6': 'VI','House7': 'VII','House8': 'VIII','House9': 'IX','House10': 'X','House11': 'XI','House12': 'XII',}
+
+	#Get a list of printable planets with deg, mins
+	for p,z in planets_dict.items():
+		if z[0] == sign:
+			#print("Getting planetary degrees and minutes for: "+sign)
+			dg_mn = z[1][0:2]
+			dg = dg_mn[0]
+			mn = dg_mn[1]
+			dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
+			p_list.append(dgmn_str)
+			#print(p_list)
+
+	#Get a list of houses with house char, deg, mins
+	for h,z in houses_dict.items():
+		if z[0] == sign:
+			dg_mn = z[1][0:2]
+			dg = dg_mn[0]
+			mn = dg_mn[1]
+			#Get house symbol
+			h = house_chars_dict[h]
+
+			dgmn_str = h+' '+str(dg)+"'"+str(mn)+'"'
+			h_list.append(dgmn_str)
+
+	#Append the planet and house lists
+	p_and_h_list = p_list + h_list
+	p_and_h_list.sort()
+
+	return p_and_h_list
 
 
 if __name__ == "__main__":
