@@ -45,7 +45,10 @@ def get_lat_lon(city):
 #calc_allpos(dob, tob, city_lat_lon, tz)
 def calc_allpos(dob, tob, city, tz):
 	#declare an empty dict to store chart objs
+	#stores sign+lon
 	planets_dict = {}
+	#dict to contain lon only
+	planets_dict_lon_only = {}
 	houses_dict = {}
 
 	date = Datetime(dob, tob, tz)
@@ -72,13 +75,18 @@ def calc_allpos(dob, tob, city, tz):
 	for p in planets_list:
 		if p.id == 'North Node':
 			planets_dict['Rahu'] = [p.sign, decdeg2dms(p.signlon)]
+			planets_dict_lon_only['Rahu'] = [p.sign, p.lon]
 		elif p.id == 'South Node':
 			planets_dict['Ketu'] = [p.sign, decdeg2dms(p.signlon)]
+			planets_dict_lon_only['Ketu'] = [p.sign, p.lon]
 		else:
 			planets_dict[p.id] = [p.sign, decdeg2dms(p.signlon)]
+			planets_dict_lon_only[p.id] = [p.sign, p.lon]
 
 
 	print(planets_dict)
+	print("############")
+	print(planets_dict_lon_only)
 
 	#Get the house positions
 	house1 = chart.get(const.HOUSE1)
@@ -102,7 +110,7 @@ def calc_allpos(dob, tob, city, tz):
 
 
 	#return planets_dict and houses_dict
-	return planets_dict, houses_dict
+	return planets_dict, houses_dict, planets_dict_lon_only
 
 #Get lists per zodiac sign that we can inject into jinja2 template
 def getPrintableObjects(sign, planets_dict, houses_dict):
@@ -120,7 +128,7 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			mn = dg_mn[1]
 			dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
 			p_list.append(dgmn_str)
-			#print(p_list)
+			print(p_list)
 
 	#Get a list of houses with house char, deg, mins
 	for h,z in houses_dict.items():
@@ -140,18 +148,64 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 
 	return p_and_h_list
 
-def getNavamsa(deg):
-	return 0
+
+def navamsa_from_long(sign, planets_dict_lon_only):
+
+	sign_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
+	nav_list = []
+
+	for p,z in planets_dict_lon_only.items():
+		longitude = planets_dict_lon_only[p][1]
+		one_pada = (360 / (12 * 9))  # There are also 108 navamsas
+		one_sign = 12 * one_pada    # = 40 degrees exactly
+		signs_elapsed = longitude / one_sign
+		fraction_left = signs_elapsed % 1
+		navamsa_sign_num = int(fraction_left * 12)
+		#we now know which sign the navamsa falls under
+		navamsa_sign_name = sign_list[navamsa_sign_num]
+		#add planet to the list if it falls in 'sign' navamsa
+		if navamsa_sign_name == sign:
+			#truncate planet name to first two chars
+			p = p[0:2]
+			nav_list.append(p)
+
+	return nav_list
+
+
+
+# def navamsa_from_long(planets_dict_lon_only):
+#   """Calculates the navamsa-sign in which given longitude falls
+#   0 = Aries, 1 = Taurus, ..., 11 = Pisces
+#   """
+# 	sign_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
+# 	navamsa_dict = {}
+	
+# 	for p,z in planets_dict_lon_only.items():
+# 		longitude = planets_dict_lon_only[p][1]
+# 		one_pada = (360 / (12 * 9))  # There are also 108 navamsas
+# 		one_sign = 12 * one_pada    # = 40 degrees exactly
+# 		signs_elapsed = longitude / one_sign
+# 		fraction_left = signs_elapsed % 1
+# 		navamsa_sign_num = int(fraction_left * 12)
+#   		#we now know which sign the navamsa falls under
+# 		navamsa_sign_name = sign_list[navamsa_sign_num]
+# 		navamsa_dict[p] = navamsa_sign_name
+
+	return navamsa_dict
 
 
 if __name__ == "__main__":
 	
-	#planets,houses = calc_allpos()
-	print(get_lat_lon('Bangalore'))
-	print(get_lat_lon('Visakhapatnam'))
-	print(get_lat_lon('hyderabad'))
-	print(get_lat_lon('sydney'))
+	planets,houses = calc_allpos()
+	#print(get_lat_lon('Bangalore'))
+	#print(get_lat_lon('Visakhapatnam'))
+	#print(get_lat_lon('hyderabad'))
+	#print(get_lat_lon('sydney'))
 	#print(planets['Sun'])
-	print("printing deg2dms output..")
-	print(decdeg2dms(130.5))
+	#print("printing deg2dms output..")
+	#print(decdeg2dms(130.5))
+
+	#print("navamsa for 352.7901809551436")
+	#print(navamsa_from_long(352.7901809551436))
+
 

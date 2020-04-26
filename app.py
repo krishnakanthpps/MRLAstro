@@ -16,10 +16,10 @@ def index():
 	return '<h1>Hello, {}!</h1>'.format(name)
 
 #Chart creation page
-@app.route('/enterdetails', methods=['GET'])
-def enterdetails():
+@app.route('/horoscope', methods=['GET'])
+def horoscope():
 	#shows horoscope details entry form
-	return render_template('enterdetails.html')
+	return render_template('enter_details.html')
 
 # Display the chart
 @app.route('/showchart', methods=['GET','POST'])
@@ -30,6 +30,7 @@ def showchart():
 	country = request.form['country']
 	city = request.form['city']
 	state = request.form['state']
+	city_lat, city_lon = get_lat_lon(city)
 	
 	#generate dob in yyyy/mm/dd format
 	day = request.form['dob_day']
@@ -49,28 +50,37 @@ def showchart():
 	#tz = '+05:30'
 
 	#get all the planetary and house positions for loc without formatting
-	planets_dict, houses_dict = calc_allpos(dob, tob, city, tz)
+	planets_dict, houses_dict, planets_dict_lon_only = calc_allpos(dob, tob, city, tz)
 	
 	#Get objects per each zodiac sign
 	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
 	
 	p_and_h_dict = {}
+	navamsa_dict = {}
 
 	#Generate dict for jinja2 with planets, houses and their positions
 	for sign in zs_list:
 		p_and_h_dict[sign] = getPrintableObjects(sign, planets_dict, houses_dict)
 
+	#Returns dict with keys = zodiac sign; value = list of planets in that navamsa
+	for sign in zs_list:
+		navamsa_dict[sign] = navamsa_from_long(sign, planets_dict_lon_only)
+
+
 	## DEBUG ##
-	city_lat, city_lon = get_lat_lon(city)
+	print("############PRINTING NAVAMSA DICT###########")
+	print(navamsa_dict)
+	print("###########################################")
+	
 	print("Name: "+birth_name)
 	print("DOB: "+dob)
 	print("City: "+city+" "+str(city_lat)+" "+str(city_lon))
 	print("Time: "+str(tob))
 	print("Timezone: "+tz)
-	print("############# P, H POSITIONS ##########")
-	print(p_and_h_dict)
+	#print("############# P, H POSITIONS ##########")
+	#print(p_and_h_dict)
 
-	return render_template('display_chart.html', birth_name=birth_name, dob=dob, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict)
 
 #Displays current planetary positions
 @app.route('/ephemeris')	

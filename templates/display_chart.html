@@ -101,9 +101,9 @@ Time Zone: {{ tz }}
 <b>Natal Chart</b>
 <br>
 <br>
-<svg width="800" height="800">
+<svg width="400" height="400">
   <!-- pi, ar, ta, ge -->
-  <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
 
       {% set count = namespace(value=15) %}
       {% for obj in p_and_h_dict['Pisces'] %}
@@ -111,21 +111,21 @@ Time Zone: {{ tz }}
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
-  <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
             {% set count = namespace(value=15) %}
       {% for obj in p_and_h_dict['Aries'] %}
           <text x="110" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
-  <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=15) %}
       {% for obj in p_and_h_dict['Taurus'] %}
           <text x="210" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
-  <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=15) %}
       {% for obj in p_and_h_dict['Gemini'] %}
           <text x="310" y="{{ count.value }}">{{ obj }}</text>
@@ -133,21 +133,21 @@ Time Zone: {{ tz }}
         {% endfor %}
 
   <!-- aq, cn, cp, le -->
-  <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=115) %}
       {% for obj in p_and_h_dict['Aquarius'] %}
           <text x="10" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
-  <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
         {% set count = namespace(value=115) %}
       {% for obj in p_and_h_dict['Cancer'] %}
           <text x="310" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
-  <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=215) %}
       {% for obj in p_and_h_dict['Capricorn'] %}
           <text x="10" y="{{ count.value }}">{{ obj }}</text>
@@ -155,7 +155,7 @@ Time Zone: {{ tz }}
         {% endfor %}
 
 
-  <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=215) %}
       {% for obj in p_and_h_dict['Leo'] %}
           <text x="310" y="{{ count.value }}">{{ obj }}</text>
@@ -163,28 +163,28 @@ Time Zone: {{ tz }}
         {% endfor %}
 
   <!--sg, sc, lib, vi-->
-  <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=315) %}
       {% for obj in p_and_h_dict['Sagittarius'] %}
           <text x="10" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
-  <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=315) %}
       {% for obj in p_and_h_dict['Scorpio'] %}
           <text x="110" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
-  <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=315) %}
       {% for obj in p_and_h_dict['Libra'] %}
           <text x="210" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
-  <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+  <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=315) %}
       {% for obj in p_and_h_dict['Virgo'] %}
           <text x="310" y="{{ count.value }}">{{ obj }}</text>
@@ -193,7 +193,108 @@ Time Zone: {{ tz }}
 
 </svg>
 
+<!-- NAVAMSA CHART STARTING HERE-->
+
+<br>
+<b>Navamsa Chart</b>
+<br>
+<br>
+<svg width="400" height="400">
+
+<rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+
+      {% set count = namespace(value=15) %}
+      {% for obj in navamsa_dict['Pisces'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+            {% set count = namespace(value=15) %}
+      {% for obj in navamsa_dict['Aries'] %}
+          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=15) %}
+      {% for obj in navamsa_dict['Taurus'] %}
+          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=15) %}
+      {% for obj in navamsa_dict['Gemini'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <!-- aq, cn, cp, le -->
+  <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=115) %}
+      {% for obj in navamsa_dict['Aquarius'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+        {% set count = namespace(value=115) %}
+      {% for obj in navamsa_dict['Cancer'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=215) %}
+      {% for obj in navamsa_dict['Capricorn'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+
+  <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=215) %}
+      {% for obj in navamsa_dict['Leo'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <!--sg, sc, lib, vi-->
+  <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in navamsa_dict['Sagittarius'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in navamsa_dict['Scorpio'] %}
+          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in navamsa_dict['Libra'] %}
+          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in navamsa_dict['Virgo'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+</svg>
+<br>
+<br>
+
 </div>
+
 
 </body>
 
