@@ -23,18 +23,21 @@ def to_dms(deg):
 def decdeg2dms(dd):
 	mnt,sec = divmod(dd*3600,60)
 	deg,mnt = divmod(mnt,60)
-	return deg,mnt,sec
+	deg = round(deg)
+	mnt = round(mnt)
+	sec = round(sec)
+	return [deg,mnt,sec]
 
 #convert
 
 #Get the latitude and longitude
 def get_lat_lon(city):
-	#geolocator = Nominatim(user_agent="mrlastro")
-	#location = geolocator.geocode(city)
-	#lat = location.latitude
-	#lon = location.longitude
-	lat = "000"
-	lon = "000"
+	geolocator = Nominatim(user_agent="mrlastro")
+	location = geolocator.geocode(city)
+	lat = location.latitude
+	lon = location.longitude
+	#lat = "000"
+	#lon = "000"
 
 	return lat, lon
 
@@ -68,11 +71,11 @@ def calc_allpos(dob, tob, city, tz):
 	#iterate and put into dict
 	for p in planets_list:
 		if p.id == 'North Node':
-			planets_dict['Rahu'] = [p.sign, to_dms_prec(p.signlon)]
+			planets_dict['Rahu'] = [p.sign, decdeg2dms(p.signlon)]
 		elif p.id == 'South Node':
-			planets_dict['Ketu'] = [p.sign, to_dms_prec(p.signlon)]
+			planets_dict['Ketu'] = [p.sign, decdeg2dms(p.signlon)]
 		else:
-			planets_dict[p.id] = [p.sign, to_dms_prec(p.signlon)]
+			planets_dict[p.id] = [p.sign, decdeg2dms(p.signlon)]
 
 
 	print(planets_dict)
@@ -95,7 +98,7 @@ def calc_allpos(dob, tob, city, tz):
 
 	#add the house pos to houses_dict
 	for h in house_list:
-		houses_dict[h.id] = [h.sign, to_dms_prec(h.signlon)]		
+		houses_dict[h.id] = [h.sign, decdeg2dms(h.signlon)]		
 
 
 	#return planets_dict and houses_dict
@@ -131,11 +134,14 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			dgmn_str = h+' '+str(dg)+"'"+str(mn)+'"'
 			h_list.append(dgmn_str)
 
-	#Append the planet and house lists
+	#Append the planet and house lists and return per zodiac sign
 	p_and_h_list = p_list + h_list
 	p_and_h_list.sort()
 
 	return p_and_h_list
+
+def getNavamsa(deg):
+	return 0
 
 
 if __name__ == "__main__":
@@ -146,4 +152,6 @@ if __name__ == "__main__":
 	print(get_lat_lon('hyderabad'))
 	print(get_lat_lon('sydney'))
 	#print(planets['Sun'])
+	print("printing deg2dms output..")
+	print(decdeg2dms(130.5))
 

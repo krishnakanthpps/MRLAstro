@@ -5,11 +5,12 @@ from flatlib.chart import Chart
 from flatlib import const
 from funcs import *
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'abcdefghij'
 
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET'])
 def index():
 	name = 'aditya'
 	return '<h1>Hello, {}!</h1>'.format(name)
@@ -44,7 +45,8 @@ def showchart():
 
 	#generate tz in +/-hh:mm format
 	tz = request.form['timezone']
-	tz = tz+":"+"00"
+	#tz = tz+":"+"00"
+	#tz = '+05:30'
 
 	#get all the planetary and house positions for loc without formatting
 	planets_dict, houses_dict = calc_allpos(dob, tob, city, tz)
@@ -111,4 +113,5 @@ def ephemeris():
 	return render_template('ephemeris.html', all_objs=all_objs)
 
 
-	
+if __name__ == "__main__":
+     app.run()

@@ -1,29 +1,91 @@
 <html>
   <head>
+    <meta charset="utf-8"/>
     <title>Your horoscope</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
-  <!--  <style type="text/css">
-      
-      .container {
-  		position: fixed;
-  		top: 10;
-  		left: 10;
-      height: 1000px
-  		width: 1000px;
-      border: 1px solid #F08080;
-      }
 
-    </style>
--->
+<style>
+
+h1 {
+  color: maroon;
+  margin-left: 40px;
+}
+
+h2 {
+  color: maroon;
+  text-align: center;
+}
+
+h3 {
+  color: maroon;
+  margin-left: 40px;
+}  
+
+p {
+  color: maroon;
+  text-align: left;
+  
+}  
+
+.details {
+  color: maroon;
+}
+
+.sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #E0BBE4;
+  overflow-x: hidden;
+  padding-top: 100px;
+}
+
+.sidenav a {
+  padding: 25px 8px 6px 16px;
+  text-decoration: none;
+  color: maroon;
+  font-size: 20px;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+ /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+</style>
+
 <body>
+<div class="sidenav">
+  <a href="#panchanga">Panchanga</a>
+  <a href="#ephemeris">Ephemeris</a>
+  <a href="#horoscope">Horoscope</a>
+  <a href="#contact">Contact</a>
+</div>
 
+<div class="main">
+<h2> MRL Astro</h2>
+<p><b>E.K | C.V.V | M.N | M.R.L</b></p>
 <!-- print chart data -->
- <div class="container">
 
-<b>Your details:</b>
 <br>
 <br>
+<p>
 Name: {{ birth_name }}
 <br>
 Date of Birth: {{ dob }}
@@ -33,61 +95,106 @@ Place of Birth: {{ city }}
 Time of Birth: {{ tob }}
 <br>
 Time Zone: {{ tz }}
-<br>
-<br>
-<!--{{ planets_dict['Sun'][0]  }} -->
-<br>
+</p>
 <br>
 
-
-<!--
-<canvas id="myCanvas" width="200" height="100"></canvas>
-<script type="text/javascript">
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
-ctx.moveTo(0, 0);
-ctx.lineTo(200, 100);
-ctx.stroke();
-
-</script>
--->
-
-<svg width="1600" height="1600">
+<b>Natal Chart</b>
+<br>
+<br>
+<svg width="800" height="800">
   <!-- pi, ar, ta, ge -->
-  <rect id="pi" x="0" y="0" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
+  <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
 
       {% set count = namespace(value=15) %}
+      {% for obj in p_and_h_dict['Pisces'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+            {% set count = namespace(value=15) %}
+      {% for obj in p_and_h_dict['Aries'] %}
+          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+      {% set count = namespace(value=15) %}
+      {% for obj in p_and_h_dict['Taurus'] %}
+          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+      {% set count = namespace(value=15) %}
+      {% for obj in p_and_h_dict['Gemini'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <!-- aq, cn, cp, le -->
+  <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+      {% set count = namespace(value=115) %}
+      {% for obj in p_and_h_dict['Aquarius'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+        {% set count = namespace(value=115) %}
+      {% for obj in p_and_h_dict['Cancer'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+      {% set count = namespace(value=215) %}
+      {% for obj in p_and_h_dict['Capricorn'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+
+  <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+      {% set count = namespace(value=215) %}
+      {% for obj in p_and_h_dict['Leo'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <!--sg, sc, lib, vi-->
+  <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+      {% set count = namespace(value=315) %}
       {% for obj in p_and_h_dict['Sagittarius'] %}
           <text x="10" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
-  <rect x="100" y="0" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
-  <rect x="200" y="0" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
-  <rect x="300" y="0" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
-  <!-- aq, cn, cp, le -->
-  <rect x="0" y="100" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
-  <rect x="300" y="100" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
-  <rect x="0" y="200" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
-  <rect x="300" y="200" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
-  <!--sg, sc, lib, vi-->
-  <rect x="0" y="300" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
+  <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in p_and_h_dict['Scorpio'] %}
+          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
 
+  <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in p_and_h_dict['Libra'] %}
+          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
 
-  <rect x="100" y="300" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
-  <rect x="200" y="300" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
-  <rect x="300" y="300" width="100" height="100" stroke="black" fill="transparent" stroke-width="1"/>
+  <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="3"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in p_and_h_dict['Virgo'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
 </svg>
-
-<!--add zodiac names to chart -->
-<script type="text/javascript">
-
-
-
-</script>
 
 </div>
 
 </body>
 
-	</html>
+</html>
