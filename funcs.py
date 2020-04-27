@@ -127,7 +127,8 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			dg_mn = z[1][0:2]
 			dg = dg_mn[0]
 			mn = dg_mn[1]
-			dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
+			#dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
+			dgmn_str = p[0:2]+' '+str(dg)+"d"+str(mn)+'m'
 			p_list.append(dgmn_str)
 			#print(p_list)
 
@@ -139,12 +140,13 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			mn = dg_mn[1]
 			#Get house symbol
 			h = house_chars_dict[h]
-			dgmn_str = h+' '+str(dg)+"'"+str(mn)+'"'
+			dgmn_str = h+' '+str(dg)+"d"+str(mn)+'m'
 			h_list.append(dgmn_str)
 
 	#Append the planet and house lists and return per zodiac sign
 	p_and_h_list = p_list + h_list
-	p_and_h_list = natsorted(p_and_h_list)
+	#sort this list from lowest to highest
+	p_and_h_list.sort(key=lambda x : x.split('d')[0].split(' ')[1])
 
 	return p_and_h_list
 

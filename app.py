@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = 'abcdefghij'
 @app.route('/', methods=['GET'])
 def index():
 	name = 'aditya'
-	return '<h1>Hello, {}!</h1>'.format(name)
+	return redirect(url_for('horoscope'))
 
 #Chart creation page
 @app.route('/horoscope', methods=['GET'])
