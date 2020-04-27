@@ -2,28 +2,20 @@
   <head>
     <title>MRL Ephemeris</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <style type="text/css">
-      .container {
-  		position: fixed;
-  		top: 10;
-  		left: 10;
-  		width: 300px;
-        border: 5px solid #F08080;
-      }
-       .horoscope-form {
-  		position: fixed;
-  		top: 300;
-  		left: 10;
-  		width: 300px;
-        border: 5px solid #F08080;
-      }
-    </style>
+
 
 <body>
+<div class="sidenav">
+  <a href="#panchanga">Panchanga</a>
+  <a href="{{ url_for('ephemeris') }}">Ephemeris</a>
+  <a href="{{ url_for('horoscope') }}">Horoscope</a>
+  <a href="#contact">Contact</a>
+</div>
 
 <!-- print ephemeris data -->
- <div class="container">
+ <div class="main">
 <table>
 	<tr>
 		<th>Planet</th>

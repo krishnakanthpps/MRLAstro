@@ -24,6 +24,7 @@ Jinja2==2.11.2
 jmespath==0.9.5
 kappa==0.6.0
 MarkupSafe==1.1.1
+natsort==7.0.1
 pip-tools==5.0.0
 placebo==0.9.0
 pyswisseph==2.0.0.post2

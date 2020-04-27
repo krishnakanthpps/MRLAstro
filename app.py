@@ -79,6 +79,12 @@ def showchart():
 	print("Timezone: "+tz)
 	#print("############# P, H POSITIONS ##########")
 	#print(p_and_h_dict)
+	print("####### PRINTING PLANETS_DICT ##########")
+	print(planets_dict)
+	print("####### PRINTING HOUSES_DICT ##########")
+	print(houses_dict)
+	print("####### PRINTING P AND H DICT ##########")
+	print(p_and_h_dict)
 
 	return render_template('display_chart.html', birth_name=birth_name, dob=dob, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict)
 

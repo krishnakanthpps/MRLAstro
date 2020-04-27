@@ -3,6 +3,7 @@ from flatlib.geopos import GeoPos
 from flatlib.chart import Chart
 from flatlib import const
 from geopy.geocoders import Nominatim
+from natsort import natsorted
 
 # Convert 23d 30' 30" to 23.508333 degrees
 from_dms = lambda degs, mins, secs: degs + mins/60 + secs/3600
@@ -128,7 +129,7 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			mn = dg_mn[1]
 			dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
 			p_list.append(dgmn_str)
-			print(p_list)
+			#print(p_list)
 
 	#Get a list of houses with house char, deg, mins
 	for h,z in houses_dict.items():
@@ -138,13 +139,12 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			mn = dg_mn[1]
 			#Get house symbol
 			h = house_chars_dict[h]
-
 			dgmn_str = h+' '+str(dg)+"'"+str(mn)+'"'
 			h_list.append(dgmn_str)
 
 	#Append the planet and house lists and return per zodiac sign
 	p_and_h_list = p_list + h_list
-	p_and_h_list.sort()
+	p_and_h_list = natsorted(p_and_h_list)
 
 	return p_and_h_list
 
@@ -169,6 +169,7 @@ def navamsa_from_long(sign, planets_dict_lon_only):
 			p = p[0:2]
 			nav_list.append(p)
 
+	nav_list = natsorted(nav_list)
 	return nav_list
 
 

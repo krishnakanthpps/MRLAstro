@@ -2,77 +2,14 @@
   <head>
     <title>MRLAstro - Create Horoscope</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<style>
-
-h1 {
-  color: maroon;
-  margin-left: 40px;
-}
-
-h2 {
-  color: maroon;
-  text-align: center;
-}
-
-h3 {
-  color: maroon;
-  margin-left: 40px;
-}  
-
-p {
-  color: maroon;
-  text-align: left;
-  
-}  
-
-.details {
-  color: maroon;
-}
-
-.sidenav {
-  height: 100%;
-  width: 160px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #E0BBE4;
-  overflow-x: hidden;
-  padding-top: 100px;
-}
-
-.sidenav a {
-  padding: 25px 8px 6px 16px;
-  text-decoration: none;
-  color: maroon;
-  font-size: 20px;
-  display: block;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.main {
-  margin-left: 160px; /* Same as the width of the sidenav */
- /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
 
 
-</style>
-
-<body>
-  <div class="sidenav">
+<div class="sidenav">
   <a href="#panchanga">Panchanga</a>
-  <a href="#ephemeris">Ephemeris</a>
-  <a href="#horoscope">Horoscope</a>
+  <a href="{{ url_for('ephemeris') }}">Ephemeris</a>
+  <a href="{{ url_for('horoscope') }}">Horoscope</a>
   <a href="#contact">Contact</a>
 </div>
 
@@ -80,7 +17,7 @@ p {
 <div class="main">
 <form action="/showchart" method="post">
 
-<h2>MRLAstro</h2>
+<h2>MRL Astro</h2>
 <h3>Sayana Horoscope</h3>
 <br>
 
