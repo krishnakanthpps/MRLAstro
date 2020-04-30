@@ -52,7 +52,7 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			mn = dg_mn[1]
 			ns = p[0:2]+' '+str(dg)+' '+str(mn)
 			test_list.append(ns)
-			dgmn_str = p[0:2]+' '+str(dg)+"d"+str(mn)+'m'
+			dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
 			p_list.append(dgmn_str)
 			#print(p_list)
 
@@ -64,7 +64,7 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			mn = dg_mn[1]
 			#Get house symbol
 			h = house_chars_dict[h]
-			dgmn_str = h+' '+str(dg)+"d"+str(mn)+'m'
+			dgmn_str = h+' '+str(dg)+"'"+str(mn)+'"'
 			h_list.append(dgmn_str)
 
 	#Append the planet and house lists and return per zodiac sign
@@ -76,11 +76,15 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 	#print("PYTHON SORT()")
 	#print(test_list.sort())
 	print("NATURAL SORT()")
-	print(natsorted(test_list))
+	#print(natsorted(test_list))
 	#print("#####")
 
 	#print("NATURAL SORT WITH KEY")
-	#test_list.sort(key=natural_keys)
+	p_and_h_list = p_and_h_list.sort(key=natural_keys)
+	#replace d,m with ' and "
+	for o in p_and_h_list:
+		o = o.replace()
+
 	#print(p_and_h_list)
 
 

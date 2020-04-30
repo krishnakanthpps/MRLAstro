@@ -113,7 +113,14 @@ def calc_allpos(dob, tob, city, tz):
 	#return planets_dict and houses_dict
 	return planets_dict, houses_dict, planets_dict_lon_only
 
-#Get lists per zodiac sign that we can inject into jinja2 template
+#creates sort key for getPrintableObjects(), takes d, m of object
+#strips m, sort by deg only
+def sortkey(obj):
+	d = int(obj.split(' ')[1].split('\'')[0])
+	return d
+
+
+#Get formatted lists of planets, houses per zodiac sign for jinja2 template insertion
 def getPrintableObjects(sign, planets_dict, houses_dict):
 	#print('in funcs, zsign is: '+sign)
 	p_list = []
@@ -128,7 +135,7 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			dg = dg_mn[0]
 			mn = dg_mn[1]
 			#dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
-			dgmn_str = p[0:2]+' '+str(dg)+"d"+str(mn)+'m'
+			dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
 			p_list.append(dgmn_str)
 			#print(p_list)
 
@@ -140,13 +147,14 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			mn = dg_mn[1]
 			#Get house symbol
 			h = house_chars_dict[h]
-			dgmn_str = h+' '+str(dg)+"d"+str(mn)+'m'
+			dgmn_str = h+' '+str(dg)+"'"+str(mn)+'"'
 			h_list.append(dgmn_str)
 
 	#Append the planet and house lists and return per zodiac sign
 	p_and_h_list = p_list + h_list
 	#sort this list from lowest to highest
-	p_and_h_list.sort(key=lambda x : x.split('d')[0].split(' ')[1])
+	#p_and_h_list.sort(key=lambda x : x.split('d')[0].split(' ')[1])
+	p_and_h_list = sorted(p_and_h_list, key=sortkey)
 
 	return p_and_h_list
 
