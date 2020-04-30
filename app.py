@@ -37,6 +37,8 @@ def showchart():
 	month = request.form['dob_month']
 	year = request.form['dob_year']
 	dob = year+'/'+month+'/'+day
+	#format in dd-mm-yyyy format for jinja template display
+	dob_jinja = day+"-"+month+"-"+year
 
 	#generate tob in hh:mm format
 	hour = request.form['tob_hour']
@@ -86,7 +88,7 @@ def showchart():
 	# print("####### PRINTING P AND H DICT ##########")
 	# print(p_and_h_dict)
 
-	return render_template('display_chart.html', birth_name=birth_name, dob=dob, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict)
 
 #Displays current planetary positions
 @app.route('/ephemeris')	
