@@ -2,7 +2,7 @@
 
 h1 {
   color: maroon;
-  margin-left: 40px;
+  
 }
 
 h2 {
@@ -12,7 +12,7 @@ h2 {
 
 h3 {
   color: maroon;
-  margin-left: 40px;
+  text-align: center;
 }  
 
 p {
@@ -25,39 +25,38 @@ p {
   color: maroon;
 }
 
-.sidenav {
-  height: 100%;
-  width: 160px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #E0BBE4;
-  overflow-x: hidden;
-  padding-top: 100px;
-}
-
-.sidenav a {
-  padding: 25px 8px 6px 16px;
-  text-decoration: none;
-  color: maroon;
-  font-size: 20px;
-  display: block;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
 .main {
-  margin-left: 160px; /* Same as the width of the sidenav */
+  margin-left: 10px; /* Same as the width of the sidenav */
  /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
 
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+/* Add a purple background color to the top navigation */
+.topnav {
+  background-color: #800080;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
 }
 
 
