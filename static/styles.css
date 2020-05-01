@@ -7,12 +7,10 @@ h1 {
 
 h2 {
   color: maroon;
-  text-align: center;
 }
 
 h3 {
   color: maroon;
-  text-align: center;
 }  
 
 p {
@@ -58,6 +56,14 @@ p {
   background-color: #4CAF50;
   color: white;
 }
+
+/* display natal and navamsa chart side by side */
+    .natalc, .navamsac {
+      float: left;
+      box-sizing: border-box;
+      width: 50%;
+      padding: 10px;
+    } 
 
 
 </style>

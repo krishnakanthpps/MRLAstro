@@ -6,10 +6,9 @@
     <link rel="stylesheet" href="../static/styles.css">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
-
-
 <body>
-<div class="sidenav">
+
+<div class="topnav">
   <a href="#panchanga">Panchanga</a>
   <a href="{{ url_for('ephemeris') }}">Ephemeris</a>
   <a href="{{ url_for('horoscope') }}">Horoscope</a>
@@ -17,12 +16,13 @@
 </div>
 
 <div class="main">
-<h2> MRL Astro</h2>
-<center><p><b>E.K | C.V.V | M.N | M.R.L</b></p></center>
+<h2 style="text-align:center">MRL Astro</h2>
+<p style="text-align:center">E.K ☉ C.V.V ☉ M.N ☉ M.R.L</p>
+
 <!-- print chart data -->
 
 <br>
-<br>
+
 <p>
 NAME: {{ birth_name }}
 <br>
@@ -36,8 +36,9 @@ Time Zone: {{ tz }}
 </p>
 <br>
 
-<b>Natal Chart</b>
-<br>
+<div class="natalc">
+
+<h3>Natal</h3>
 <br>
 <svg width="400" height="400">
   <!-- pi, ar, ta, ge -->
@@ -130,15 +131,15 @@ Time Zone: {{ tz }}
         {% endfor %}
 
 </svg>
+</div>
 
 <!-- NAVAMSA CHART STARTING HERE-->
 
-<br>
-<b>Navamsa Chart</b>
-<br>
+<div class="navamsac">
+
+<h3>Navamsa</h3>
 <br>
 <svg width="400" height="400">
-
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
 
       {% set count = namespace(value=15) %}
@@ -228,6 +229,8 @@ Time Zone: {{ tz }}
         {% endfor %}
 
 </svg>
+</div>
+
 <br>
 <br>
 

@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="../static/styles.css">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
+<body>
+
 <div class="topnav">
   <a href="#panchanga">Panchanga</a>
   <a href="{{ url_for('ephemeris') }}">Ephemeris</a>
@@ -12,21 +14,21 @@
   <a href="#contact">Contact</a>
 </div>
 
+
 <!-- horoscope entry form -->
 <div class="main">
 <form action="/showchart" method="post">
 
-<h2>MRL Astro</h2>
-<h3>Sayana Horoscope</h3>
-<br>
-<p>E.K | C.V.V | M.N | M.R.L</p>
+<h2 style="text-align:center">MRLAstro</h2>
+<p style="text-align:center">E.K ☉ C.V.V ☉ M.N ☉ M.R.L</p>
 
 <br>
 
-<b>Enter your details to generate your horoscope.</b>
+<br>
 
+<h3>Enter your details to generate your horoscope.</h3>
 <br>
-<br>
+
 <label for="birth_name">Name: </label>
 <input type="text" id="form_dob_name" name="birth_name">
 <br>
@@ -365,6 +367,8 @@ Timezone:
 
 
 </form>
+
+
 </div>
 
 
@@ -372,4 +376,4 @@ Timezone:
 
 
 
-  </html>
+</html>
