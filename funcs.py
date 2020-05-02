@@ -86,9 +86,9 @@ def calc_allpos(dob, tob, city, tz):
 			planets_dict_lon_only[p.id] = [p.sign, p.lon]
 
 
-	print(planets_dict)
-	print("############")
-	print(planets_dict_lon_only)
+	#print(planets_dict)
+	#print("############")
+	#print(planets_dict_lon_only)
 
 	#Get the house positions
 	house1 = chart.get(const.HOUSE1)

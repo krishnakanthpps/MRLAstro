@@ -7,6 +7,14 @@ import datetime
 from datetime import date
 from funcs import *
 from progressions import *
+from jinja2 import Environment, PackageLoader, select_autoescape
+
+env = Environment(
+    loader=PackageLoader('app', 'templates'),
+    autoescape=select_autoescape(['html', 'xml']),
+    keep_trailing_newline=True
+)
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'ff3a5067411e420dcd0245787ba7bc533be5ce4b'
@@ -60,7 +68,6 @@ def showchart():
 	#dicts to store formatted objects in zodiac sign - [planet_positions] format
 	p_and_h_dict = {}
 	navamsa_dict = {}
-	progressions_dict = {}
 
 	#Generate dict for jinja2 with planets, houses and their positions
 	for sign in zs_list:
@@ -70,13 +77,16 @@ def showchart():
 	for sign in zs_list:
 		navamsa_dict[sign] = navamsa_from_long(sign, planets_dict_lon_only)
 
-	#calculate progressions
-	progressions_dict = calc_progressions(dob, tob, city, tz)
-	progressions_dict_h = {}
-	progressions_dict_pr = {}
+	#Progressions dict - calculate progressions
+	prog_pl_dict = {}
+	prog_houses_dict = {}
+
+	prog_pl_dict, prog_houses_dict, prg_details = calc_progressions(dob, tob, city, tz)
+
 	#generate printable objects for progressions
+	progressions_dict_pr = {}
 	for sign in zs_list:	
-		progressions_dict_pr[sign] = getPrintableObjects(sign, progressions_dict, progressions_dict_h)
+		progressions_dict_pr[sign] = getPrintableObjects(sign, prog_pl_dict, prog_houses_dict)
 
 	## DEBUG ##
 	# print("############PRINTING progressions PR DICT###########")
@@ -97,7 +107,7 @@ def showchart():
 	# print("####### PRINTING P AND H DICT ##########")
 	# print(p_and_h_dict)
 
-	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details)
 
 #Displays current planetary positions
 @app.route('/ephemeris')	

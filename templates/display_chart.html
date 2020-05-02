@@ -22,15 +22,15 @@
 <!-- print chart data -->
 
 <br>
-
+<p><b>Birth Details:</b><br>
 <p>
-NAME: {{ birth_name }}
+Name: {{ birth_name }}
 <br>
-D.O.B: {{ dob }}
+Date of Birth: {{ dob }}
 <br>
-P.O.B: {{ city }}
+Place of Birth: {{ city }}
 <br>
-T.O.B: {{ tob }}
+Time of Birth: {{ tob }}
 <br>
 Time Zone: {{ tz }}
 </p>
@@ -237,6 +237,14 @@ Time Zone: {{ tz }}
 <!-- Progressed chart --->
 <div class="progressedc">
 <h3>Progressed Chart</h3>
+<br>
+<p><b>Progression Details:</b><br>
+  <br>
+   Date of Birth: {{prg_details['dob']}}<br>
+   Current Age: {{prg_details['curr_age']}}<br>
+   Current Date: {{prg_details['today_date']}}<br>
+   Progressed date: {{prg_details['prg_date']}}<br>
+ </p>
 <br>
 <svg width="400" height="400">
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>

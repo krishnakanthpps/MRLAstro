@@ -261,7 +261,7 @@ Seconds:
 </select>
 <br>
 <br>
-<p><b>If born outside India, select the correct timezone:</b></p>
+<p><b>(If born outside India, select correct timezone)</b></p>
 Timezone:
 <select id="form_timezone" name="timezone">
   <option value="-12:00">(GMT-12:00) International Date Line West</option>
@@ -347,6 +347,7 @@ Timezone:
   <option value="12:00">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
   <option value="13:00">(GMT+13:00) Nuku'alofa</option>
 </select>   
+
 <br>
 <br>
 <b>Select place of birth:</b>
@@ -363,11 +364,106 @@ Timezone:
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 <script src="//geodata.solutions/includes/countrystatecity.js"></script>
 <br>
+
+
 <br>
+<!-- 
+<b>Select date for Progressions:</b>
+<br>
+
+Day:
+<select id="form_prg_day" name="prg_day">
+  <option value="-">-</option>
+  <option value="1" selected>1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+  <option value="23">23</option>
+  <option value="24">24</option>
+  <option value="25">25</option>
+  <option value="26">26</option>
+  <option value="27">27</option>
+  <option value="28">28</option>
+  <option value="29">29</option>
+  <option value="30">30</option>
+  <option value="31">31</option>
+</select>
+
+Month:
+<select id="form_prg_month" name="prg_month">
+  <option value="-">-</option>
+  <option value="1" selected>January</option>
+  <option value="2">Febuary</option>
+  <option value="3">March</option>
+  <option value="4">April</option>
+  <option value="5">May</option>
+  <option value="6">June</option>
+  <option value="7">July</option>
+  <option value="8">August</option>
+  <option value="9">September</option>
+  <option value="10">October</option>
+  <option value="11">November</option>
+  <option value="12">December</option>
+</select>
+
+
+Year:
+<select id="form_prg_year" name="prg_year"></select>
+<script>
+var start = 1950;
+var end = new Date().getFullYear();
+var options = "";
+for(var year = start ; year <=end; year++){
+  options += "<option>"+ year +"</option>";
+}
+document.getElementById("form_prg_year").innerHTML = options;
+</script>
+
+<br>
+<p>OR 
+<br>
+
+<input type="radio" id="form_prg_date" name="prg_date" value="today">
+<label for="prg_date"> Calculate Progressions for today</label>
+<br>
+</p>
+-->
+<br>
+
   <input type="submit" value="Submit"></input>
 
-
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </div>
