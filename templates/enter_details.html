@@ -9,7 +9,7 @@
 
 <div class="topnav">
   <a href="#panchanga">Panchanga</a>
-  <a href="{{ url_for('ephemeris') }}">Ephemeris</a>
+  <a href="{{ url_for('ephemeris') }}" target="_blank">Ephemeris</a>
   <a href="{{ url_for('horoscope') }}">Horoscope</a>
   <a href="#contact">Contact</a>
 </div>
@@ -26,16 +26,15 @@
 
 <br>
 
-<h3>Enter details to generate horoscope</h3>
+<h3>Sayana Horoscope Generator</h3>
 <br>
-
+<p><b>Enter details below:</b></p>
 <label for="birth_name">Name: </label>
 <input type="text" id="form_dob_name" name="birth_name">
 <br>
 <br>
 <b>Select date of birth:</b>
 <br>
-
 Day:
 <select id="form_dob_day" name="dob_day">
   <option value="-">-</option>
@@ -261,6 +260,8 @@ Seconds:
 <option value="59">59</option>
 </select>
 <br>
+<br>
+<p><b>If born outside India, select the correct timezone:</b></p>
 Timezone:
 <select id="form_timezone" name="timezone">
   <option value="-12:00">(GMT-12:00) International Date Line West</option>
@@ -319,7 +320,7 @@ Timezone:
   <option value="5:00">(GMT+05:00) Yekaterinburg</option>
   <option value="5:00">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
   <option value="5:30">(GMT+05:30) Sri Jayawardenapura</option>
-  <option value="5:30">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+  <option value="5:30" selected>(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
   <option value="5:45">(GMT+05:45) Kathmandu</option>
   <option value="6:00">(GMT+06:00) Almaty, Novosibirsk</option>
   <option value="6:00">(GMT+06:00) Astana, Dhaka</option>
@@ -350,7 +351,7 @@ Timezone:
 <br>
 <b>Select place of birth:</b>
 <br>
-<select name="country" class="countries order-alpha limit-pop-1000000 presel-US" id="countryId">
+<select name="country" class="countries order-alpha limit-pop-1000000 presel-IN" id="countryId">
     <option value="">Select Country</option>
 </select>
 <select name="state" class="states order-alpha" id="stateId">

@@ -69,9 +69,10 @@ def calc_allpos(dob, tob, city, tz):
 	pluto = chart.getObject(const.PLUTO)
 	rahu = chart.getObject(const.NORTH_NODE)
 	ketu = chart.getObject(const.SOUTH_NODE)
+	chiron = chart.getObject(const.CHIRON)
 
 	#put all the planet objects into a list
-	planets_list = [sun,moon,mars,mercury,jupiter,venus,saturn,uranus,neptune,pluto,rahu,ketu]
+	planets_list = [sun,moon,mars,mercury,jupiter,venus,saturn,uranus,neptune,pluto,rahu,ketu,chiron]
 	#iterate and put into dict
 	for p in planets_list:
 		if p.id == 'North Node':
@@ -135,8 +136,12 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			dg = dg_mn[0]
 			mn = dg_mn[1]
 			#dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
-			dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
-			p_list.append(dgmn_str)
+			if p == 'Chiron':
+				dgmn_str = 'K'+' '+str(dg)+"'"+str(mn)+'"'
+				p_list.append(dgmn_str)
+			else:
+				dgmn_str = p[0:2]+' '+str(dg)+"'"+str(mn)+'"'
+				p_list.append(dgmn_str)
 			#print(p_list)
 
 	#Get a list of houses with house char, deg, mins

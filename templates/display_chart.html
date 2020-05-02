@@ -10,7 +10,7 @@
 
 <div class="topnav">
   <a href="#panchanga">Panchanga</a>
-  <a href="{{ url_for('ephemeris') }}">Ephemeris</a>
+  <a href="{{ url_for('ephemeris') }}" target="_blank">Ephemeris</a>
   <a href="{{ url_for('horoscope') }}">Horoscope</a>
   <a href="#contact">Contact</a>
 </div>
@@ -36,9 +36,11 @@ Time Zone: {{ tz }}
 </p>
 <br>
 
-<div class="natalc">
 
-<h3>Natal</h3>
+<!-- Natal Chart -->
+
+<div class="natalc">
+<h3>Birth Chart</h3>
 <br>
 <svg width="400" height="400">
   <!-- pi, ar, ta, ge -->
@@ -231,12 +233,10 @@ Time Zone: {{ tz }}
 </svg>
 </div>
 
-<br>
-<br>
-
+<hr>
+<!-- Progressed chart --->
 <div class="progressedc">
-
-<h3>Progressions</h3>
+<h3>Progressed Chart</h3>
 <br>
 <svg width="400" height="400">
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>

@@ -90,8 +90,8 @@ def showchart():
 	print("Timezone: "+tz)
 	# #print("############# P, H POSITIONS ##########")
 	# #print(p_and_h_dict)
-	# print("####### PRINTING PLANETS_DICT ##########")
-	# print(planets_dict)
+	#print("####### PRINTING PLANETS_DICT ##########")
+	#print(planets_dict)
 	# print("####### PRINTING HOUSES_DICT ##########")
 	# print(houses_dict)
 	# print("####### PRINTING P AND H DICT ##########")
@@ -102,42 +102,43 @@ def showchart():
 #Displays current planetary positions
 @app.route('/ephemeris')	
 def ephemeris():
-	date = Datetime('2020/04/21', '12:06', '-07:00')
-	pos = GeoPos('38n32', '8w54')
-	chart = Chart(date, pos, hsys=const.HOUSES_PLACIDUS)
-	all_objs = chart.objects
+	# date = Datetime('2020/04/21', '12:06', '-07:00')
+	# pos = GeoPos('38n32', '8w54')
+	# chart = Chart(date, pos, hsys=const.HOUSES_PLACIDUS)
+	# all_objs = chart.objects
 
-	#get planets and signs
-	sun = chart.getObject(const.SUN)
-	moon = chart.getObject(const.MOON)
-	mars = chart.getObject(const.MARS)
-	mercury = chart.getObject(const.MERCURY)
-	jupiter = chart.getObject(const.JUPITER)
-	venus = chart.getObject(const.VENUS)
-	saturn = chart.getObject(const.SATURN)
-	rahu = chart.getObject(const.NORTH_NODE)
-	ketu = chart.getObject(const.SOUTH_NODE)
+	# #get planets and signs
+	# sun = chart.getObject(const.SUN)
+	# moon = chart.getObject(const.MOON)
+	# mars = chart.getObject(const.MARS)
+	# mercury = chart.getObject(const.MERCURY)
+	# jupiter = chart.getObject(const.JUPITER)
+	# venus = chart.getObject(const.VENUS)
+	# saturn = chart.getObject(const.SATURN)
+	# rahu = chart.getObject(const.NORTH_NODE)
+	# ketu = chart.getObject(const.SOUTH_NODE)
 
-	#to access attributes
-	#sun.id, sun.lon, sun.sign, son.signlon, sun.lonspeed
+	# #to access attributes
+	# #sun.id, sun.lon, sun.sign, son.signlon, sun.lonspeed
 
-	#Get house objects
-	asc = chart.get(const.ASC)
-	house1 = chart.get(const.HOUSE1)
-	house2 = chart.get(const.HOUSE2)
-	house3 = chart.get(const.HOUSE3)
-	house4 = chart.get(const.HOUSE4)
-	house5 = chart.get(const.HOUSE5)
-	house6 = chart.get(const.HOUSE6)
-	house7 = chart.get(const.HOUSE7)
-	house8 = chart.get(const.HOUSE8)
-	house9 = chart.get(const.HOUSE9)
-	house10 = chart.get(const.HOUSE10)
-	house11 = chart.get(const.HOUSE11)
-	house12 = chart.get(const.HOUSE12)
+	# #Get house objects
+	# asc = chart.get(const.ASC)
+	# house1 = chart.get(const.HOUSE1)
+	# house2 = chart.get(const.HOUSE2)
+	# house3 = chart.get(const.HOUSE3)
+	# house4 = chart.get(const.HOUSE4)
+	# house5 = chart.get(const.HOUSE5)
+	# house6 = chart.get(const.HOUSE6)
+	# house7 = chart.get(const.HOUSE7)
+	# house8 = chart.get(const.HOUSE8)
+	# house9 = chart.get(const.HOUSE9)
+	# house10 = chart.get(const.HOUSE10)
+	# house11 = chart.get(const.HOUSE11)
+	# house12 = chart.get(const.HOUSE12)
 
 	#pass chart object to template
-	return render_template('ephemeris.html', all_objs=all_objs)
+	#return render_template('ephemeris.html', all_objs=all_objs)
+	return redirect("https://www.astro.com/swisseph/swepha_e.htm", code=302)
 
 
 if __name__ == "__main__":
