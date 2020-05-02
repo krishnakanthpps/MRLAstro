@@ -3,11 +3,13 @@ from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
 from flatlib.chart import Chart
 from flatlib import const
+import datetime
+from datetime import date
 from funcs import *
-
+from progressions import *
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'abcdefghij'
+app.config['SECRET_KEY'] = 'ff3a5067411e420dcd0245787ba7bc533be5ce4b'
 
 
 @app.route('/', methods=['GET'])
@@ -30,7 +32,7 @@ def showchart():
 	country = request.form['country']
 	city = request.form['city']
 	state = request.form['state']
-	city_lat, city_lon = get_lat_lon(city)
+	#city_lat, city_lon = get_lat_lon(city)
 	
 	#generate dob in yyyy/mm/dd format
 	day = request.form['dob_day']
@@ -48,37 +50,44 @@ def showchart():
 
 	#generate tz in +/-hh:mm format
 	tz = request.form['timezone']
-	#tz = tz+":"+"00"
-	#tz = '+05:30'
 
-	#get all the planetary and house positions for loc without formatting
+	#get all the planet and house positions (raw - no formatting)
 	planets_dict, houses_dict, planets_dict_lon_only = calc_allpos(dob, tob, city, tz)
 	
-	#Get objects per each zodiac sign
+	#zodiac sign list
 	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
 	
+	#dicts to store formatted objects in zodiac sign - [planet_positions] format
 	p_and_h_dict = {}
 	navamsa_dict = {}
+	progressions_dict = {}
 
 	#Generate dict for jinja2 with planets, houses and their positions
 	for sign in zs_list:
 		p_and_h_dict[sign] = getPrintableObjects(sign, planets_dict, houses_dict)
 
-	#Returns dict with keys = zodiac sign; value = list of planets in that navamsa
+	#Navamsa dict - keys = zodiac sign; value = list of planets in that navamsa
 	for sign in zs_list:
 		navamsa_dict[sign] = navamsa_from_long(sign, planets_dict_lon_only)
 
+	#calculate progressions
+	progressions_dict = calc_progressions(dob, tob, city, tz)
+	progressions_dict_h = {}
+	progressions_dict_pr = {}
+	#generate printable objects for progressions
+	for sign in zs_list:	
+		progressions_dict_pr[sign] = getPrintableObjects(sign, progressions_dict, progressions_dict_h)
 
 	## DEBUG ##
-	# print("############PRINTING NAVAMSA DICT###########")
-	# print(navamsa_dict)
+	# print("############PRINTING progressions PR DICT###########")
+	# print(progressions_dict_pr)
 	# print("###########################################")
 	
-	# print("Name: "+birth_name)
-	# print("DOB: "+dob)
-	# print("City: "+city+" "+str(city_lat)+" "+str(city_lon))
-	# print("Time: "+str(tob))
-	# print("Timezone: "+tz)
+	print("Name: "+birth_name)
+	print("DOB: "+dob)
+	#print("City: "+city+" "+str(city_lat)+" "+str(city_lon))
+	print("Time: "+str(tob))
+	print("Timezone: "+tz)
 	# #print("############# P, H POSITIONS ##########")
 	# #print(p_and_h_dict)
 	# print("####### PRINTING PLANETS_DICT ##########")
@@ -88,7 +97,7 @@ def showchart():
 	# print("####### PRINTING P AND H DICT ##########")
 	# print(p_and_h_dict)
 
-	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr)
 
 #Displays current planetary positions
 @app.route('/ephemeris')	

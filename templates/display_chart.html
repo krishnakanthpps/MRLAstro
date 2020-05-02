@@ -234,6 +234,103 @@ Time Zone: {{ tz }}
 <br>
 <br>
 
+<div class="progressedc">
+
+<h3>Progressions</h3>
+<br>
+<svg width="400" height="400">
+<rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+
+      {% set count = namespace(value=15) %}
+      {% for obj in progressions_dict_pr['Pisces'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+            {% set count = namespace(value=15) %}
+      {% for obj in progressions_dict_pr['Aries'] %}
+          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=15) %}
+      {% for obj in progressions_dict_pr['Taurus'] %}
+          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=15) %}
+      {% for obj in progressions_dict_pr['Gemini'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <!-- aq, cn, cp, le -->
+  <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=115) %}
+      {% for obj in progressions_dict_pr['Aquarius'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+        {% set count = namespace(value=115) %}
+      {% for obj in progressions_dict_pr['Cancer'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=215) %}
+      {% for obj in progressions_dict_pr['Capricorn'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+
+  <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=215) %}
+      {% for obj in progressions_dict_pr['Leo'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <!--sg, sc, lib, vi-->
+  <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in progressions_dict_pr['Sagittarius'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in progressions_dict_pr['Scorpio'] %}
+          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in progressions_dict_pr['Libra'] %}
+          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in progressions_dict_pr['Virgo'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+</svg>
+</div>
+
+<!-- end body div -->
 </div>
 <br>
 <br>

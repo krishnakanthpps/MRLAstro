@@ -58,7 +58,7 @@ p {
 }
 
 /* display natal and navamsa chart side by side */
-    #natalc, #navamsac {
+    #natalc, #navamsac, #progressedc {
       float: left;
       box-sizing: border-box;
       width: 100%;
