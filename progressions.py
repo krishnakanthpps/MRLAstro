@@ -30,7 +30,7 @@ def calc_progressions(dob, tob, city, tz):
 
 	#get current age of person in years to dob_from_prg and get dob_to_prg
 	curr_age = today - dob
-	curr_age_yrs = int((curr_age.days)/365) + 1
+	curr_age_yrs = int((curr_age.days)/365) 
 
 	#add this number of days to dob to get new progressed date
 	prg_date = dob + datetime.timedelta(days=curr_age_yrs)
@@ -50,11 +50,11 @@ def calc_progressions(dob, tob, city, tz):
 
 	prg_details_dict = {}
 	prg_details_dict['dob'] = str(dob_for_prnt)
-	prg_details_dict['curr_age'] = str(curr_age_yrs - 1)
+	prg_details_dict['curr_age'] = str(curr_age_yrs)
 	prg_details_dict['prg_date'] = str(prg_date_prnt)
 	prg_details_dict['today_date'] = str(today_prnt)
 	
-	#print("########## printing PRG PLANETS############")
+	print("\n########## printing PRG PLANETS############")
 	print(prg_details_dict)
 	#print(houses_dict_prg)
 	#print("######### END ##############")
@@ -69,10 +69,10 @@ def calc_progressions(dob, tob, city, tz):
 	#dob_prg = dob.split('/')
 	#planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg = calc_allpos(dob, tob, city, tz)	
 
-dob = '1986/5/28'
-tob = '12:25'
-tz = '5:30'
-city = 'Hyderabad'
+# dob = '1958/3/9'
+# tob = '12:25'
+# tz = '5:30'
+# city = 'Hyderabad'
 
-print("########")
-print(calc_progressions(dob, tob, city, tz))
+# print("########")
+# calc_progressions(dob, tob, city, tz)
