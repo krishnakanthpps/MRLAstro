@@ -24,9 +24,9 @@ p {
 }
 
 .main {
-  margin-left: 10px; /* Same as the width of the sidenav */
+  
  /* Increased text to enable scrolling */
-  padding: 0px 10px;
+  margin-left: 20px;
 }
 
 /* Add a purple background color to the top navigation */
@@ -57,13 +57,7 @@ p {
   color: white;
 }
 
-/* display natal and navamsa chart side by side */
-    #natalc, #navamsac {
-      float: left;
-      box-sizing: border-box;
-      width: 100%;
-      padding: 10px;
-    } 
+
 
 
 </style>

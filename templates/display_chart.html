@@ -15,11 +15,12 @@
   <a href="#contact">Contact</a>
 </div>
 
-<div class="main">
 <h2 style="text-align:center">MRL Astro</h2>
 <p style="text-align:center">E.K ☉ C.V.V ☉ M.N ☉ M.R.L</p>
 
 <!-- print chart data -->
+<div class="main">
+
 
 <br>
 <p><b>Birth Details:</b><br>
@@ -38,8 +39,12 @@ Time Zone: {{ tz }}
 
 
 <!-- Natal Chart -->
+<!-- display natal and navamsa chart side by side as two cells in row -->
+ <div style="width: 100%; display: table;">
+        <div style="display: table-row; height: 500px;">
+            <div style="width: 500px; display: table-cell">
 
-<div class="natalc">
+
 <h3>Birth Chart</h3>
 <br>
 <svg width="400" height="400">
@@ -135,10 +140,10 @@ Time Zone: {{ tz }}
 </svg>
 </div>
 
+
 <!-- NAVAMSA CHART STARTING HERE-->
 
-<div class="navamsac">
-
+<div style="display: table-cell">
 <h3>Navamsa</h3>
 <br>
 <svg width="400" height="400">
@@ -233,12 +238,16 @@ Time Zone: {{ tz }}
 </svg>
 </div>
 
+</div>
+</div>
+
 <hr>
 <!-- Progressed chart --->
-<div class="progressedc">
+
 <h3>Progressed Chart</h3>
 <br>
 <p><b>Progression Details:</b><br>
+
   <br>
    Date of Birth: {{prg_details['dob']}}<br>
    Current Age: {{prg_details['curr_age']}}<br>
@@ -250,7 +259,7 @@ Time Zone: {{ tz }}
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
 
       {% set count = namespace(value=15) %}
-      {% for obj in progressions_dict_pr['Pisces'] %}
+      {% for obj in progressions_dict_pr['Pisces']%}
           <text x="10" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
@@ -336,13 +345,12 @@ Time Zone: {{ tz }}
         {% endfor %}
 
 </svg>
-</div>
 
-<!-- end body div -->
-</div>
 <br>
 <br>
 
+<!-- end main div -->
+</div>
 </body>
 
 </html>
