@@ -14,15 +14,19 @@ def calc_progressions(dob, tob, city, tz):
 	
 	"""
 
-
 	"""
 	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']	
 
-	#make it a datetime object, we set progressed time to utc
+	planets_dict_prg = {}
+	houses_dict_prg = {}
+	planets_dict_lon_only_prg = {}
+	prg_details_dict = {}
 
+	dob_tob = dob+' '+tob
+	dob_tob = datetime.datetime.strptime(dob_tob, "%Y/%m/%d %H:%M")
+	
+	#make it a datetime object
 	dob = datetime.datetime.strptime(dob, "%Y/%m/%d")
-
-	#DOB change format for jinja2
 	dob_for_prnt = dob.strftime('%d-%m-%Y')
 
 	today = datetime.datetime.utcnow()
@@ -32,42 +36,95 @@ def calc_progressions(dob, tob, city, tz):
 	curr_age = today - dob
 	curr_age_yrs = int((curr_age.days)/365) 
 
-	#add this number of days to dob to get new progressed date
-	prg_date = dob + datetime.timedelta(days=curr_age_yrs)
+	prg_date = dob_tob + datetime.timedelta(days=curr_age_yrs)
 
-	#generate d-m-yyyy formatted string for jinja2
-	prg_date_prnt = prg_date.strftime('%d-%m-%Y')
-	#convert the date obj to yyyy/mm/dd string format, also
-	prg_date = prg_date.strftime('%Y/%m/%d')
+	#check if birthday already occured
+	bday_this_year = datetime.datetime(today.year, dob.month, dob.day)
+	bday_previous_year = datetime.datetime(today.year - 1, dob.month, dob.day)
+
+	#check if bday already occured
+	bday_passed = today - bday_this_year
+
+	if bday_passed.days < 0:
+		print('bday yet to occur this year')
+		#calculate number of days elapsed since last years bday
+		days_since_last_bday=(today - bday_previous_year)
+		print('days_since_last_bday: '+str(days_since_last_bday.days))
+		
+		"""convert this into progressed hours to represent year in progressed days
+		1 year = 1 progressed day
+		365 days = 24 progressed hrs
+		1 day = 24/365 progressed hrs"""
+
+		#get hours to add to birthtime 
+		hours_to_add = (days_since_last_bday * 24/365).days
+
+		print("adding these hours to birthtime: "+str(hours_to_add))
+		print("Prg date before adding hours: "+str(prg_date))
+		prg_date = prg_date + datetime.timedelta(hours=hours_to_add)
+
+		print("Prg date after adding hours: "+str(prg_date))
+		#print("New PRG date with hours added is: "+str(prg_date))
+		print("Correct progression date and time: "+str(prg_date))
+		
+		prg_date_prnt = prg_date
+		prg_date = prg_date.strftime('%Y/%m/%d')
+
+		#format change for jinja2
+		prg_date_prnt = prg_date_prnt.strftime('%m-%d-%Y')
+
+		#Generate the new progressed chart objects for the new date
+		planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg = calc_allpos(prg_date, tob, city, tz)
+		prg_details_dict['dob'] = str(dob_for_prnt)
+		prg_details_dict['curr_age'] = str(curr_age_yrs)
+		prg_details_dict['prg_date'] = str(prg_date_prnt)
+		prg_details_dict['today_date'] = str(today_prnt)
 	
 
-	#Generate the new progressed chart objects for the new date
-	planets_dict_prg = {}
-	houses_dict_prg = {}
-	planets_dict_lon_only_prg = {}
+		#return planets_dict_prg, houses_dict_prg, prg_details_dict
 
-	planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg = calc_allpos(prg_date, tob, city, tz)
+	else:
+		#This block executes if birthday has already passed in current year
+		print('bday has passed')
+		#calculate number of days elapsed since current year bday
+		days_since_last_bday=(today - bday_this_year)
+		print('days_since_last_bday: '+str(days_since_last_bday.days))
+		
+		"""convert this into progressed hours to represent year in progressed days
+		1 year = 1 progressed day
+		365 days = 24 progressed hrs
+		1 day = 24/365 progressed hrs"""
 
-	prg_details_dict = {}
-	prg_details_dict['dob'] = str(dob_for_prnt)
-	prg_details_dict['curr_age'] = str(curr_age_yrs)
-	prg_details_dict['prg_date'] = str(prg_date_prnt)
-	prg_details_dict['today_date'] = str(today_prnt)
+		#get hours to add to birthtime 
+		hours_to_add = (days_since_last_bday * 24/365).days
+
+		print("adding these hours to birthtime: "+str(hours_to_add))
+		print("Prg date before adding hours: "+str(prg_date))
+		prg_date = prg_date + datetime.timedelta(hours=hours_to_add)
+
+		print("Prg date after adding hours: "+str(prg_date))
+		#print("New PRG date with hours added is: "+str(prg_date))
+		print("Correct progression date and time: "+str(prg_date))
+		
+		prg_date_prnt = prg_date
+		prg_date = prg_date.strftime('%Y/%m/%d')
+
+		#format change for jinja2
+		prg_date_prnt = prg_date_prnt.strftime('%m-%d-%Y')
+
+		#Generate the new progressed chart objects for the new date
+		planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg = calc_allpos(prg_date, tob, city, tz)
+		prg_details_dict['dob'] = str(dob_for_prnt)
+		prg_details_dict['curr_age'] = str(curr_age_yrs)
+		prg_details_dict['prg_date'] = str(prg_date_prnt)
+		prg_details_dict['today_date'] = str(today_prnt)
+
 	
-	print("\n########## printing PRG PLANETS############")
-	print(prg_details_dict)
-	#print(houses_dict_prg)
-	#print("######### END ##############")
 
 	return planets_dict_prg, houses_dict_prg, prg_details_dict
 
 
-	#generate the progressed chart for this to date
-
-
-	#end_date = date_1 + datetime.timedelta(days=34)
-	#dob_prg = dob.split('/')
-	#planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg = calc_allpos(dob, tob, city, tz)	
+""" DEBUGGING 
 
 # dob = '1958/3/9'
 # tob = '12:25'
@@ -76,3 +133,15 @@ def calc_progressions(dob, tob, city, tz):
 
 # print("########")
 # calc_progressions(dob, tob, city, tz)
+
+dob='1958/3/9'
+dob = datetime.datetime.strptime(dob, "%Y/%m/%d")
+today = datetime.datetime.utcnow()
+curr_age = today - dob
+curr_age_yrs = int((curr_age.days)/365)
+prg_date = dob + datetime.timedelta(days=curr_age_yrs)
+
+print('Progressed date is: '+str(prg_date))
+print('Age: '+str(curr_age_yrs))
+
+"""
