@@ -71,7 +71,7 @@ def calc_progressions(dob, tob, city, tz):
 		prg_date = prg_date.strftime('%Y/%m/%d')
 
 		#format change for jinja2
-		prg_date_prnt = prg_date_prnt.strftime('%m-%d-%Y')
+		prg_date_prnt = prg_date_prnt.strftime('%d-%m-%Y')
 
 		#Generate the new progressed chart objects for the new date
 		planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg = calc_allpos(prg_date, tob, city, tz)
@@ -110,7 +110,7 @@ def calc_progressions(dob, tob, city, tz):
 		prg_date = prg_date.strftime('%Y/%m/%d')
 
 		#format change for jinja2
-		prg_date_prnt = prg_date_prnt.strftime('%m-%d-%Y')
+		prg_date_prnt = prg_date_prnt.strftime('%d-%m-%Y')
 
 		#Generate the new progressed chart objects for the new date
 		planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg = calc_allpos(prg_date, tob, city, tz)
