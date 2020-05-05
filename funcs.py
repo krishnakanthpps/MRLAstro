@@ -122,11 +122,14 @@ def sortkey(obj):
 
 
 #Get formatted lists of planets, houses per zodiac sign for jinja2 template insertion
-def getPrintableObjects(sign, planets_dict, houses_dict):
+def getPrintableObjects(sign, planets_dict, houses_dict, p_only=False):
 	#print('in funcs, zsign is: '+sign)
 	p_list = []
 	h_list = []
-	house_chars_dict = {'House1': 'I','House2': 'II','House3': 'III','House4': 'IV','House5': 'V','House6': 'VI','House7': 'VII','House8': 'VIII','House9': 'IX','House10': 'X','House11': 'XI','House12': 'XII',}
+	house_chars_dict = {'House1': 'I','House2': 'II','House3': 'III','House4': 'IV','House5': 'V','House6': 'VI','House7': 'VII','House8': 'VIII','House9': 'IX','House10': 'X','House11': 'XI','House12': 'XII'}
+
+	#reverse the sort order of objects by degree for these signs (print descending to ascending)
+	rev_deg_signs = ['Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
 
 	#Get a list of printable planets with deg, mins
 	for p,z in planets_dict.items():
@@ -145,21 +148,26 @@ def getPrintableObjects(sign, planets_dict, houses_dict):
 			#print(p_list)
 
 	#Get a list of houses with house char, deg, mins
-	for h,z in houses_dict.items():
-		if z[0] == sign:
-			dg_mn = z[1][0:2]
-			dg = dg_mn[0]
-			mn = dg_mn[1]
-			#Get house symbol
-			h = house_chars_dict[h]
-			dgmn_str = h+' '+str(dg)+"'"+str(mn)+'"'
-			h_list.append(dgmn_str)
+	#only calculate houses if p_only is set to False
+	if not p_only:
+		for h,z in houses_dict.items():
+			if z[0] == sign:
+				dg_mn = z[1][0:2]
+				dg = dg_mn[0]
+				mn = dg_mn[1]
+				#Get house symbol
+				h = house_chars_dict[h]
+				dgmn_str = h+' '+str(dg)+"'"+str(mn)+'"'
+				h_list.append(dgmn_str)
 
 	#Append the planet and house lists and return per zodiac sign
 	p_and_h_list = p_list + h_list
-	#sort this list from lowest to highest
-	#p_and_h_list.sort(key=lambda x : x.split('d')[0].split(' ')[1])
-	p_and_h_list = sorted(p_and_h_list, key=sortkey)
+
+	#sort this list from lowest to highest for Ar - Sc and in reverse from Sg to Pi
+	if sign in rev_deg_signs:
+		p_and_h_list = sorted(p_and_h_list, key=sortkey, reverse=True)
+	else:
+		p_and_h_list = sorted(p_and_h_list, key=sortkey)
 
 	return p_and_h_list
 

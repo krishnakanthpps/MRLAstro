@@ -88,18 +88,23 @@ def showchart():
 	for sign in zs_list:	
 		progressions_dict_pr[sign] = getPrintableObjects(sign, prog_pl_dict, prog_houses_dict)
 
+	#Generate transit chart objects dict
+	p_and_h_dict_transits = calc_transits()
+	#print(p_and_h_dict_transits)
+
+
 	## DEBUG ##
 	# print("############PRINTING progressions PR DICT###########")
 	# print(progressions_dict_pr)
 	# print("###########################################")
 	
-	print("Name: "+birth_name)
-	print("DOB: "+dob)
+	#print("Name: "+birth_name)
+	#print("DOB: "+dob)
 	#print("City: "+city+" "+str(city_lat)+" "+str(city_lon))
-	print("Time: "+str(tob))
-	print("Timezone: "+tz)
+	#print("Time: "+str(tob))
+	#print("Timezone: "+tz)
 	# #print("############# P, H POSITIONS ##########")
-	# #print(p_and_h_dict)
+	#print(p_and_h_dict)
 	#print("####### PRINTING PLANETS_DICT ##########")
 	#print(planets_dict)
 	# print("####### PRINTING HOUSES_DICT ##########")
@@ -107,7 +112,7 @@ def showchart():
 	# print("####### PRINTING P AND H DICT ##########")
 	# print(p_and_h_dict)
 
-	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits)
 
 #Displays current planetary positions
 @app.route('/ephemeris')	

@@ -42,7 +42,7 @@ Time Zone: {{ tz }}
 <!-- display natal and navamsa chart side by side as two cells in row -->
  <div style="width: 100%; display: table;">
         <div style="display: table-row; height: 500px;">
-            <div style="width: 500px; display: table-cell">
+            <div style="width: 450px; display: table-cell">
 
 
 <h3>Birth Chart</h3>
@@ -244,17 +244,13 @@ Time Zone: {{ tz }}
 <hr>
 <!-- Progressed chart --->
 
-<h3>Progressed Chart</h3>
-<br>
-<p><b>Progression Details:</b><br>
+ <div style="width: 100%; display: table;">
+        <div style="display: table-row; height: 500px;">
+            <div style="width: 450px; display: table-cell">
 
-  <br>
-   Date of Birth: {{prg_details['dob']}}<br>
-   Current Age: {{prg_details['curr_age']}}<br>
-   Current Date: {{prg_details['today_date']}}<br>
-   Progressed date: {{prg_details['prg_date']}}<br>
- </p>
+<h3>Progressions</h3>
 <br>
+
 <svg width="400" height="400">
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
 
@@ -345,8 +341,118 @@ Time Zone: {{ tz }}
         {% endfor %}
 
 </svg>
-
 <br>
+<p>
+   Date of Birth: {{prg_details['dob']}}<br>
+   Current Age: {{prg_details['curr_age']}}<br>
+   Current Date: {{prg_details['today_date']}}<br>
+   Progressed date: {{prg_details['prg_date']}}<br>
+ </p>
+
+</div>
+<br>
+
+<!-- Progressed chart --->
+<div style="display: table-cell">
+<h3>Transits</h3>
+<br>
+<svg width="400" height="400">
+<rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+
+      {% set count = namespace(value=15) %}
+      {% for obj in p_and_h_dict_transits['Pisces']%}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+            {% set count = namespace(value=15) %}
+      {% for obj in p_and_h_dict_transits['Aries'] %}
+          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=15) %}
+      {% for obj in p_and_h_dict_transits['Taurus'] %}
+          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=15) %}
+      {% for obj in p_and_h_dict_transits['Gemini'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <!-- aq, cn, cp, le -->
+  <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=115) %}
+      {% for obj in p_and_h_dict_transits['Aquarius'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+        {% set count = namespace(value=115) %}
+      {% for obj in p_and_h_dict_transits['Cancer'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=215) %}
+      {% for obj in p_and_h_dict_transits['Capricorn'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+
+  <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=215) %}
+      {% for obj in p_and_h_dict_transits['Leo'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <!--sg, sc, lib, vi-->
+  <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in p_and_h_dict_transits['Sagittarius'] %}
+          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in p_and_h_dict_transits['Scorpio'] %}
+          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in p_and_h_dict_transits['Libra'] %}
+          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+  <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
+      {% set count = namespace(value=315) %}
+      {% for obj in p_and_h_dict_transits['Virgo'] %}
+          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          {% set count.value = count.value + 15 %}
+        {% endfor %}
+
+</svg>
+</div>
+
+</div>
+</div>
+
+
+
 <br>
 
 <!-- end main div -->

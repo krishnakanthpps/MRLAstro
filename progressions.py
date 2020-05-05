@@ -8,6 +8,9 @@ import datetime
 from datetime import date
 
 
+zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']	
+
+
 #planets_dict, houses_dict, planets_dict_lon_only = calc_allpos(dob, tob, city, tz)
 
 def calc_progressions(dob, tob, city, tz):
@@ -15,8 +18,6 @@ def calc_progressions(dob, tob, city, tz):
 	"""
 
 	"""
-	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']	
-
 	planets_dict_prg = {}
 	houses_dict_prg = {}
 	planets_dict_lon_only_prg = {}
@@ -98,13 +99,13 @@ def calc_progressions(dob, tob, city, tz):
 		#get hours to add to birthtime 
 		hours_to_add = (days_since_last_bday * 24/365).days
 
-		print("adding these hours to birthtime: "+str(hours_to_add))
-		print("Prg date before adding hours: "+str(prg_date))
+		#print("adding these hours to birthtime: "+str(hours_to_add))
+		#print("Prg date before adding hours: "+str(prg_date))
 		prg_date = prg_date + datetime.timedelta(hours=hours_to_add)
 
-		print("Prg date after adding hours: "+str(prg_date))
+		#print("Prg date after adding hours: "+str(prg_date))
 		#print("New PRG date with hours added is: "+str(prg_date))
-		print("Correct progression date and time: "+str(prg_date))
+		#print("Correct progression date and time: "+str(prg_date))
 		
 		prg_date_prnt = prg_date
 		prg_date = prg_date.strftime('%Y/%m/%d')
@@ -123,14 +124,40 @@ def calc_progressions(dob, tob, city, tz):
 
 	return planets_dict_prg, houses_dict_prg, prg_details_dict
 
+#calculates transits for current utc time
+def calc_transits():
 
-""" DEBUGGING 
+	planets_dict_transit= {}
+	houses_dict_transit = {}
+	planets_dict_lon_only_transit = {}
+	p_and_h_dict_transit = {}
+
+	today = datetime.datetime.utcnow()
+	transit_date = today.strftime('%Y/%m/%d')
+	transit_time = today.strftime('%H:%M')
+
+	#Set the timezone to UTC/GMT, we calculate transits to this timezone
+	tz = "00:00"
+	city = "London"
+
+	planets_dict_transit, houses_dict_transit, planets_dict_lon_only_transit = calc_allpos(transit_date, transit_time, city, tz)
+
+	for sign in zs_list:
+		p_and_h_dict_transit[sign] = getPrintableObjects(sign, planets_dict_transit, houses_dict_transit, p_only=True)
+
+	return p_and_h_dict_transit
+
+
+#DEBUGGING 
 
 # dob = '1958/3/9'
 # tob = '12:25'
 # tz = '5:30'
 # city = 'Hyderabad'
 
+# calc_transits(dob, tob, city, tz)
+
+"""
 # print("########")
 # calc_progressions(dob, tob, city, tz)
 
@@ -143,5 +170,5 @@ prg_date = dob + datetime.timedelta(days=curr_age_yrs)
 
 print('Progressed date is: '+str(prg_date))
 print('Age: '+str(curr_age_yrs))
-
 """
+
