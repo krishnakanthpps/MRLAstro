@@ -1,4 +1,5 @@
 from flask import Flask, render_template, session, redirect, url_for, request, redirect
+from jinja2 import Environment, PackageLoader, select_autoescape
 from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
 from flatlib.chart import Chart
@@ -7,7 +8,8 @@ import datetime
 from datetime import date
 from funcs import *
 from progressions import *
-from jinja2 import Environment, PackageLoader, select_autoescape
+from shadvarga import *
+
 
 env = Environment(
     loader=PackageLoader('app', 'templates'),
@@ -88,10 +90,12 @@ def showchart():
 	for sign in zs_list:	
 		progressions_dict_pr[sign] = getPrintableObjects(sign, prog_pl_dict, prog_houses_dict)
 
-	#Generate transit chart objects dict
+	#Generate transit chart 
 	p_and_h_dict_transits = calc_transits()
 	#print(p_and_h_dict_transits)
 
+	#####Generate Sharvargas####
+	hora_dict = calc_horas(planets_dict_lon_only)
 
 	## DEBUG ##
 	# print("############PRINTING progressions PR DICT###########")
@@ -106,13 +110,13 @@ def showchart():
 	# #print("############# P, H POSITIONS ##########")
 	#print(p_and_h_dict)
 	#print("####### PRINTING PLANETS_DICT ##########")
-	#print(planets_dict)
+	#print(hora_dict)
 	# print("####### PRINTING HOUSES_DICT ##########")
 	# print(houses_dict)
 	# print("####### PRINTING P AND H DICT ##########")
 	# print(p_and_h_dict)
 
-	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict)
 
 #Displays current planetary positions
 @app.route('/ephemeris')	

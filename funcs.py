@@ -171,7 +171,7 @@ def getPrintableObjects(sign, planets_dict, houses_dict, p_only=False):
 
 	return p_and_h_list
 
-
+#returns list of planets per navamsa sign
 def navamsa_from_long(sign, planets_dict_lon_only):
 
 	sign_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
