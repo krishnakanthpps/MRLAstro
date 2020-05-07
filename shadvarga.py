@@ -1,5 +1,12 @@
+
+#some lists
+zs_odd_signs = ['Aries', 'Gemini', 'Leo','Libra', 'Sagittarius', 'Aquarius']
+
+zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
+
+
 """
-	Returns hora of planet given the below example dictionary
+	Returns HORA of planet given the below example dictionary
 	
 	{'Sun': ['Capricorn', 279.9196373475607], 'Moon': ['Sagittarius', 269.1425613804137], 'Mars': ['Capricorn', 283.6911963266094], 'Mercury': ['Sagittarius', 258.7059129886326], 'Jupiter': ['Sagittarius', 241.09105316185673], 'Venus': ['Aquarius', 306.0894496658849], 'Saturn': ['Sagittarius', 267.6901331020929], 'Uranus': ['Sagittarius', 250.1264855882071], 'Neptune': ['Gemini', 85.22504147608478], 'Pluto': ['Gemini', 75.25527693994611], 'Rahu': ['Sagittarius', 259.17343174945495], 'Ketu': ['Gemini', 79.17343174945495], 'Chiron': ['Sagittarius', 258.8702714981658]}
 
@@ -10,7 +17,7 @@ def calc_horas(planets_dict):
 	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
 
 	#one hora is 15 deg
-	one_hora = 360 / 24
+	#one_hora = 360 / 24
 	hora_dict = {}
 
 	for planet,pos in planets_dict.items():
@@ -58,15 +65,70 @@ def calc_horas(planets_dict):
 	#print(hora_dict)
 	return hora_dict
 
+"""
+	Returns the Drekkana (D-3) of given planet
+"""
+def calc_drekkana(planets_dict):
+	
+	drek_dict = {}
+
+	for planet,pos in planets_dict.items():
+		#number of horas elapsed
+		lon = int(pos[1])
+		sign = pos[0] 
+		#horas_elapsed = int((lon / one_hora))
+		planet = planet[0:2]
+		lon_sign_deg = int(lon % 30)
+		#print(horas_elapsed, lon_sign_deg, sign)
+		if lon_sign_deg <= 10:
+			#planet lies in 1st drekkana (same sign)
+			drek_sign = sign
+			if drek_sign in drek_dict:
+				drek_dict[drek_sign].append(planet)
+			else:
+				drek_dict[drek_sign] = [planet]
+
+		##get the 5th sign from current sign if planet between 10 - 20 deg
+		elif (lon_sign_deg > 10) and (lon_sign_deg <= 20):
+			
+			curr_sign_index = zs_list.index(sign)
+			#print(f"Current sign is: {sign}, sign index is: {curr_sign_index}")
+			#get 5th sign from this and normalize by number of signs
+			curr_sign_index = (curr_sign_index + 4) % 12
+			#print(f"Fifth sign from: {sign}, is: {zs_list[curr_sign_index]}")
+			drek_sign = zs_list[curr_sign_index]
+			if drek_sign in drek_dict:
+				drek_dict[drek_sign].append(planet)
+			else:
+				drek_dict[drek_sign] = [planet]	
+
+		else:
+			##get the 5th sign from current sign if planet between 20 - 30 deg
+			curr_sign_index = zs_list.index(sign)
+			#print(f"Current sign is: {sign}, sign index is: {curr_sign_index}")
+			#get 9th sign from this and normalize by number of signs
+			curr_sign_index = (curr_sign_index + 8) % 12
+			#rint(f"9th sign from: {sign}, is: {zs_list[curr_sign_index]}")
+			drek_sign = zs_list[curr_sign_index]
+			if drek_sign in drek_dict:
+				drek_dict[drek_sign].append(planet)
+			else:
+				drek_dict[drek_sign] = [planet]		
 
 
 
 
+	#print(drek_dict)
+	return drek_dict
 
 
 
 
+#planets_dict = {'Sun': ['Aries', 8.9196373475607], 'Moon': ['Sagittarius', 269.1425613804137], 'Mars': ['Capricorn', 283.6911963266094], 'Mercury': ['Sagittarius', 258.7059129886326], 'Jupiter': ['Sagittarius', 241.09105316185673], 'Venus': ['Aquarius', 306.0894496658849], 'Saturn': ['Sagittarius', 267.6901331020929], 'Uranus': ['Sagittarius', 250.1264855882071], 'Neptune': ['Gemini', 85.22504147608478], 'Pluto': ['Gemini', 75.25527693994611], 'Rahu': ['Sagittarius', 259.17343174945495], 'Ketu': ['Gemini', 79.17343174945495], 'Chiron': ['Sagittarius', 258.8702714981658]}
+	
+# planets_dict = {'Sun': ['Aries', 24.9196373475607], 'Moon': ['Sagittarius', 29.1425613804137]}
 
 
-#calc_horas(planets_dict)
+# #calc_horas(planets_dict)
+# calc_drekkana(planets_dict)
 
