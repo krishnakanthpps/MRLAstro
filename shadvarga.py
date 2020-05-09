@@ -1,3 +1,5 @@
+import math
+from funcs import *
 
 #some lists
 zs_odd_signs = ['Aries', 'Gemini', 'Leo','Libra', 'Sagittarius', 'Aquarius']
@@ -115,20 +117,49 @@ def calc_drekkana(planets_dict):
 			else:
 				drek_dict[drek_sign] = [planet]		
 
-
-
-
 	#print(drek_dict)
 	return drek_dict
 
+"""
+	Returns dwadashamsa for given planet
+"""
+def calc_dwadasamsa(planets_dict):
+	dwa_dict = {}
 
+	for planet,pos in planets_dict.items():
+		#round longitude to 4 decimal places
+		#and normalize within 30deg
+		lon = round((pos[1] % 30), 4)
+		sign = pos[0] 
+		planet = planet[0:2]
+		#each dwadashamsa is 2.5d (2d30m) so divide by 2.5 and find nth dwadashamsa
+		dwa_number = math.ceil(lon / 2.5)
 
+		#get current sign index
+		curr_sign_index = zs_list.index(sign)
+		#advance current sign by dwa_number, repeat from start
+		curr_sign_index = (curr_sign_index + (dwa_number-1)) % 12
+		#get the dwadasamsa sign
+		dwa_sign = zs_list[curr_sign_index]
+		
+		#DEBUG
+		#print(f"Planet: {planet} | Sign: {sign} |  Longitude: {lon} DMS: {str(decdeg2dms(pos[1]))} | Dwa number: {dwa_number}  |  Dwa sign: {dwa_sign}")
+		if dwa_sign in dwa_dict:
+			dwa_dict[dwa_sign].append(planet)
+		else:
+			dwa_dict[dwa_sign] = [planet]		
 
-#planets_dict = {'Sun': ['Aries', 8.9196373475607], 'Moon': ['Sagittarius', 269.1425613804137], 'Mars': ['Capricorn', 283.6911963266094], 'Mercury': ['Sagittarius', 258.7059129886326], 'Jupiter': ['Sagittarius', 241.09105316185673], 'Venus': ['Aquarius', 306.0894496658849], 'Saturn': ['Sagittarius', 267.6901331020929], 'Uranus': ['Sagittarius', 250.1264855882071], 'Neptune': ['Gemini', 85.22504147608478], 'Pluto': ['Gemini', 75.25527693994611], 'Rahu': ['Sagittarius', 259.17343174945495], 'Ketu': ['Gemini', 79.17343174945495], 'Chiron': ['Sagittarius', 258.8702714981658]}
+	#print(dwa_dict)
+	return dwa_dict
+
+#def calc_trimsamsa(planets_dict):
+#	trimsamsa_dict = {}
+
+# planets_dict = {'Sun': ['Aries', 2.50000], 'Moon': ['Sagittarius', 269.1425613804137], 'Mars': ['Capricorn', 283.6911963266094], 'Mercury': ['Sagittarius', 258.7059129886326], 'Jupiter': ['Sagittarius', 241.09105316185673], 'Venus': ['Aquarius', 306.0894496658849], 'Saturn': ['Sagittarius', 267.6901331020929], 'Uranus': ['Sagittarius', 250.1264855882071], 'Neptune': ['Gemini', 85.22504147608478], 'Pluto': ['Gemini', 75.25527693994611], 'Rahu': ['Sagittarius', 259.17343174945495], 'Ketu': ['Gemini', 79.17343174945495], 'Chiron': ['Sagittarius', 258.8702714981658]}
 	
-# planets_dict = {'Sun': ['Aries', 24.9196373475607], 'Moon': ['Sagittarius', 29.1425613804137]}
+# # planets_dict = {'Sun': ['Aries', 24.9196373475607], 'Moon': ['Sagittarius', 29.1425613804137]}
 
 
-# #calc_horas(planets_dict)
-# calc_drekkana(planets_dict)
-
+# # #calc_horas(planets_dict)
+# # calc_drekkana(planets_dict)
+# calc_dwadasamsa(planets_dict)

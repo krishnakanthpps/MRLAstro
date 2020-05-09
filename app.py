@@ -97,6 +97,7 @@ def showchart():
 	#####Generate Sharvargas####
 	hora_dict = calc_horas(planets_dict_lon_only)
 	drekkana_dict = calc_drekkana(planets_dict_lon_only)
+	dwa_dict = calc_dwadasamsa(planets_dict_lon_only)
 
 	## DEBUG ##
 	# print("############PRINTING progressions PR DICT###########")
@@ -117,7 +118,7 @@ def showchart():
 	# print("####### PRINTING P AND H DICT ##########")
 	# print(p_and_h_dict)
 
-	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict)
 
 #Displays current planetary positions
 @app.route('/ephemeris')	
