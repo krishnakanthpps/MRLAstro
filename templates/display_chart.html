@@ -46,6 +46,7 @@ Time Zone: {{ tz }}
 
 
 <h3>Birth Chart</h3>
+ <!-- <img src="static/svg/planets/sun.svg" width="20" height="20"> -->
 <br>
 <svg width="400" height="400">
   <!-- pi, ar, ta, ge -->
@@ -53,6 +54,7 @@ Time Zone: {{ tz }}
 
       {% set count = namespace(value=15) %}
       {% for obj in p_and_h_dict['Pisces'] %}
+
           <text x="10" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
@@ -136,6 +138,8 @@ Time Zone: {{ tz }}
           <text x="310" y="{{ count.value }}">{{ obj }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
+
+<img src="static/svg/planets/sun.svg" width="20" height="20">
 
 </svg>
 </div>
@@ -651,6 +655,10 @@ Time Zone: {{ tz }}
 </div>
 
 
+ <div style="width: 100%; display: table;">
+        <div style="display: table-row; height: 500px;">
+            <div style="width: 450px; display: table-cell">
+
 <h3>Dwadasamsa</h3>
 <br>
 <svg width="400" height="400">
@@ -742,9 +750,43 @@ Time Zone: {{ tz }}
           {% set count.value = count.value + 15 %}
         {% endfor %}
 </svg>
+</div>
 
+<div style="display: table-cell">
+<h3>Trimsamsa</h3>
+<br>
+<table style="width:30%" border=1 bordercolor=blue>
+  <tr>
+    <th>Trimsamsa</th>
+    <th>Planets and Houses</th>
+  </tr>
+    <tr>
+    <td>Mars 
+    <td>{{ trimsamsa_dict.get('Mars', 'None') }}</td>
+  </tr>
+    <tr>
+    <td>Mercury 
+    <td>{{ trimsamsa_dict.get('Mercury', 'None') }}</td>
+  </tr>
+    <tr>
+    <td>Jupiter 
+    <td>{{ trimsamsa_dict.get('Jupiter', 'None') }}</td>
+  </tr>
+    <tr>
+    <td>Venus 
+    <td>{{ trimsamsa_dict.get('Venus', 'None') }}</td>
+  </tr>
+    <tr>
+    <td>Saturn 
+    <td>{{ trimsamsa_dict.get('Saturn', 'None') }}</td>
+  </tr>
 
+</table>
 
+</div>
+
+</div>
+</div>
 
 <!-- end main div -->
 </div>

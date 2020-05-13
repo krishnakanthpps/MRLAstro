@@ -51,6 +51,7 @@ def calc_allpos(dob, tob, city, tz):
 	#dict to contain lon only
 	planets_dict_lon_only = {}
 	houses_dict = {}
+	houses_dict_signlon = {}
 
 	date = Datetime(dob, tob, tz)
 	city_lat, city_lon = get_lat_lon(city)
@@ -108,11 +109,11 @@ def calc_allpos(dob, tob, city, tz):
 
 	#add the house pos to houses_dict
 	for h in house_list:
-		houses_dict[h.id] = [h.sign, decdeg2dms(h.signlon)]		
-
+		houses_dict[h.id] = [h.sign, decdeg2dms(h.signlon)]	
+		houses_dict_signlon[h.id] = [h.sign, h.signlon]
 
 	#return planets_dict and houses_dict
-	return planets_dict, houses_dict, planets_dict_lon_only
+	return planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon
 
 #creates sort key for getPrintableObjects(), takes d, m of object
 #strips m, sort by deg only

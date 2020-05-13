@@ -47,49 +47,10 @@ def calc_progressions(dob, tob, city, tz):
 	bday_passed = today - bday_this_year
 
 	if bday_passed.days < 0:
-		print('bday yet to occur this year')
+		#print('bday yet to occur this year')
 		#calculate number of days elapsed since last years bday
 		days_since_last_bday=(today - bday_previous_year)
-		print('days_since_last_bday: '+str(days_since_last_bday.days))
-		
-		"""convert this into progressed hours to represent year in progressed days
-		1 year = 1 progressed day
-		365 days = 24 progressed hrs
-		1 day = 24/365 progressed hrs"""
-
-		#get hours to add to birthtime 
-		hours_to_add = (days_since_last_bday * 24/365).days
-
-		print("adding these hours to birthtime: "+str(hours_to_add))
-		print("Prg date before adding hours: "+str(prg_date))
-		prg_date = prg_date + datetime.timedelta(hours=hours_to_add)
-
-		print("Prg date after adding hours: "+str(prg_date))
-		#print("New PRG date with hours added is: "+str(prg_date))
-		print("Correct progression date and time: "+str(prg_date))
-		
-		prg_date_prnt = prg_date
-		prg_date = prg_date.strftime('%Y/%m/%d')
-
-		#format change for jinja2
-		prg_date_prnt = prg_date_prnt.strftime('%d-%m-%Y')
-
-		#Generate the new progressed chart objects for the new date
-		planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg = calc_allpos(prg_date, tob, city, tz)
-		prg_details_dict['dob'] = str(dob_for_prnt)
-		prg_details_dict['curr_age'] = str(curr_age_yrs)
-		prg_details_dict['prg_date'] = str(prg_date_prnt)
-		prg_details_dict['today_date'] = str(today_prnt)
-	
-
-		#return planets_dict_prg, houses_dict_prg, prg_details_dict
-
-	else:
-		#This block executes if birthday has already passed in current year
-		print('bday has passed')
-		#calculate number of days elapsed since current year bday
-		days_since_last_bday=(today - bday_this_year)
-		print('days_since_last_bday: '+str(days_since_last_bday.days))
+		#print('days_since_last_bday: '+str(days_since_last_bday.days))
 		
 		"""convert this into progressed hours to represent year in progressed days
 		1 year = 1 progressed day
@@ -114,7 +75,46 @@ def calc_progressions(dob, tob, city, tz):
 		prg_date_prnt = prg_date_prnt.strftime('%d-%m-%Y')
 
 		#Generate the new progressed chart objects for the new date
-		planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg = calc_allpos(prg_date, tob, city, tz)
+		planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg, houses_dict_signlon = calc_allpos(prg_date, tob, city, tz)
+		prg_details_dict['dob'] = str(dob_for_prnt)
+		prg_details_dict['curr_age'] = str(curr_age_yrs)
+		prg_details_dict['prg_date'] = str(prg_date_prnt)
+		prg_details_dict['today_date'] = str(today_prnt)
+	
+
+		#return planets_dict_prg, houses_dict_prg, prg_details_dict
+
+	else:
+		#This block executes if birthday has already passed in current year
+		#print('bday has passed')
+		#calculate number of days elapsed since current year bday
+		days_since_last_bday=(today - bday_this_year)
+		#print('days_since_last_bday: '+str(days_since_last_bday.days))
+		
+		"""convert this into progressed hours to represent year in progressed days
+		1 year = 1 progressed day
+		365 days = 24 progressed hrs
+		1 day = 24/365 progressed hrs"""
+
+		#get hours to add to birthtime 
+		hours_to_add = (days_since_last_bday * 24/365).days
+
+		#print("adding these hours to birthtime: "+str(hours_to_add))
+		#print("Prg date before adding hours: "+str(prg_date))
+		prg_date = prg_date + datetime.timedelta(hours=hours_to_add)
+
+		#print("Prg date after adding hours: "+str(prg_date))
+		#print("New PRG date with hours added is: "+str(prg_date))
+		#print("Correct progression date and time: "+str(prg_date))
+		
+		prg_date_prnt = prg_date
+		prg_date = prg_date.strftime('%Y/%m/%d')
+
+		#format change for jinja2
+		prg_date_prnt = prg_date_prnt.strftime('%d-%m-%Y')
+
+		#Generate the new progressed chart objects for the new date
+		planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg, houses_dict_signlon = calc_allpos(prg_date, tob, city, tz)
 		prg_details_dict['dob'] = str(dob_for_prnt)
 		prg_details_dict['curr_age'] = str(curr_age_yrs)
 		prg_details_dict['prg_date'] = str(prg_date_prnt)
@@ -140,7 +140,7 @@ def calc_transits():
 	tz = "00:00"
 	city = "London"
 
-	planets_dict_transit, houses_dict_transit, planets_dict_lon_only_transit = calc_allpos(transit_date, transit_time, city, tz)
+	planets_dict_transit, houses_dict_transit, planets_dict_lon_only_transit, houses_dict_signlon = calc_allpos(transit_date, transit_time, city, tz)
 
 	for sign in zs_list:
 		p_and_h_dict_transit[sign] = getPrintableObjects(sign, planets_dict_transit, houses_dict_transit, p_only=True)

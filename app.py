@@ -62,7 +62,7 @@ def showchart():
 	tz = request.form['timezone']
 
 	#get all the planet and house positions (raw - no formatting)
-	planets_dict, houses_dict, planets_dict_lon_only = calc_allpos(dob, tob, city, tz)
+	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon = calc_allpos(dob, tob, city, tz)
 	
 	#zodiac sign list
 	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
@@ -98,10 +98,11 @@ def showchart():
 	hora_dict = calc_horas(planets_dict_lon_only)
 	drekkana_dict = calc_drekkana(planets_dict_lon_only)
 	dwa_dict = calc_dwadasamsa(planets_dict_lon_only)
+	trimsamsa_dict = calc_trimsamsa(planets_dict_lon_only, houses_dict_signlon)
 
 	## DEBUG ##
 	# print("############PRINTING progressions PR DICT###########")
-	# print(progressions_dict_pr)
+	#print(houses_dict_signlon)
 	# print("###########################################")
 	
 	#print("Name: "+birth_name)
@@ -117,8 +118,9 @@ def showchart():
 	# print(houses_dict)
 	# print("####### PRINTING P AND H DICT ##########")
 	# print(p_and_h_dict)
+	print(trimsamsa_dict)
 
-	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict, trimsamsa_dict=trimsamsa_dict)
 
 #Displays current planetary positions
 @app.route('/ephemeris')	

@@ -1,5 +1,6 @@
 import math
 from funcs import *
+import pprint
 
 #some lists
 zs_odd_signs = ['Aries', 'Gemini', 'Leo','Libra', 'Sagittarius', 'Aquarius']
@@ -152,14 +153,119 @@ def calc_dwadasamsa(planets_dict):
 	#print(dwa_dict)
 	return dwa_dict
 
-#def calc_trimsamsa(planets_dict):
-#	trimsamsa_dict = {}
+"""
+	Returns the Trimsamsa dict for all given planets 
+"""
 
-# planets_dict = {'Sun': ['Aries', 2.50000], 'Moon': ['Sagittarius', 269.1425613804137], 'Mars': ['Capricorn', 283.6911963266094], 'Mercury': ['Sagittarius', 258.7059129886326], 'Jupiter': ['Sagittarius', 241.09105316185673], 'Venus': ['Aquarius', 306.0894496658849], 'Saturn': ['Sagittarius', 267.6901331020929], 'Uranus': ['Sagittarius', 250.1264855882071], 'Neptune': ['Gemini', 85.22504147608478], 'Pluto': ['Gemini', 75.25527693994611], 'Rahu': ['Sagittarius', 259.17343174945495], 'Ketu': ['Gemini', 79.17343174945495], 'Chiron': ['Sagittarius', 258.8702714981658]}
+def calc_trimsamsa(planets_dict, houses_dict):
 	
-# # planets_dict = {'Sun': ['Aries', 24.9196373475607], 'Moon': ['Sagittarius', 29.1425613804137]}
+	house_chars_dict = {'House1': 'I','House2': 'II','House3': 'III','House4': 'IV','House5': 'V','House6': 'VI','House7': 'VII','House8': 'VIII','House9': 'IX','House10': 'X','House11': 'XI','House12': 'XII'}
+	zs_odd_signs = ['Aries', 'Gemini', 'Leo','Libra', 'Sagittarius', 'Aquarius']
+	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
+	trimsamsa_dict = {}
+
+	#calc trimsamsas for planets
+	for planet,pos in planets_dict.items():
+		lon = round((pos[1] % 30), 4)
+		sign = pos[0] 
+ 
+
+		#if planet in odd sign, trimsamsa
+		if sign in zs_odd_signs:
+			if lon <= 5:
+				tr = 'Mars'
+			elif (lon > 5) and (lon <=10):
+				tr = 'Saturn'
+			elif (lon > 10) and (lon <=18):
+				tr = 'Jupiter'
+			elif (lon > 18) and (lon <=25):
+				tr = 'Mercury'
+			elif (lon > 18) and (lon <=30):
+				tr = 'Venus'
+
+			planet = planet[0:2]
+			if tr in trimsamsa_dict:
+				trimsamsa_dict[tr].append(planet)
+			else:
+				trimsamsa_dict[tr] = [planet]
+
+		else:
+			if lon <= 5:
+				tr = 'Venus'
+			elif (lon > 5) and (lon <=12):
+				tr = 'Mercury'
+			elif (lon > 12) and (lon <=20):
+				tr = 'Jupiter'
+			elif (lon > 20) and (lon <=25):
+				tr = 'Saturn'
+			elif (lon > 25) and (lon <=30):
+				tr = 'Mars'
+
+			planet = planet[0:2]
+			if tr in trimsamsa_dict:
+				trimsamsa_dict[tr].append(planet)
+			else:
+				trimsamsa_dict[tr] = [planet]	
+
+	#calc trimsamsas for houses
+	for house,pos in houses_dict.items():
+		lon = round((pos[1] % 30), 4)
+		sign = pos[0] 
+		#get the house symbol
+		house = house_chars_dict[house]
+
+		#if house in odd sign, trimsamsa
+		if sign in zs_odd_signs:
+			if lon <= 5:
+				tr = 'Mars'
+			elif (lon > 5) and (lon <=10):
+				tr = 'Saturn'
+			elif (lon > 10) and (lon <=18):
+				tr = 'Jupiter'
+			elif (lon > 18) and (lon <=25):
+				tr = 'Mercury'
+			elif (lon > 18) and (lon <=30):
+				tr = 'Venus'
+			if tr in trimsamsa_dict:
+				trimsamsa_dict[tr].append(house)
+			else:
+				trimsamsa_dict[tr] = [house]
+
+		else:
+			if lon <= 5:
+				tr = 'Venus'
+			elif (lon > 5) and (lon <=12):
+				tr = 'Mercury'
+			elif (lon > 12) and (lon <=20):
+				tr = 'Jupiter'
+			elif (lon > 20) and (lon <=25):
+				tr = 'Saturn'
+			elif (lon > 25) and (lon <=30):
+				tr = 'Mars'
+
+			if tr in trimsamsa_dict:
+				trimsamsa_dict[tr].append(house)
+			else:
+				trimsamsa_dict[tr] = [house]	
+
+	#format for jinja2 printing
+	for obj in trimsamsa_dict:
+		pl_list = ', '.join(trimsamsa_dict[obj])
+		trimsamsa_dict[obj] = pl_list
+
+	#print(trimsamsa_dict)
+	return trimsamsa_dict
+
+	
 
 
-# # #calc_horas(planets_dict)
-# # calc_drekkana(planets_dict)
-# calc_dwadasamsa(planets_dict)
+#planets_dict = {'Sun': ['Aries', 2.50000], 'Moon': ['Aries', 2.50000], 'Mars': ['Capricorn', 283.6911963266094], 'Mercury': ['Sagittarius', 258.7059129886326], 'Jupiter': ['Sagittarius', 241.09105316185673], 'Venus': ['Aquarius', 306.0894496658849], 'Saturn': ['Sagittarius', 267.6901331020929], 'Uranus': ['Sagittarius', 250.1264855882071], 'Neptune': ['Gemini', 85.22504147608478], 'Pluto': ['Gemini', 75.25527693994611], 'Rahu': ['Sagittarius', 259.17343174945495], 'Ketu': ['Gemini', 79.17343174945495], 'Chiron': ['Sagittarius', 258.8702714981658]}
+	
+# #houses_dict = {'House1': ['Libra', [3, 39, 47]], 'House2': ['Scorpio', [1, 32, 27]], 'House3': ['Sagittarius', [2, 1, 30]], 'House4': ['Capricorn', [3, 52, 44]], 'House5': ['Aquarius', [5, 45, 18]], 'House6': ['Pisces', [6, 9, 32]], 'House7': ['Aries', [3, 39, 47]], 'House8': ['Taurus', [1, 32, 27]], 'House9': ['Gemini', [2, 1, 30]], 'House10': ['Cancer', [3, 52, 44]], 'House11': ['Leo', [5, 45, 18]], 'House12': ['Virgo', [6, 9, 32]]}
+# # # # planets_dict = {'Sun': ['Aries', 24.9196373475607], 'Moon': ['Sagittarius', 29.1425613804137]}
+#houses_dict = {'House1': ['Libra', 3.6629645418784094], 'House2': ['Scorpio', 1.5408442522945052], 'House3': ['Sagittarius', 2.0251098186394643], 'House4': ['Capricorn', 3.879007240706926], 'House5': ['Aquarius', 5.754867809076472], 'House6': ['Pisces', 6.159021441151367], 'House7': ['Aries', 3.6629645418784094], 'House8': ['Taurus', 1.5408442522945052], 'House9': ['Gemini', 2.0251098186394643], 'House10': ['Cancer', 3.8790072407069403], 'House11': ['Leo', 5.754867809076501], 'House12': ['Virgo', 6.159021441151339]}
+
+# # # #calc_horas(planets_dict)
+# # # calc_drekkana(planets_dict)
+# # calc_dwadasamsa(planets_dict)
+#calc_trimsamsa(planets_dict, houses_dict)
