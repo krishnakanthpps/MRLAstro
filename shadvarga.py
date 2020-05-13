@@ -184,6 +184,8 @@ def calc_trimsamsa(planets_dict, houses_dict):
 				tr = 'Venus'
 
 			planet = planet[0:2]
+			if planet == 'Ch':
+				planet = 'K'
 			if tr in trimsamsa_dict:
 				trimsamsa_dict[tr].append(planet)
 			else:
@@ -202,6 +204,8 @@ def calc_trimsamsa(planets_dict, houses_dict):
 				tr = 'Mars'
 
 			planet = planet[0:2]
+			if planet == 'Ch':
+				planet = 'K'
 			if tr in trimsamsa_dict:
 				trimsamsa_dict[tr].append(planet)
 			else:
