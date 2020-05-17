@@ -55,7 +55,7 @@ Time Zone: {{ tz }}
 <!-- display natal and progressions chart side by side as two cells in row -->
 
 <div class="row">
-<div class="col-sm-6" style="background-color:lavender;">
+<div class="col-sm-6">
 
 <h3>Birth Chart</h3>
 <br>
@@ -171,7 +171,7 @@ Time Zone: {{ tz }}
 
 
 <!-- Progressions chart-->
-<div class="col-sm-6" style="background-color:lavender;">
+<div class="col-sm-6">
 <h3>Progressions</h3>
 <br>
 <svg width="450" height="450">
@@ -222,9 +222,6 @@ Time Zone: {{ tz }}
         <text x="110" y="150" fill="blue" >D.O.B: {{prg_details['dob']}}</text>
         <text x="110" y="170" fill="blue">Age: {{prg_details['curr_age']}}</text>
         <text x="110" y="190" fill="blue">Prog. Date: {{prg_details['prg_date']}}</text>
-        
-
-
   <!-- Progression details end -->
 
   <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
@@ -289,15 +286,15 @@ Time Zone: {{ tz }}
 
 </div>
 </div>
-
-
-
 <hr>
+
 <!-- Navamsa chart --->
+<div class="row">
+<div class="col-sm-6">
 
 <h3>Navamsa</h3>
 <br>
-<svg width="400" height="400">
+<svg width="450" height="450">
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
 
       {% set count = namespace(value=5) %}
@@ -385,17 +382,15 @@ Time Zone: {{ tz }}
           <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
           {% set count.value = count.value + 20 %}
         {% endfor %}
+</svg>
+</div>
 
-
-
-
-<br>
 
 <!-- Transit chart --->
-
+<div class="col-sm-6">
 <h3>Transits</h3>
 <br>
-<svg width="400" height="400">
+<svg width="450" height="450">
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=5) %}
       {% for obj in p_and_h_dict_transits['Pisces'] %}
@@ -497,11 +492,14 @@ Time Zone: {{ tz }}
 
 
 </svg>
-
+</div>
+</div>
 
 <br>
 
-
+<!-- HORA -->
+<div class="row">
+<div class="col-sm-6">
 <h3>Hora</h3>
 <br>
 <svg width="400" height="400">
@@ -593,9 +591,10 @@ Time Zone: {{ tz }}
           {% set count.value = count.value + 15 %}
         {% endfor %}
 </svg>
+</div>
 
-
-
+<!-- Drekkana -->
+<div class="col-sm-6">
 <h3>Drekkana</h3>
 <br>
 <svg width="400" height="400">
@@ -687,7 +686,13 @@ Time Zone: {{ tz }}
           {% set count.value = count.value + 20 %}
         {% endfor %}
 </svg>
+</div>
+</div>
 
+<br>
+<!-- Dwadasamsa -->
+<div class="row">
+<div class="col-sm-6">
 
 <h3>Dwadasamsa</h3>
 <br>
@@ -780,7 +785,10 @@ Time Zone: {{ tz }}
           {% set count.value = count.value + 20 %}
         {% endfor %}
 </svg>
+</div>
 
+<!-- Trimsamsa -->
+<div class="col-sm-6">
 <h3>Trimsamsa</h3>
 <br>
 <table style="width:30%" border=1 bordercolor=blue>
@@ -831,7 +839,8 @@ Time Zone: {{ tz }}
 
 </table>
 
-
+</div>
+</div>
 
 <br>
 
