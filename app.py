@@ -17,6 +17,62 @@ env = Environment(
     keep_trailing_newline=True
 )
 
+png_dict = {
+	"Su":"static/png/planets/sun.png",
+	"Mo":"static/png/planets/moon.png",
+	"Ma":"static/png/planets/mars.png",
+	"Me":"static/png/planets/mercury.png",
+	"Ju":"static/png/planets/jupiter.png",
+	"Ve":"static/png/planets/venus.png",
+	"Sa":"static/png/planets/saturn.png",
+	"Ur":"static/png/planets/uranus.png",
+	"Ne":"static/png/planets/neptune.png",
+	"Pl":"static/png/planets/pluto.png",
+	"Ra":"static/png/planets/rahu.png",
+	"Ke":"static/png/planets/ketu.png",
+	"K":"static/png/planets/chiron.png",
+	"I":"static/png/houses/1.png",
+	"II":"static/png/houses/2.png",
+	"III":"static/png/houses/3.png",
+	"IV":"static/png/houses/4.png",
+	"V":"static/png/houses/5.png",
+	"VI":"static/png/houses/6.png",
+	"VII":"static/png/houses/7.png",
+	"VIII":"static/png/houses/8.png",
+	"IX":"static/png/houses/9.png",
+	"X":"static/png/houses/10.png",
+	"XI":"static/png/houses/11.png",
+	"XII":"static/png/houses/12.png"
+}
+
+unicode_dict = {
+	"Su":"\u2609",
+	"Mo":"\u263D",
+	"Ma":"\u2642",
+	"Me":"\u263F",
+	"Ju":"\u2643",
+	"Ve":"\u2640",
+	"Sa":"\u2644",
+	"Ur":"\u2645",
+	"Ne":"\u2646",
+	"Pl":"\u2647",
+	"Ra":"\u260A",
+	"Ke":"\u260B",
+	"K":"\u26B7",
+	"I":"I",
+	"II":"II",
+	"III":"III",
+	"IV":"IV",
+	"V":"V",
+	"VI":"VI",
+	"VII":"VII",
+	"VIII":"VIII",
+	"IX":"IX",
+	"X":"X",
+	"XI":"XI",
+	"XII":"XII"
+}
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'ff3a5067411e420dcd0245787ba7bc533be5ce4b'
@@ -26,6 +82,11 @@ app.config['SECRET_KEY'] = 'ff3a5067411e420dcd0245787ba7bc533be5ce4b'
 def index():
 	name = 'aditya'
 	return redirect(url_for('horoscope'))
+
+@app.route('/panchanga', methods=['GET'])
+def panchanga():
+	#shows horoscope details entry form
+	return render_template('panchanga.html')
 
 #Chart creation page
 @app.route('/horoscope', methods=['GET'])
@@ -118,9 +179,9 @@ def showchart():
 	# print(houses_dict)
 	# print("####### PRINTING P AND H DICT ##########")
 	# print(p_and_h_dict)
-	#print(trimsamsa_dict)
+	print(trimsamsa_dict)
 
-	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict, trimsamsa_dict=trimsamsa_dict)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict, trimsamsa_dict=trimsamsa_dict, png_dict=png_dict, unicode_dict=unicode_dict)
 
 #Displays current planetary positions
 @app.route('/ephemeris')	

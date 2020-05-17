@@ -9,7 +9,7 @@
 <body>
 
 <div class="topnav">
-  <a href="#panchanga">Panchanga</a>
+  <a href="{{ url_for('panchanga') }}">Panchanga</a>
   <a href="{{ url_for('ephemeris') }}" target="_blank">Ephemeris</a>
   <a href="{{ url_for('horoscope') }}">Horoscope</a>
   <a href="#contact">Contact</a>
@@ -46,100 +46,115 @@ Time Zone: {{ tz }}
 
 
 <h3>Birth Chart</h3>
- <!-- <img src="static/svg/planets/sun.svg" width="20" height="20"> -->
+
+
 <br>
 <svg width="400" height="400">
+    <style>
+    .small { font: 15px sans-serif; fill: blue; }
+  </style>
+
+
   <!-- pi, ar, ta, ge -->
   <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in p_and_h_dict['Pisces'] %}
-
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+         <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="25px" height="25px"/>
+         <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
+        {% set count.value = count.value + 15 %}
         {% endfor %}
-
+     
   <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-            {% set count = namespace(value=15) %}
-      {% for obj in p_and_h_dict['Aries'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+        {% set count = namespace(value=5) %}
+        {% for obj in p_and_h_dict['Aries'] %}
+         <image x="105" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+         <text x="125" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
+        {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in p_and_h_dict['Taurus'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          <image x="205" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+         <text x="225" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in p_and_h_dict['Gemini'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+        <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+         <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <!-- aq, cn, cp, le -->
   <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=115) %}
+      {% set count = namespace(value=105) %}
       {% for obj in p_and_h_dict['Aquarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+        <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+         <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-        {% set count = namespace(value=115) %}
+        {% set count = namespace(value=105) %}
       {% for obj in p_and_h_dict['Cancer'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+        <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=215) %}
+      {% set count = namespace(value=205) %}
       {% for obj in p_and_h_dict['Capricorn'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+        <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
 
   <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=215) %}
+      {% set count = namespace(value=205) %}
       {% for obj in p_and_h_dict['Leo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+        <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <!--sg, sc, lib, vi-->
   <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in p_and_h_dict['Sagittarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+         <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in p_and_h_dict['Scorpio'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+        <image x="105" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="125" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in p_and_h_dict['Libra'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+        <image x="205" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="225" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in p_and_h_dict['Virgo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+        <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
-<img src="static/svg/planets/sun.svg" width="20" height="20">
 
 </svg>
 </div>
@@ -153,38 +168,43 @@ Time Zone: {{ tz }}
 <svg width="400" height="400">
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
 
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in progressions_dict_pr['Pisces']%}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-            {% set count = namespace(value=15) %}
+            {% set count = namespace(value=5) %}
       {% for obj in progressions_dict_pr['Aries'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+          <image x="105" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="125" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in progressions_dict_pr['Taurus'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          <image x="205" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="225" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in progressions_dict_pr['Gemini'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <!-- aq, cn, cp, le -->
   <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=115) %}
+      {% set count = namespace(value=105) %}
       {% for obj in progressions_dict_pr['Aquarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
@@ -199,53 +219,60 @@ Time Zone: {{ tz }}
   <!-- Progression details end -->
 
   <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-        {% set count = namespace(value=115) %}
+        {% set count = namespace(value=105) %}
       {% for obj in progressions_dict_pr['Cancer'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=215) %}
+      {% set count = namespace(value=205) %}
       {% for obj in progressions_dict_pr['Capricorn'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
 
   <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=215) %}
+      {% set count = namespace(value=205) %}
       {% for obj in progressions_dict_pr['Leo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <!--sg, sc, lib, vi-->
   <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in progressions_dict_pr['Sagittarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+          <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in progressions_dict_pr['Scorpio'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+          <image x="105" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="125" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in progressions_dict_pr['Libra'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          <image x="205" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="225" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in progressions_dict_pr['Virgo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+          <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
@@ -268,90 +295,90 @@ Time Zone: {{ tz }}
 <svg width="400" height="400">
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
 
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in navamsa_dict['Pisces'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-            {% set count = namespace(value=15) %}
+            {% set count = namespace(value=5) %}
       {% for obj in navamsa_dict['Aries'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="110" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in navamsa_dict['Taurus'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="210" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in navamsa_dict['Gemini'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <!-- aq, cn, cp, le -->
   <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=115) %}
+      {% set count = namespace(value=105) %}
       {% for obj in navamsa_dict['Aquarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-        {% set count = namespace(value=115) %}
+        {% set count = namespace(value=105) %}
       {% for obj in navamsa_dict['Cancer'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=215) %}
+      {% set count = namespace(value=205) %}
       {% for obj in navamsa_dict['Capricorn'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
 
   <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=215) %}
+      {% set count = namespace(value=205) %}
       {% for obj in navamsa_dict['Leo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+         <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <!--sg, sc, lib, vi-->
   <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in navamsa_dict['Sagittarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in navamsa_dict['Scorpio'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="110" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in navamsa_dict['Libra'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="210" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in navamsa_dict['Virgo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
 
@@ -365,92 +392,104 @@ Time Zone: {{ tz }}
 <br>
 <svg width="400" height="400">
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-
-      {% set count = namespace(value=15) %}
-      {% for obj in p_and_h_dict_transits['Pisces']%}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+      {% set count = namespace(value=5) %}
+      {% for obj in p_and_h_dict_transits['Pisces'] %}
+         <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="25px" height="25px"/>
+         <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
+        {% set count.value = count.value + 15 %}
         {% endfor %}
-
+     
   <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-            {% set count = namespace(value=15) %}
-      {% for obj in p_and_h_dict_transits['Aries'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+        {% set count = namespace(value=5) %}
+        {% for obj in p_and_h_dict_transits['Aries'] %}
+         <image x="105" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+         <text x="125" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
+        {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in p_and_h_dict_transits['Taurus'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+          <image x="205" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+         <text x="225" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in p_and_h_dict_transits['Gemini'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+        <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+         <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <!-- aq, cn, cp, le -->
   <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=115) %}
+      {% set count = namespace(value=105) %}
       {% for obj in p_and_h_dict_transits['Aquarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+        <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+         <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-        {% set count = namespace(value=115) %}
+        {% set count = namespace(value=105) %}
       {% for obj in p_and_h_dict_transits['Cancer'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+        <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=215) %}
+      {% set count = namespace(value=205) %}
       {% for obj in p_and_h_dict_transits['Capricorn'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+        <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
 
   <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=215) %}
+      {% set count = namespace(value=205) %}
       {% for obj in p_and_h_dict_transits['Leo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+        <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <!--sg, sc, lib, vi-->
   <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in p_and_h_dict_transits['Sagittarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
+         <image x="5" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="25" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in p_and_h_dict_transits['Scorpio'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
+        <image x="105" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="125" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in p_and_h_dict_transits['Libra'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
+        <image x="205" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="225" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
 
   <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in p_and_h_dict_transits['Virgo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
+        <image x="305" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+        <text x="325" y="{{ count.value + 15 }}">{{ obj.split(' ')[1] }}</text>
           {% set count.value = count.value + 15 %}
         {% endfor %}
+
 
 </svg>
 </div>
@@ -565,88 +604,88 @@ Time Zone: {{ tz }}
 
       {% set count = namespace(value=15) %}
       {% for obj in drekkana_dict['Pisces'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
             {% set count = namespace(value=15) %}
       {% for obj in drekkana_dict['Aries'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="110" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=15) %}
       {% for obj in drekkana_dict['Taurus'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="210" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=15) %}
       {% for obj in drekkana_dict['Gemini'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <!-- aq, cn, cp, le -->
   <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=115) %}
       {% for obj in drekkana_dict['Aquarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
         {% set count = namespace(value=115) %}
       {% for obj in drekkana_dict['Cancer'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+         <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=215) %}
       {% for obj in drekkana_dict['Capricorn'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
 
   <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=215) %}
       {% for obj in drekkana_dict['Leo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <!--sg, sc, lib, vi-->
   <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=315) %}
       {% for obj in drekkana_dict['Sagittarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=315) %}
       {% for obj in drekkana_dict['Scorpio'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="110" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=315) %}
       {% for obj in drekkana_dict['Libra'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="210" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
       {% set count = namespace(value=315) %}
       {% for obj in drekkana_dict['Virgo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 </svg>
 </div>
@@ -664,90 +703,90 @@ Time Zone: {{ tz }}
 <svg width="400" height="400">
 <rect id="pi" x="0" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
 
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in dwa_dict['Pisces'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="100" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-            {% set count = namespace(value=15) %}
+            {% set count = namespace(value=5) %}
       {% for obj in dwa_dict['Aries'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="110" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="200" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in dwa_dict['Taurus'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="210" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="300" y="0" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=15) %}
+      {% set count = namespace(value=5) %}
       {% for obj in dwa_dict['Gemini'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <!-- aq, cn, cp, le -->
   <rect x="0" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=115) %}
+      {% set count = namespace(value=105) %}
       {% for obj in dwa_dict['Aquarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+         <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="300" y="100" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-        {% set count = namespace(value=115) %}
+        {% set count = namespace(value=105) %}
       {% for obj in dwa_dict['Cancer'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="0" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=215) %}
+      {% set count = namespace(value=205) %}
       {% for obj in dwa_dict['Capricorn'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
 
   <rect x="300" y="200" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=215) %}
+      {% set count = namespace(value=205) %}
       {% for obj in dwa_dict['Leo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <!--sg, sc, lib, vi-->
   <rect x="0" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in dwa_dict['Sagittarius'] %}
-          <text x="10" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+          <image x="10" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="100" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in dwa_dict['Scorpio'] %}
-          <text x="110" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+         <image x="110" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="200" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in dwa_dict['Libra'] %}
-          <text x="210" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+         <image x="210" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 
   <rect x="300" y="300" width="100" height="100" stroke="blue" fill="transparent" stroke-width="2"/>
-      {% set count = namespace(value=315) %}
+      {% set count = namespace(value=305) %}
       {% for obj in dwa_dict['Virgo'] %}
-          <text x="310" y="{{ count.value }}">{{ obj }}</text>
-          {% set count.value = count.value + 15 %}
+         <image x="310" y="{{ count.value }}" href="{{png_dict[obj.split(' ')[0]]}}" width="20px" height="20px"/>
+          {% set count.value = count.value + 20 %}
         {% endfor %}
 </svg>
 </div>
@@ -762,23 +801,43 @@ Time Zone: {{ tz }}
   </tr>
     <tr>
     <td>Mars 
-    <td>{{ trimsamsa_dict.get('Mars', 'None') }}</td>
+    <td>
+      {% for obj in trimsamsa_dict['Mars'] %}
+      <img src="{{ png_dict[obj] }}" width="20" height="20"">
+      {% endfor %}
+    </td>
   </tr>
     <tr>
     <td>Mercury 
-    <td>{{ trimsamsa_dict.get('Mercury', 'None') }}</td>
+      <td>
+      {% for obj in trimsamsa_dict['Mercury'] %}
+        <img src="{{ png_dict[obj] }}" width="20" height="20"">
+      {% endfor %}
+    </td>
   </tr>
     <tr>
     <td>Jupiter 
-    <td>{{ trimsamsa_dict.get('Jupiter', 'None') }}</td>
+    <td>
+      {% for obj in trimsamsa_dict['Jupiter'] %}
+        <img src="{{ png_dict[obj] }}" width="20" height="20"">
+      {% endfor %}
+    </td>
   </tr>
     <tr>
     <td>Venus 
-    <td>{{ trimsamsa_dict.get('Venus', 'None') }}</td>
+    <td> 
+        {% for obj in trimsamsa_dict['Venus'] %}
+        <img src="{{ png_dict[obj] }}" width="20" height="20"">
+        {% endfor %}
+    </td>
   </tr>
     <tr>
     <td>Saturn 
-    <td>{{ trimsamsa_dict.get('Saturn', 'None') }}</td>
+      <td>
+            {% for obj in trimsamsa_dict['Saturn'] %}
+        <img src="{{ png_dict[obj] }}" width="20" height="20"">
+        {% endfor %}
+      </td>
   </tr>
 
 </table>
@@ -792,6 +851,8 @@ Time Zone: {{ tz }}
 </div>
 
 <br>
+
+
 </body>
 
 </html>

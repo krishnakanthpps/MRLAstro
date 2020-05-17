@@ -253,9 +253,9 @@ def calc_trimsamsa(planets_dict, houses_dict):
 				trimsamsa_dict[tr] = [house]	
 
 	#format for jinja2 printing
-	for obj in trimsamsa_dict:
-		pl_list = ', '.join(trimsamsa_dict[obj])
-		trimsamsa_dict[obj] = pl_list
+	#for obj in trimsamsa_dict:
+#		pl_list = ', '.join(trimsamsa_dict[obj])
+#		trimsamsa_dict[obj] = pl_list
 
 	#print(trimsamsa_dict)
 	return trimsamsa_dict
