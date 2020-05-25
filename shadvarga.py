@@ -37,28 +37,28 @@ def calc_horas(planets_dict):
 
 			if sign in zs_odd_signs and lon_sign_deg <= 15:
 				#add + in front of planet name
-				planet = "+"+planet[0:2]
+				planet = "+:"+planet[0:2]
 				if sign in hora_dict:
 					hora_dict[sign].append(planet)
 				else:
 					hora_dict[sign] = [planet]
 
 			elif sign in zs_odd_signs and lon_sign_deg > 15:
-				planet = "-"+planet[0:2]
+				planet = "-:"+planet[0:2]
 				if sign in hora_dict:
 					hora_dict[sign].append(planet)
 				else:
 					hora_dict[sign] = [planet]
 
 			elif sign not in zs_odd_signs and lon_sign_deg <= 15:
-				planet = "-"+planet[0:2]
+				planet = "-:"+planet[0:2]
 				if sign in hora_dict:
 					hora_dict[sign].append(planet)
 				else:
 					hora_dict[sign] = [planet]
 
 			elif sign not in zs_odd_signs and lon_sign_deg > 15:
-				planet = "+"+planet[0:2]
+				planet = "+:"+planet[0:2]
 				if sign in hora_dict:
 					hora_dict[sign].append(planet)
 				else:
