@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MRL Astro</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+  <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+
+<!-- Blue with white text -->
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #800080;">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('horoscope') }}">Horoscope</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container" max-width: 50%;>
+<br>
+<h2 style="text-align:center">MRL Astro</h2>
+<p style="text-align:center">E.K ☉ C.V.V ☉ M.N ☉ M.R.L</p>
+<br>
+<!-- masters imags display -->
+<p class="aligncenter">
+<img src="static/masters.jpg" alt="Master M.R.L, Master E.K" style="width:50%">
+</p>
+<!-- -->
+<br>
+<p>Namaskaram,</p>
+
+<p>The Vedic Astrology resources on this site are based on the teachings of Master M.R.L Rao (1946 - 2018) of Visakhapatnam, India. He was a disciple of Master E.K (Ekkirala Krishnamacharya), a daivajña and taught the science of Astrology to thousands of people in his lifetime. You can read more about him <a href="https://www.sarvaani.org/?page_id=28">here</a>.</p>
+
+<p>In his own words.. </p>
+
+<p class="font-italic"> "Jyotisa (Astrology) is a like a lamp whose light enables us to cross the dark forest of life with ease. Among the Vedāngās, Astrology is considered to be the eye of the Vēda Purusha or cosmic man which demonstrates the importance given to this subject by our ancients".</p>
+
+<p>This site currently has a Sayana horoscope calculator which can be accessed <a href="https://mrlastro.sarvaani.org/horoscope">here</a>.</p>
+
+<p>More resources including his teachings and notes will be added soon. </p>
+<br>
+</div>
+</body>
+</html>

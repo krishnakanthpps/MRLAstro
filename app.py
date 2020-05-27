@@ -79,14 +79,17 @@ app.config['SECRET_KEY'] = 'ff3a5067411e420dcd0245787ba7bc533be5ce4b'
 
 
 @app.route('/', methods=['GET'])
-def index():
-	name = 'aditya'
-	return redirect(url_for('horoscope'))
+def home():
+	return render_template('home.html')
 
 @app.route('/panchanga', methods=['GET'])
 def panchanga():
 	#shows horoscope details entry form
 	return render_template('panchanga.html')
+
+#@app.route('/prasna', methods=['GET','POST'])
+#def prasna():
+
 
 #Chart creation page
 @app.route('/horoscope', methods=['GET'])

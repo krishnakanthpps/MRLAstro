@@ -18,7 +18,7 @@ h3 {
 }  
 
 p {
-  color: maroon;
+  color: black;
   text-align: left;
   
 }  
@@ -62,7 +62,9 @@ p {
   color: white;
 }
 
-
+.aligncenter {
+    text-align: center;
+}
 
 
 </style>
