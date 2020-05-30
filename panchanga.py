@@ -52,6 +52,8 @@ galc_cent_mid_mula = lambda: swe.set_sid_mode(swe.SIDM_USER, 1922011.128853056, 
 set_ayanamsa_mode = lambda: swe.set_sid_mode(swe.SIDM_LAHIRI)
 reset_ayanamsa_mode = lambda: swe.set_sid_mode(swe.SIDM_FAGAN_BRADLEY)
 
+tithi_list = ['Purnima', 'Padyami', 'Vidiya', 'Tadiya', 'Chaturdasi','Panchami','Shashti','Saptami','Ashtami','Navami','Dasami','Ekadasi','Dwadasi','Trayodasi','Chaturdasi','Amavasya','Padyami', 'Vidiya', 'Tadiya', 'Chaturdasi','Panchami','Shashti','Saptami','Ashtami','Navami','Dasami','Ekadasi','Dwadasi','Trayodasi','Chaturdasi']
+
 # Temporary function
 def get_planet_name(planet):
   names = { swe.SURYA: 'Surya', swe.CHANDRA: 'Candra', swe.KUJA: 'Mangala',
@@ -245,6 +247,20 @@ def tithi(jd, place):
     leap_tithi = 1 if today == 30 else leap_tithi
     answer += [int(leap_tithi), to_dms(ends)]
 
+  #convert to string in format 'Tithi: tithi, upto 00:00' 
+  tithi_name = tithi_list[answer[0]]
+  tithi_end_time = ''
+  #check if end time is AM or PM
+  if answer[1][:2][0] > 12:
+    am_or_pm = 'PM'
+  else:
+    am_or_pm = 'AM'
+  #convert time to string
+  for t in answer[1][:2]:
+    tithi_end_time = tithi_end_time + str(t) + ':'
+  
+  tithi_end_time = tithi_end_time.rstrip(':')
+  answer = tithi_name + ' upto ' + tithi_end_time + ' '+am_or_pm
   return answer
 
 
@@ -615,15 +631,15 @@ def tithi_tests():
   apr19 = gregorian_to_jd(Date(2013, 4, 19))
   apr20 = gregorian_to_jd(Date(2013, 4, 20))
   apr21 = gregorian_to_jd(Date(2013, 4, 21))
-  print(tithi(date1, bangalore))  # Expected: krishna ashtami (23), ends at 27:07:38
-  print(tithi(date2, bangalore))  # Expected: Saptami, ends at 16:24:19
-  print(tithi(date3, bangalore))  # Expected: Krishna Saptami, ends at 25:03:30
-  print(tithi(date2, helsinki))   # Expected: Shukla saptami until 12:54:19
-  print(tithi(apr24, bangalore))  # Expected: [10, [6,9,29], 11, [27, 33, 58]]
-  print(tithi(feb3, bangalore))   # Expected: [22, [8,14,6], 23, [30, 33, 17]]
-  print(tithi(apr19, helsinki))   # Expected: [9, [28, 45, 0]]
-  print(tithi(apr20, helsinki))   # Expected: [10, [29, 22, 7]]
-  print(tithi(apr21, helsinki))   # Expected: [10, [5, 22, 6]]
+  print(tithi(date1, irvine))  # Expected: krishna ashtami (23), ends at 27:07:38
+  # print(tithi(date2, bangalore))  # Expected: Saptami, ends at 16:24:19
+  # print(tithi(date3, bangalore))  # Expected: Krishna Saptami, ends at 25:03:30
+  # print(tithi(date2, helsinki))   # Expected: Shukla saptami until 12:54:19
+  # print(tithi(apr24, bangalore))  # Expected: [10, [6,9,29], 11, [27, 33, 58]]
+  # print(tithi(feb3, bangalore))   # Expected: [22, [8,14,6], 23, [30, 33, 17]]
+  # print(tithi(apr19, helsinki))   # Expected: [9, [28, 45, 0]]
+  # print(tithi(apr20, helsinki))   # Expected: [10, [29, 22, 7]]
+  # print(tithi(apr21, helsinki))   # Expected: [10, [5, 22, 6]]
   return
 
 def nakshatra_tests():
@@ -671,30 +687,42 @@ def navamsa_tests():
               [6, 4], [10, 11], [9, 5], [7, 10], [8, 10]]
   assert(nv == expected)
 
+#returns the panchanga for a specific date, location
+def getPanchanga(date, place):
+  panchanga_dict = {}
+  #Get Tithi
+  tithi = tithi(date, place)
+  tithi_num = tithi[0]
+  tithi_end_time = tithi[1]
+
+
+
 
 if __name__ == "__main__":
   import sys
   bangalore = Place(12.972, 77.594, +5.5)
-  shillong = Place(25.569, 91.883, +5.5)
-  helsinki = Place(60.17, 24.935, +2.0)
-  date1 = gregorian_to_jd(Date(2009, 7, 15))
-  date2 = gregorian_to_jd(Date(2013, 1, 18))
-  date3 = gregorian_to_jd(Date(1985, 6, 9))
-  date4 = gregorian_to_jd(Date(2009, 6, 21))
-  apr_8 = gregorian_to_jd(Date(2010, 4, 8))
-  apr_10 = gregorian_to_jd(Date(2010, 4, 10))
-  print("All tests")
-  all_tests()
-  print("tithi...")
-  tithi_tests()
-  print("nakshatra..")
-  nakshatra_tests()
-  print("yoga..")
-  yoga_tests()
-  print("masa..")
-  masa_tests()
-  print("ascendant..")
-  ascendant_tests()
-  print("navamsa..")
-  navamsa_tests()
+  #irvine = Place(33.40, 117.49, -7.0)
+  # shillong = Place(25.569, 91.883, +5.5)
+  # helsinki = Place(60.17, 24.935, +2.0)
+  date1 = gregorian_to_jd(Date(2020, 5, 28))
+  # date2 = gregorian_to_jd(Date(2013, 1, 18))
+  # date3 = gregorian_to_jd(Date(1985, 6, 9))
+  # date4 = gregorian_to_jd(Date(2009, 6, 21))
+  # apr_8 = gregorian_to_jd(Date(2010, 4, 8))
+  # apr_10 = gregorian_to_jd(Date(2010, 4, 10))
+  # print("All tests")
+  # all_tests()
+  # print("tithi...")
+  #tithi_tests()
+  print(tithi(date1, bangalore))
+  # print("nakshatra..")
+  # nakshatra_tests()
+  # print("yoga..")
+  # yoga_tests()
+  # print("masa..")
+  # masa_tests()
+  #print("ascendant..")
+  #ascendant_tests()
+  #print("navamsa..")
+  #navamsa_tests()
   # new_moon(jd)
