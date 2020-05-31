@@ -107,7 +107,7 @@ def showchart():
 	city = request.form['city']
 	state = request.form['state']
 	#city_lat, city_lon = get_lat_lon(city)
-	
+
 	#generate dob in yyyy/mm/dd format
 	day = request.form['dob_day']
 	month = request.form['dob_month']
@@ -124,6 +124,19 @@ def showchart():
 
 	#generate tz in +/-hh:mm format
 	tz = request.form['timezone']
+
+	#get prg date details
+	prg_date_now = request.form.get("prg_date_now") 
+	if prg_date_now is None:
+		prg_day = request.form['prg_day']
+		prg_month = request.form['prg_month']
+		prg_year = request.form['prg_year']
+		prg_date = prg_year+'/'+prg_month+'/'+prg_day
+	else:
+		#set prg date to today
+		prg_date = datetime.datetime.utcnow()
+		prg_date = prg_date.strftime('%Y/%m/%d')
+
 
 	#get all the planet and house positions (raw - no formatting)
 	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon = calc_allpos(dob, tob, city, tz)
@@ -147,7 +160,7 @@ def showchart():
 	prog_pl_dict = {}
 	prog_houses_dict = {}
 
-	prog_pl_dict, prog_houses_dict, prg_details = calc_progressions(dob, tob, city, tz)
+	prog_pl_dict, prog_houses_dict, prg_details = calc_progressions(dob, tob, city, tz, prg_date)
 
 	#generate printable objects for progressions
 	progressions_dict_pr = {}
@@ -169,6 +182,7 @@ def showchart():
 	#print(houses_dict_signlon)
 	# print("###########################################")
 	
+	#print(f"prg date: {prg_date}")
 	#print("Name: "+birth_name)
 	#print("DOB: "+dob)
 	#print("City: "+city+" "+str(city_lat)+" "+str(city_lon))

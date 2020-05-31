@@ -379,14 +379,13 @@ Timezone:
 <br>
 
 <br>
-<!-- 
-<b>Select date for Progressions:</b>
-<br>
 
+
+<b>Select date for Progressions:</b>&nbsp;&nbsp;<input type="radio" id="form_prg_date" name="prg_date_now" value="today" checked="checked"><label for="prg_date">TODAY</label>&nbsp;&nbsp;<span style="color:red;"><b>OR</b></span>&nbsp;&nbsp;
 Day:
 <select id="form_prg_day" name="prg_day">
   <option value="-">-</option>
-  <option value="1" selected>1</option>
+  <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
   <option value="4">4</option>
@@ -418,11 +417,10 @@ Day:
   <option value="30">30</option>
   <option value="31">31</option>
 </select>
-
 Month:
 <select id="form_prg_month" name="prg_month">
   <option value="-">-</option>
-  <option value="1" selected>January</option>
+  <option value="1">January</option>
   <option value="2">Febuary</option>
   <option value="3">March</option>
   <option value="4">April</option>
@@ -435,8 +433,6 @@ Month:
   <option value="11">November</option>
   <option value="12">December</option>
 </select>
-
-
 Year:
 <select id="form_prg_year" name="prg_year"></select>
 <script>
@@ -450,14 +446,7 @@ document.getElementById("form_prg_year").innerHTML = options;
 </script>
 
 <br>
-<p>OR 
-<br>
-
-<input type="radio" id="form_prg_date" name="prg_date" value="today">
-<label for="prg_date"> Calculate Progressions for today</label>
-<br>
 </p>
--->
 <input type="submit" value="Submit"></input>
 </form>
 

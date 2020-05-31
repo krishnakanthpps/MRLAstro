@@ -13,7 +13,7 @@ zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scor
 
 #planets_dict, houses_dict, planets_dict_lon_only = calc_allpos(dob, tob, city, tz)
 
-def calc_progressions(dob, tob, city, tz):
+def calc_progressions(dob, tob, city, tz, prg_to_date):
 	
 	"""
 
@@ -28,28 +28,29 @@ def calc_progressions(dob, tob, city, tz):
 	
 	#make it a datetime object
 	dob = datetime.datetime.strptime(dob, "%Y/%m/%d")
+	prg_to_date = datetime.datetime.strptime(prg_to_date, "%Y/%m/%d")
 	dob_for_prnt = dob.strftime('%d-%m-%Y')
 
-	today = datetime.datetime.utcnow()
-	today_prnt = today.strftime('%d-%m-%Y')
+	#today = datetime.datetime.utcnow()
+	today_prnt = prg_to_date.strftime('%d-%m-%Y')
 
 	#get current age of person in years to dob_from_prg and get dob_to_prg
-	curr_age = today - dob
+	curr_age = prg_to_date - dob
 	curr_age_yrs = int((curr_age.days)/365) 
 
 	prg_date = dob_tob + datetime.timedelta(days=curr_age_yrs)
 
 	#check if birthday already occured
-	bday_this_year = datetime.datetime(today.year, dob.month, dob.day)
-	bday_previous_year = datetime.datetime(today.year - 1, dob.month, dob.day)
+	bday_this_year = datetime.datetime(prg_date.year, dob.month, dob.day)
+	bday_previous_year = datetime.datetime(prg_date.year - 1, dob.month, dob.day)
 
 	#check if bday already occured
-	bday_passed = today - bday_this_year
+	bday_passed = prg_date - bday_this_year
 
 	if bday_passed.days < 0:
 		#print('bday yet to occur this year')
 		#calculate number of days elapsed since last years bday
-		days_since_last_bday=(today - bday_previous_year)
+		days_since_last_bday=(prg_date - bday_previous_year)
 		#print('days_since_last_bday: '+str(days_since_last_bday.days))
 		
 		"""convert this into progressed hours to represent year in progressed days
@@ -88,7 +89,7 @@ def calc_progressions(dob, tob, city, tz):
 		#This block executes if birthday has already passed in current year
 		#print('bday has passed')
 		#calculate number of days elapsed since current year bday
-		days_since_last_bday=(today - bday_this_year)
+		days_since_last_bday=(prg_date - bday_this_year)
 		#print('days_since_last_bday: '+str(days_since_last_bday.days))
 		
 		"""convert this into progressed hours to represent year in progressed days
