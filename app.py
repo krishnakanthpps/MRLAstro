@@ -5,9 +5,6 @@ from flatlib.geopos import GeoPos
 from flatlib.chart import Chart
 from flatlib import const
 import datetime
-import requests
-import json
-import geoip2.database
 from datetime import date
 from funcs import *
 from progressions import *
@@ -203,96 +200,6 @@ def showchart():
 	#print(trimsamsa_dict)
 
 	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict, trimsamsa_dict=trimsamsa_dict, png_dict=png_dict, unicode_dict=unicode_dict)
-
-#Get prasna chart at /prasna
-@app.route('/prasna')
-def prasna():
-	
-	#Get name, location from form
-	birth_name = 'Prasna'
-	#url = 'http://api.ipstack.com/{}?access_key=548e5549f6562bf7e8e0e6c00d3ab925'.format(request.remote_addr)
-	reader = geoip2.database.Reader('static/GeoLite2-City_20200526/GeoLite2-City.mmdb')
-	client_ip = request.remote_addr
-	response = reader.city(client_ip)
-	city = response.city.name
-	state = response.subdivisions.most_specific.name
-	city = city+', '+state
-	#url = 'http://api.ipstack.com/136.52.121.146?access_key=548e5549f6562bf7e8e0e6c00d3ab925'
-	#print(url)
-	#r = requests.get(url)
-	#j = json.loads(r.text)
-	#city = j['city']
-	#state = j['region_name']
-	#city = city+', '+state
-
-	#city_lat, city_lon = get_lat_lon(city)
-
-	#generate dob in yyyy/mm/dd format
-	day = '31'
-	month = '05'
-	year = '2020'
-	dob = year+'/'+month+'/'+day
-	#format in dd-mm-yyyy format for jinja template display
-	dob_jinja = day+"-"+month+"-"+year
-
-	#generate tob in hh:mm format
-	hour = '07'
-	minute = '50'
-	second = '00'
-	tob = hour+":"+minute
-
-	#generate tz in +/-hh:mm format
-	tz = '-07:00'
-
-	#get all the planet and house positions (raw - no formatting)
-	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon = calc_allpos(dob, tob, city, tz)
-	
-	#zodiac sign list
-	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
-	
-	#dicts to store formatted objects in zodiac sign - [planet_positions] format
-	p_and_h_dict = {}
-	navamsa_dict = {}
-
-	#Generate dict for jinja2 with planets, houses and their positions
-	for sign in zs_list:
-		p_and_h_dict[sign] = getPrintableObjects(sign, planets_dict, houses_dict)
-
-	#Navamsa dict - keys = zodiac sign; value = list of planets in that navamsa
-	for sign in zs_list:
-		navamsa_dict[sign] = navamsa_from_long(sign, planets_dict_lon_only)
-
-	#####Generate Sharvargas####
-	hora_dict = calc_horas(planets_dict_lon_only)
-	drekkana_dict = calc_drekkana(planets_dict_lon_only)
-	dwa_dict = calc_dwadasamsa(planets_dict_lon_only)
-	trimsamsa_dict = calc_trimsamsa(planets_dict_lon_only, houses_dict_signlon)
-
-	## DEBUG ##
-	# print("############PRINTING progressions PR DICT###########")
-	#print(houses_dict_signlon)
-	# print("###########################################")
-	
-	#print(f"prg date: {prg_date}")
-	#print("Name: "+birth_name)
-	#print("DOB: "+dob)
-	#print("City: "+city+" "+str(city_lat)+" "+str(city_lon))
-	#print("Time: "+str(tob))
-	#print("Timezone: "+tz)
-	# #print("############# P, H POSITIONS ##########")
-	#print(p_and_h_dict)
-	#print("####### PRINTING PLANETS_DICT ##########")
-	#print(hora_dict)
-	#print(png_dict)
-	# print("####### PRINTING HOUSES_DICT ##########")
-	# print(houses_dict)
-	# print("####### PRINTING P AND H DICT ##########")
-	# print(p_and_h_dict)
-	#print(trimsamsa_dict)
-
-	return render_template('prasna.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict, trimsamsa_dict=trimsamsa_dict, png_dict=png_dict, unicode_dict=unicode_dict)
-
-
 
 #Displays current planetary positions
 @app.route('/ephemeris')	
