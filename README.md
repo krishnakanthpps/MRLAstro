@@ -1,6 +1,6 @@
 # MRLAstro
 
-Python-Flask based sayana horoscope generator.
+Flask based Sayana Horoscope generator.
 
 ## Installation
 
