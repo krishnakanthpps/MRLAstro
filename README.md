@@ -15,7 +15,9 @@ flask run
 Create image and run container
 
 ```
-docker build -t mrlastro.test 
+./redo-docker.sh
 
-docker container logs -f mrlastro.test
+docker container logs --tail -f mrlastro.test
 ```
+
+Browse to http://localhost:8080
