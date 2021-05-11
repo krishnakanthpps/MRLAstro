@@ -11,8 +11,11 @@ flask run
 ```
 
 ## Dockerized 
-```
 
+Create image and run container
+
+```
+docker build -t mrlastro.test 
 
 docker container logs -f mrlastro.test
 ```
