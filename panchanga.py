@@ -279,8 +279,45 @@ def nakshatra(jd, place):
     ends = (rise - jd + approx_end) * 24 + tz
     leap_nak = 1 if nak == 27 else leap_nak
     answer += [int(leap_nak), to_dms(ends)]
-
+    
   return answer
+
+def get_nakshara_name_printable(nakshatra_data):
+
+  nak_num = nakshatra_data[0]
+  nak_upto = nakshatra_data[1]
+
+  nak_end_time = ':'.join(map(str,nak_upto))
+ 
+  nakshatras = { 1:"Aśvinī",
+                2:"Bharaṇī",
+                3:"Kṛttikā",
+                4:"Rohiṇī",
+                5:"Mṛgaśirā",
+                6:"Ārdrā",
+                7:"Punarvasū",
+                8:"Puṣya",
+                9:"Āśleṣā",
+                10:"Maghā",
+                11:"Pūrvaphalgunī",
+                12:"Uttaraphalgunī",
+                13:"Hasta",
+                14:"Cittā",
+                15:"Svāti",
+                16:"Viśākhā",
+                17:"Anurādhā",
+                18:"Jyeṣṭhā",
+                19:"Mūlā",
+                20:"Pūrvāṣāḍhā",
+                21:"Uttarāṣāḍhā",
+                22:"Śravaṇā",
+                23:"Dhaniṣṭhā",
+                24:"Śatabhiṣā",
+                25:"Pūrvābhādrā",
+                26:"Uttarābhādrā",
+                27:"Revatī"
+              }
+  return nakshatras[nak_num],nak_end_time
 
 
 def yoga(jd, place):
@@ -610,20 +647,20 @@ def all_tests():
 
 def tithi_tests():
   print(sys._getframe().f_code.co_name)
-  # feb3 = gregorian_to_jd(Date(2013, 2, 3))
-  # apr24 = gregorian_to_jd(Date(2010, 4, 24))
-  # apr19 = gregorian_to_jd(Date(2013, 4, 19))
-  # apr20 = gregorian_to_jd(Date(2013, 4, 20))
-  # apr21 = gregorian_to_jd(Date(2013, 4, 21))
-  # print(tithi(date1, bangalore))  # Expected: krishna ashtami (23), ends at 27:07:38
-  print(tithi(date2, hyderabad))  # Expected: Saptami, ends at 16:24:19
-  # print(tithi(date3, bangalore))  # Expected: Krishna Saptami, ends at 25:03:30
-  # print(tithi(date2, helsinki))   # Expected: Shukla saptami until 12:54:19
-  # print(tithi(apr24, bangalore))  # Expected: [10, [6,9,29], 11, [27, 33, 58]]
-  # print(tithi(feb3, bangalore))   # Expected: [22, [8,14,6], 23, [30, 33, 17]]
-  # print(tithi(apr19, helsinki))   # Expected: [9, [28, 45, 0]]
-  # print(tithi(apr20, helsinki))   # Expected: [10, [29, 22, 7]]
-  # print(tithi(apr21, helsinki))   # Expected: [10, [5, 22, 6]]
+  feb3 = gregorian_to_jd(Date(2013, 2, 3))
+  apr24 = gregorian_to_jd(Date(2010, 4, 24))
+  apr19 = gregorian_to_jd(Date(2013, 4, 19))
+  apr20 = gregorian_to_jd(Date(2013, 4, 20))
+  apr21 = gregorian_to_jd(Date(2013, 4, 21))
+  print(tithi(date1, bangalore))  # Expected: krishna ashtami (23), ends at 27:07:38
+  print(tithi(date2, bangalore))  # Expected: Saptami, ends at 16:24:19
+  print(tithi(date3, bangalore))  # Expected: Krishna Saptami, ends at 25:03:30
+  print(tithi(date2, helsinki))   # Expected: Shukla saptami until 12:54:19
+  print(tithi(apr24, bangalore))  # Expected: [10, [6,9,29], 11, [27, 33, 58]]
+  print(tithi(feb3, bangalore))   # Expected: [22, [8,14,6], 23, [30, 33, 17]]
+  print(tithi(apr19, helsinki))   # Expected: [9, [28, 45, 0]]
+  print(tithi(apr20, helsinki))   # Expected: [10, [29, 22, 7]]
+  print(tithi(apr21, helsinki))   # Expected: [10, [5, 22, 6]]
   return
 
 def nakshatra_tests():
@@ -632,6 +669,9 @@ def nakshatra_tests():
   print(nakshatra(date2, bangalore))  # Expected: 27 (Revati), ends at 19:23:09
   print(nakshatra(date3, bangalore))  # Expecred: 24 (Shatabhisha) ends at 26:32:43
   print(nakshatra(date4, shillong))   # Expected: [3, [5,1,14]] then [4,[26,31,13]]
+
+  test_nak = [1, [26, 32, 42]]
+  print(get_nakshara_name_printable(test_nak))
   return
 
 def yoga_tests():
@@ -677,16 +717,19 @@ if __name__ == "__main__":
   bangalore = Place(12.972, 77.594, +5.5)
   shillong = Place(25.569, 91.883, +5.5)
   helsinki = Place(60.17, 24.935, +2.0)
-  hyderabad = Place(17.385, 78.486, +5.5)
-  date2 = gregorian_to_jd(Date(2020, 12, 27))
-  # date2 = gregorian_to_jd(Date(2013, 1, 18))
-  # date3 = gregorian_to_jd(Date(1985, 6, 9))
-  # date4 = gregorian_to_jd(Date(2009, 6, 21))
-  # apr_8 = gregorian_to_jd(Date(2010, 4, 8))
-  # apr_10 = gregorian_to_jd(Date(2010, 4, 10))
-#  all_tests()
-  tithi_tests()
-  # nakshatra_tests()
+  rocklin = Place(38.79, 121.23, -7.0)
+  date1 = gregorian_to_jd(Date(2009, 7, 15))
+  date2 = gregorian_to_jd(Date(2013, 1, 18))
+  date3 = gregorian_to_jd(Date(1985, 6, 9))
+  date4 = gregorian_to_jd(Date(2021, 5, 11))
+  apr_8 = gregorian_to_jd(Date(2010, 4, 8))
+  apr_10 = gregorian_to_jd(Date(2010, 4, 10))
+  # all_tests()
+  # tithi_tests()
+  #nakshatra_tests()
+
+  nakshatra_today = nakshatra(date4, rocklin)  # Expected: [3, [5,1,14]] then [4,[26,31,13]]
+  print(get_nakshara_name_printable(nakshatra_today))
   # yoga_tests()
   # masa_tests()
   # ascendant_tests()

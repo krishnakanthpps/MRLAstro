@@ -109,10 +109,20 @@ def showchart():
 	#city_lat, city_lon = get_lat_lon(city)
 
 	#generate dob in yyyy/mm/dd format
-	day = request.form['dob_day']
-	month = request.form['dob_month']
-	year = request.form['dob_year']
-	dob = year+'/'+month+'/'+day
+	# day = request.form['dob_day']
+	# month = request.form['dob_month']
+	# year = request.form['dob_year']
+	# dob = year+'/'+month+'/'+day
+
+	user_dob = request.form['user_dob']
+	dob = user_dob.replace("-","/")
+
+	#Also get the day, month, year for jinja display
+	date_list = user_dob.split("-")
+	year = date_list[0]
+	month = date_list[1]
+	day = date_list[2]
+
 	#format in dd-mm-yyyy format for jinja template display
 	dob_jinja = day+"-"+month+"-"+year
 
