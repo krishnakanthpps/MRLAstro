@@ -129,7 +129,7 @@ def showchart():
 	#generate tob in hh:mm format
 	hour = request.form['tob_hour']
 	minute = request.form['tob_minute']
-	second = request.form['tob_second']
+	#second = request.form['tob_second']
 	tob = hour+":"+minute
 
 	#generate tz in +/-hh:mm format
