@@ -8,6 +8,9 @@ from natsort import natsorted
 # Convert 23d 30' 30" to 23.508333 degrees
 from_dms = lambda degs, mins, secs: degs + mins/60 + secs/3600
 
+
+planets_list = ["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Uranus","Neptune","Pluto","Rahu","Ketu","Chiron"]
+
 # the inverse
 def to_dms_prec(deg):
   d = int(deg)
@@ -219,9 +222,19 @@ def navamsa_from_long(sign, planets_dict_lon_only):
 	return navamsa_dict
 
 
+
 if __name__ == "__main__":
 	
-	planets,houses = calc_allpos()
+	
+	dob = "1986/05/28"
+	tob = "12:25"
+	city = "hyderabad"
+	tz = 5.5
+	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon = calc_allpos(dob, tob, city, tz)
+
+	get_sthanabala(planets_dict, houses_dict)
+	#print(houses_dict)
+
 	#print(get_lat_lon('Bangalore'))
 	#print(get_lat_lon('Visakhapatnam'))
 	#print(get_lat_lon('hyderabad'))

@@ -9,7 +9,7 @@ from datetime import date
 from funcs import *
 from progressions import *
 from shadvarga import *
-
+from shadbala import *
 
 env = Environment(
     loader=PackageLoader('app', 'templates'),
@@ -187,10 +187,12 @@ def showchart():
 	dwa_dict = calc_dwadasamsa(planets_dict_lon_only)
 	trimsamsa_dict = calc_trimsamsa(planets_dict_lon_only, houses_dict_signlon)
 
+	shadbala_dict = calc_shadbalas(planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon)
 	## DEBUG ##
 	# print("############PRINTING progressions PR DICT###########")
 	#print(houses_dict_signlon)
-	# print("###########################################")
+	#print("###########################################")
+	#print(shadbala_dict)
 	
 	#print(f"prg date: {prg_date}")
 	#print("Name: "+birth_name)
@@ -209,7 +211,16 @@ def showchart():
 	# print(p_and_h_dict)
 	#print(trimsamsa_dict)
 
-	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict, trimsamsa_dict=trimsamsa_dict, png_dict=png_dict, unicode_dict=unicode_dict)
+	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict, trimsamsa_dict=trimsamsa_dict, shadbala_dict=shadbala_dict, png_dict=png_dict, unicode_dict=unicode_dict)
+
+
+#Displays Shadbala
+@app.route('/shadbala')
+def shadbala():
+
+	shadbala_dict = {}
+
+	return render_template('shadbala.html',shadbala_dict=shadbala_dict)
 
 #Displays current planetary positions
 @app.route('/ephemeris')	
