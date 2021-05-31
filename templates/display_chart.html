@@ -9,7 +9,7 @@
     <a class="nav-link" id="shadbala-tab" data-toggle="tab" href="#shadbala" role="tab" aria-controls="shadbala" aria-selected="false">Shadbala</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="shadvarga-tab" data-toggle="tab" href="#shadvarga" role="tab" aria-controls="shadvarga" aria-selected="false">Shadvarga</a>
+    <a class="nav-link" id="ashtakavarga-tab" data-toggle="tab" href="#ashtakavarga" role="tab" aria-controls="ashtakavarga" aria-selected="false">Ashtakavarga</a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -402,18 +402,18 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">Sthana</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <th scope="row" class="table-warning">Sthāna</th>
+      <td class="table-warning">{{ shadbala_dict['sthanabalas']['sun_total_sthanabala'] }}</td>
+      <td class="table-warning">{{ shadbala_dict['sthanabalas']['moon_total_sthanabala'] }}</td>
+      <td class="table-warning">{{ shadbala_dict['sthanabalas']['mars_total_sthanabala'] }}</td>
+      <td class="table-warning">{{ shadbala_dict['sthanabalas']['mercury_total_sthanabala'] }}</td>
+      <td class="table-warning">{{ shadbala_dict['sthanabalas']['jupiter_total_sthanabala'] }}</td>
+      <td class="table-warning">{{ shadbala_dict['sthanabalas']['venus_total_sthanabala'] }}</td>
+      <td class="table-warning">{{ shadbala_dict['sthanabalas']['saturn_total_sthanabala'] }}</td>
 
     </tr>
       <tr>
-      <th scope="row">Ucchabala</th>
+      <td>Ucchabala</td>
       <td>{{ shadbala_dict['sthanabalas']['ucchabalas']['Sun'] }}</td>
       <td>{{ shadbala_dict['sthanabalas']['ucchabalas']['Moon'] }}</td>
       <td>{{ shadbala_dict['sthanabalas']['ucchabalas']['Mars'] }}</td>
@@ -424,7 +424,7 @@
     </tr>
 
      <tr>
-      <th scope="row">Shadvargabala</th>
+      <td>Shadvargabala</td>
       <td>{{ shadbala_dict['sthanabalas']['vargabalas']['Sun'] }}</td>
       <td>{{ shadbala_dict['sthanabalas']['vargabalas']['Moon'] }}</td>
       <td>{{ shadbala_dict['sthanabalas']['vargabalas']['Mars'] }}</td>
@@ -433,12 +433,52 @@
       <td>{{ shadbala_dict['sthanabalas']['vargabalas']['Venus'] }}</td>
       <td>{{ shadbala_dict['sthanabalas']['vargabalas']['Saturn'] }}</td>
     </tr>
-    
+
+    <tr>
+      <td>Ojhayugmabala</td>
+      <td>{{ shadbala_dict['sthanabalas']['ojhayugmarasiamsabalas']['Sun'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['ojhayugmarasiamsabalas']['Moon'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['ojhayugmarasiamsabalas']['Mars'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['ojhayugmarasiamsabalas']['Mercury'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['ojhayugmarasiamsabalas']['Jupiter'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['ojhayugmarasiamsabalas']['Venus'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['ojhayugmarasiamsabalas']['Saturn'] }}</td>
+  </tr>
+
+    <tr>
+      <td>Kendrādibala</td>
+      <td>{{ shadbala_dict['sthanabalas']['kendradibalas']['Sun'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['kendradibalas']['Moon'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['kendradibalas']['Mars'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['kendradibalas']['Mercury'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['kendradibalas']['Jupiter'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['kendradibalas']['Venus'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['kendradibalas']['Saturn'] }}</td>
+  </tr>
+
+      <tr>
+      <td>Drekkānabala</td>
+      <td>{{ shadbala_dict['sthanabalas']['drekkanabalas']['Sun'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['drekkanabalas']['Moon'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['drekkanabalas']['Mars'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['drekkanabalas']['Mercury'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['drekkanabalas']['Jupiter'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['drekkanabalas']['Venus'] }}</td>
+      <td>{{ shadbala_dict['sthanabalas']['drekkanabalas']['Saturn'] }}</td>
+  </tr>
+
   </tbody>
+
 </table>
+<br>
+  <i>More balas coming soon...</i>
  </div>
 </div>
-  <div class="tab-pane fade" id="shadvarga" role="tabpanel" aria-labelledby="shadvarga-tab">...</div>
+  <div class="tab-pane fade" id="ashtakavarga" role="tabpanel" aria-labelledby="ashtakavarga-tab">
+    <div class="container">
+      <br>Coming soon...
+    </div>
+  </div>
 </div>
 
 

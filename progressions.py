@@ -115,7 +115,7 @@ def calc_progressions(dob, tob, city, tz, prg_to_date):
 		prg_date_prnt = prg_date_prnt.strftime('%d-%m-%Y')
 
 		#Generate the new progressed chart objects for the new date
-		planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg, houses_dict_signlon = calc_allpos(prg_date, tob, city, tz)
+		planets_dict_prg, houses_dict_prg, planets_dict_lon_only_prg, houses_dict_signlon, chart = calc_allpos(prg_date, tob, city, tz)
 		prg_details_dict['dob'] = str(dob_for_prnt)
 		prg_details_dict['curr_age'] = str(curr_age_yrs)
 		prg_details_dict['prg_date'] = str(prg_date_prnt)
@@ -141,7 +141,7 @@ def calc_transits():
 	tz = "00:00"
 	city = "London"
 
-	planets_dict_transit, houses_dict_transit, planets_dict_lon_only_transit, houses_dict_signlon = calc_allpos(transit_date, transit_time, city, tz)
+	planets_dict_transit, houses_dict_transit, planets_dict_lon_only_transit, houses_dict_signlon, chart = calc_allpos(transit_date, transit_time, city, tz)
 
 	for sign in zs_list:
 		p_and_h_dict_transit[sign] = getPrintableObjects(sign, planets_dict_transit, houses_dict_transit, p_only=True)

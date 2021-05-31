@@ -149,7 +149,7 @@ def showchart():
 
 
 	#get all the planet and house positions (raw - no formatting)
-	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon = calc_allpos(dob, tob, city, tz)
+	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, chart = calc_allpos(dob, tob, city, tz)
 	
 	#zodiac sign list
 	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
@@ -195,11 +195,11 @@ def showchart():
 	shadvarga_dict['navamsa_dict'] = navamsa_dict
 	shadvarga_dict['trimsamsa_dict'] = trimsamsa_dict
 
-	print("########### SHADVARGA DICT ##############")
-	print(shadvarga_dict)
-	print("########### END ##############")
+	# print("########### SHADVARGA DICT ##############")
+	# print(shadvarga_dict)
+	# print("########### END ##############")
 
-	shadbala_dict = calc_shadbalas(planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, shadvarga_dict)
+	shadbala_dict = calc_shadbalas(planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, shadvarga_dict, chart)
 	## DEBUG ##
 	# print("############PRINTING progressions PR DICT###########")
 	#print(houses_dict_signlon)

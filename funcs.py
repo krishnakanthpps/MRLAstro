@@ -89,11 +89,6 @@ def calc_allpos(dob, tob, city, tz):
 			planets_dict[p.id] = [p.sign, decdeg2dms(p.signlon)]
 			planets_dict_lon_only[p.id] = [p.sign, p.lon]
 
-
-	#print(planets_dict)
-	#print("############")
-	#print(planets_dict_lon_only)
-
 	#Get the house positions
 	house1 = chart.get(const.HOUSE1)
 	house2 = chart.get(const.HOUSE2)
@@ -116,7 +111,7 @@ def calc_allpos(dob, tob, city, tz):
 		houses_dict_signlon[h.id] = [h.sign, h.signlon]
 
 	#return planets_dict and houses_dict
-	return planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon
+	return planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, chart
 
 #creates sort key for getPrintableObjects(), takes d, m of object
 #strips m, sort by deg only
