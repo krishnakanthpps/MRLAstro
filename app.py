@@ -187,7 +187,19 @@ def showchart():
 	dwa_dict = calc_dwadasamsa(planets_dict_lon_only)
 	trimsamsa_dict = calc_trimsamsa(planets_dict_lon_only, houses_dict_signlon)
 
-	shadbala_dict = calc_shadbalas(planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon)
+	#Store all varga dicts in one place
+	shadvarga_dict = {}
+	shadvarga_dict['hora_dict'] = hora_dict
+	shadvarga_dict['drekkana_dict'] = drekkana_dict
+	shadvarga_dict['dwa_dict'] = dwa_dict
+	shadvarga_dict['navamsa_dict'] = navamsa_dict
+	shadvarga_dict['trimsamsa_dict'] = trimsamsa_dict
+
+	print("########### SHADVARGA DICT ##############")
+	print(shadvarga_dict)
+	print("########### END ##############")
+
+	shadbala_dict = calc_shadbalas(planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, shadvarga_dict)
 	## DEBUG ##
 	# print("############PRINTING progressions PR DICT###########")
 	#print(houses_dict_signlon)
