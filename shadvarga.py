@@ -122,6 +122,49 @@ def calc_drekkana(planets_dict):
 	return drek_dict
 
 """
+	Returns the Saptamsa (D-7) of given planet
+"""
+def calc_saptamsa(planets_dict):
+	
+	saptamsa_dict = {}
+
+	for planet,pos in planets_dict.items():
+		#number of horas elapsed
+		lon = pos[1]
+		sign = pos[0] 
+		#horas_elapsed = int((lon / one_hora))
+		planet = planet[0:2]
+		lon_sign_deg = lon % 30
+
+		dms_value = to_dms_prec(lon_sign_deg)
+
+		each_saptamsa = 30 / 7
+
+		saptamsa_number = int(( lon_sign_deg / each_saptamsa ) + 1)
+
+		#Find if sign is odd or even
+		if sign in zs_odd_signs:
+			num_of_sign = zs_list.index(sign) + 1
+			#print(f"{planet} is in {str(num_of_sign)}th sign of the zodiac")
+			#print(f"It is in Saptamsa #{str(saptamsa_number)} in {sign} ")
+			saptamsa_sign = ( saptamsa_number + num_of_sign - 2 ) % 12
+			saptamsa_sign_name = zs_list[saptamsa_sign]
+
+		else:
+			#Find the 7th place from sign
+			num_of_sign = ( zs_list.index(sign) + 6 ) % 12
+			saptamsa_sign = ( saptamsa_number + num_of_sign - 1 ) % 12
+			saptamsa_sign_name = zs_list[saptamsa_sign]
+
+		if saptamsa_sign in saptamsa_dict:
+			saptamsa_dict[saptamsa_sign_name].append(planet)
+		else:
+			saptamsa_dict[saptamsa_sign_name] = [planet]
+
+
+	return saptamsa_dict
+
+"""
 	Returns dwadashamsa for given planet
 """
 def calc_dwadasamsa(planets_dict):

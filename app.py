@@ -73,10 +73,8 @@ unicode_dict = {
 	"XII":"XII"
 }
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'ff3a5067411e420dcd0245787ba7bc533be5ce4b'
-
 
 @app.route('/', methods=['GET'])
 def home():
@@ -186,6 +184,7 @@ def showchart():
 	drekkana_dict = calc_drekkana(planets_dict_lon_only)
 	dwa_dict = calc_dwadasamsa(planets_dict_lon_only)
 	trimsamsa_dict = calc_trimsamsa(planets_dict_lon_only, houses_dict_signlon)
+	saptamsa_dict = calc_saptamsa(planets_dict_lon_only)
 
 	#Store all varga dicts in one place
 	shadvarga_dict = {}
@@ -194,9 +193,10 @@ def showchart():
 	shadvarga_dict['dwa_dict'] = dwa_dict
 	shadvarga_dict['navamsa_dict'] = navamsa_dict
 	shadvarga_dict['trimsamsa_dict'] = trimsamsa_dict
+	shadvarga_dict['saptamsa_dict'] = saptamsa_dict
 
 	# print("########### SHADVARGA DICT ##############")
-	# print(shadvarga_dict)
+	#print(shadvarga_dict)
 	# print("########### END ##############")
 
 	shadbala_dict = calc_shadbalas(planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, shadvarga_dict, chart)
