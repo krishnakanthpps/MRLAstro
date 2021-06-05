@@ -183,7 +183,7 @@ def navamsa_from_long(sign, planets_dict_lon_only):
 		signs_elapsed = longitude / one_sign
 		fraction_left = signs_elapsed % 1
 		navamsa_sign_num = int(fraction_left * 12)
-		#we now know which sign the navamsa falls under
+		#We now know which sign the navamsa falls under
 		navamsa_sign_name = sign_list[navamsa_sign_num]
 		#add planet to the list if it falls in 'sign' navamsa
 		if navamsa_sign_name == sign:

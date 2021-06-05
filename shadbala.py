@@ -232,6 +232,11 @@ def get_vargabala(planets_dict, shadvarga_dict):
 
 	get_varga_balas(hora_dict_clean)
 
+	#print("############# Calculating Saptamsa vargabalas ##################")
+	
+	saptamsa_dict = shadvarga_dict["saptamsa_dict"]
+	#get_varga_balas(saptamsa_dict)
+
 	#print(vargabala_dict)
 
 	#Hora dict needs some pre-processing due to additional symbols
