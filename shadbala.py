@@ -377,6 +377,45 @@ def get_drekkanabala(planets_dict):
 
 	return drekkanabala_dict
 
+
+#Get digbala
+def get_digbala(planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, shadvarga_dict, chart):
+
+	digbala_dict = {}
+
+	#Get longitudes for kendras
+	house1 = chart.get(const.HOUSE1)
+	house4 = chart.get(const.HOUSE4)
+	house7 = chart.get(const.HOUSE7)
+	house10 = chart.get(const.HOUSE10)
+
+	min_strength_house = { "Sun":house4.lon,"Moon":house10.lon,"Mars":house4.lon,"Mercury":house7.lon,"Jupiter":house7.lon,"Venus":house10.lon,"Saturn":house1.lon }
+
+	for planet,pos in planets_dict_lon_only.items():
+		if planet not in transsaturnian_list:
+
+			deg = pos[1]
+			sign = pos[0]
+
+			#Calculate digbalas
+			dist = abs(deg - min_strength_house[planet])
+			if dist > 180:
+				dist = round(( 360 - dist ) / 3, 2)
+			else:
+				dist = round((dist / 3), 2)
+			digbala_dict[planet] = dist	
+				
+
+	#Get the total of all computed 
+	total_digbala = 0.0
+	for db in digbala_dict.values():
+		total_digbala+=db
+
+	digbala_dict['total_digbala'] = total_digbala
+
+	return digbala_dict
+
+
 #####################
 ###### SHADBALA #####
 #####################
@@ -402,36 +441,34 @@ def get_sthanabala(planets_dict, houses_dict, planets_dict_lon_only, houses_dict
 	kendradibala_dict = get_kendradibala(planets_dict, houses_dict, shadvarga_dict, chart)
 	sthanabala_dict["kendradibalas"] = kendradibala_dict
 
-
+	#Get drekkanabala
 	drekkanabala_dict = get_drekkanabala(planets_dict)
 	sthanabala_dict["drekkanabalas"] = drekkanabala_dict
+
+
+	#Get dikbala
+	digbala_dict =  get_digbala(planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, shadvarga_dict, chart)
+	sthanabala_dict["digbalas"] = digbala_dict
 
 
 	#################################################
 	#### Compute totals for each bala per planet ####
 	#################################################
-	sun_total_sthanabala = sthanabala_dict['ucchabalas']['Sun'] + sthanabala_dict['vargabalas']['Sun'] + sthanabala_dict['ojhayugmarasiamsabalas']['Sun'] + sthanabala_dict["kendradibalas"]['Sun'] + sthanabala_dict["drekkanabalas"]['Sun']
+	sun_total_sthanabala = sthanabala_dict['ucchabalas']['Sun'] + sthanabala_dict['vargabalas']['Sun'] + sthanabala_dict['ojhayugmarasiamsabalas']['Sun'] + sthanabala_dict["kendradibalas"]['Sun'] + sthanabala_dict["drekkanabalas"]['Sun'] + sthanabala_dict["kendradibalas"]['Sun'] + sthanabala_dict["digbalas"]['Sun']
+	moon_total_sthanabala = sthanabala_dict['ucchabalas']['Moon'] + sthanabala_dict['vargabalas']['Moon'] + sthanabala_dict['ojhayugmarasiamsabalas']['Moon'] + sthanabala_dict["kendradibalas"]['Moon'] + sthanabala_dict["drekkanabalas"]['Moon'] + sthanabala_dict["digbalas"]['Moon']
+	mars_total_sthanabala = sthanabala_dict['ucchabalas']['Mars'] + sthanabala_dict['vargabalas']['Mars'] + sthanabala_dict['ojhayugmarasiamsabalas']['Mars'] + sthanabala_dict["kendradibalas"]['Mars'] + sthanabala_dict["drekkanabalas"]['Mars'] + sthanabala_dict["digbalas"]['Mars']
+	mercury_total_sthanabala = sthanabala_dict['ucchabalas']['Mercury'] + sthanabala_dict['vargabalas']['Mercury'] + sthanabala_dict['ojhayugmarasiamsabalas']['Mercury'] + sthanabala_dict["kendradibalas"]['Mercury'] + sthanabala_dict["drekkanabalas"]['Mercury'] + sthanabala_dict["digbalas"]['Mercury']
+	jupiter_total_sthanabala = sthanabala_dict['ucchabalas']['Jupiter'] + sthanabala_dict['vargabalas']['Jupiter'] + sthanabala_dict['ojhayugmarasiamsabalas']['Jupiter'] + sthanabala_dict["kendradibalas"]['Jupiter'] + sthanabala_dict["drekkanabalas"]['Jupiter'] + sthanabala_dict["digbalas"]['Jupiter']
+	venus_total_sthanabala = sthanabala_dict['ucchabalas']['Venus'] + sthanabala_dict['vargabalas']['Venus'] + sthanabala_dict['ojhayugmarasiamsabalas']['Venus'] + sthanabala_dict["kendradibalas"]['Venus'] + sthanabala_dict["drekkanabalas"]['Venus'] + sthanabala_dict["digbalas"]['Venus']
+	saturn_total_sthanabala = sthanabala_dict['ucchabalas']['Saturn'] + sthanabala_dict['vargabalas']['Saturn'] + sthanabala_dict['ojhayugmarasiamsabalas']['Saturn'] + sthanabala_dict["kendradibalas"]['Saturn'] + sthanabala_dict["drekkanabalas"]['Saturn'] + sthanabala_dict["digbalas"]['Saturn']
 
-	moon_total_sthanabala = sthanabala_dict['ucchabalas']['Moon'] + sthanabala_dict['vargabalas']['Moon'] + sthanabala_dict['ojhayugmarasiamsabalas']['Moon'] + sthanabala_dict["kendradibalas"]['Moon'] + sthanabala_dict["drekkanabalas"]['Moon']
-
-	mars_total_sthanabala = sthanabala_dict['ucchabalas']['Mars'] + sthanabala_dict['vargabalas']['Mars'] + sthanabala_dict['ojhayugmarasiamsabalas']['Mars'] + sthanabala_dict["kendradibalas"]['Mars'] + sthanabala_dict["drekkanabalas"]['Mars']
-
-	mercury_total_sthanabala = sthanabala_dict['ucchabalas']['Mercury'] + sthanabala_dict['vargabalas']['Mercury'] + sthanabala_dict['ojhayugmarasiamsabalas']['Mercury'] + sthanabala_dict["kendradibalas"]['Mercury'] + sthanabala_dict["drekkanabalas"]['Mercury']
-
-	jupiter_total_sthanabala = sthanabala_dict['ucchabalas']['Jupiter'] + sthanabala_dict['vargabalas']['Jupiter'] + sthanabala_dict['ojhayugmarasiamsabalas']['Jupiter'] + sthanabala_dict["kendradibalas"]['Jupiter'] + sthanabala_dict["drekkanabalas"]['Jupiter']
-
-	venus_total_sthanabala = sthanabala_dict['ucchabalas']['Venus'] + sthanabala_dict['vargabalas']['Venus'] + sthanabala_dict['ojhayugmarasiamsabalas']['Venus'] + sthanabala_dict["kendradibalas"]['Venus'] + sthanabala_dict["drekkanabalas"]['Venus']
-
-	saturn_total_sthanabala = sthanabala_dict['ucchabalas']['Saturn'] + sthanabala_dict['vargabalas']['Saturn'] + sthanabala_dict['ojhayugmarasiamsabalas']['Saturn'] + sthanabala_dict["kendradibalas"]['Saturn'] + sthanabala_dict["drekkanabalas"]['Saturn']
-
-
-	sthanabala_dict['sun_total_sthanabala'] = sun_total_sthanabala
-	sthanabala_dict['moon_total_sthanabala'] = moon_total_sthanabala
-	sthanabala_dict['mars_total_sthanabala'] = mars_total_sthanabala
-	sthanabala_dict['mercury_total_sthanabala'] = mercury_total_sthanabala
-	sthanabala_dict['jupiter_total_sthanabala'] = jupiter_total_sthanabala
-	sthanabala_dict['venus_total_sthanabala'] = venus_total_sthanabala
-	sthanabala_dict['saturn_total_sthanabala'] = saturn_total_sthanabala
+	sthanabala_dict['sun_total_sthanabala'] = round(sun_total_sthanabala, 2)
+	sthanabala_dict['moon_total_sthanabala'] = round(moon_total_sthanabala, 2)
+	sthanabala_dict['mars_total_sthanabala'] = round(mars_total_sthanabala, 2)
+	sthanabala_dict['mercury_total_sthanabala'] = round(mercury_total_sthanabala, 2)
+	sthanabala_dict['jupiter_total_sthanabala'] = round(jupiter_total_sthanabala, 2)
+	sthanabala_dict['venus_total_sthanabala'] = round(venus_total_sthanabala, 2)
+	sthanabala_dict['saturn_total_sthanabala'] = round(saturn_total_sthanabala, 2)
 
 
 	#print(sthanabala_dict)
