@@ -1,22 +1,26 @@
-<html>
-  <head>
-    <meta charset="utf-8"/>
-    <title>Panchanga</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles.css">
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
+{% extends 'base.html' %} 
 
-<body>
-<div class="topnav">
-  <a href="{{ url_for('panchanga') }}">Panchanga</a>
-  <a href="{{ url_for('horoscope') }}">Horoscope</a>
-  <a href="#contact">Contact</a>
+{% block content %}
+ <div class="container">
+      <br>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Select Location
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Visakhapatnam</a>
+          <a class="dropdown-item" href="#">Hyderabad</a>
+          <a class="dropdown-item" href="#">Los Angeles</a>
+        </div>
+      </div>
+          <br> Date: {{ panchanga_dict['date_fmt'] }}
+          <br> Tithi: {{ panchanga_dict['tithi_name'] }} upto {{ panchanga_dict['tithi_end_time'] }}
+          <br> Vāra: 
+          <br> Nakshatra: 
+          <br> Yoga: 
+        </p>
+        <br>
+
 </div>
 
-
-<h3>Coming soon.</h3>
-
-</body>
-
-</html>
+{% endblock %}

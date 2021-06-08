@@ -4,12 +4,15 @@ from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
 from flatlib.chart import Chart
 from flatlib import const
-import datetime
 from datetime import date
 from funcs import *
 from progressions import *
 from shadvarga import *
 from shadbala import *
+from panchanga import *
+from flask_moment import Moment
+import pytz
+
 
 env = Environment(
     loader=PackageLoader('app', 'templates'),
@@ -76,18 +79,11 @@ unicode_dict = {
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'ff3a5067411e420dcd0245787ba7bc533be5ce4b'
 
+moment = Moment(app)
+
 @app.route('/', methods=['GET'])
 def home():
 	return render_template('home.html')
-
-@app.route('/panchanga', methods=['GET'])
-def panchanga():
-	#shows horoscope details entry form
-	return render_template('panchanga.html')
-
-#@app.route('/prasna', methods=['GET','POST'])
-#def prasna():
-
 
 #Chart creation page
 @app.route('/horoscope', methods=['GET'])
@@ -274,6 +270,29 @@ def ephemeris():
 	#pass chart object to template
 	#return render_template('ephemeris.html', all_objs=all_objs)
 	return redirect("https://www.astro.com/swisseph/swepha_e.htm", code=302)
+
+@app.route('/panchanga', methods=['GET'])
+def panchanga():
+
+	time_of_day = "5:30"
+	city = "hyderabad"
+	tz = 5.5
+
+	#Get the current date, time in India
+	curr_date = datetime.datetime.now(pytz.timezone("Asia/Calcutta"))
+	curr_date_fmt = curr_date.strftime('%d-%m-%Y')
+	date_swisseph_fmt_date = curr_date.strftime('%Y/%m/%d')
+
+	date_dict = { "date": date_swisseph_fmt_date, "date_fmt":curr_date_fmt, "time_of_day": time_of_day, "city": city, "tz": tz } 
+
+	#Get the required information
+	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, chart = calc_allpos(date_swisseph_fmt_date, time_of_day, city, tz)
+
+	#print(date_dict)
+	#Generate the panchanga
+	panchanga_dict = get_tithi(planets_dict_lon_only, date_dict)
+	
+	return render_template('panchanga.html', panchanga_dict=panchanga_dict)
 
 
 if __name__ == "__main__":

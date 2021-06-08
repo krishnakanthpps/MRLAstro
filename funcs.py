@@ -36,13 +36,21 @@ def decdeg2dms(dd):
 
 #Get the latitude and longitude
 def get_lat_lon(city):
-	geolocator = Nominatim(user_agent="mrlastro")
-	location = geolocator.geocode(city)
-	lat = location.latitude
-	lon = location.longitude
-	#lat = "000"
-	#lon = "000"
 
+	#save some lookups
+	city = city.lower()
+	if city == "hyderabad":
+		lat = 17.360589
+		lon = 78.4740613
+	elif city == "visakhapatnam":
+		lat = 17.7231276
+		lon = 83.3012842
+	else:
+		geolocator = Nominatim(user_agent="mrlastro")
+		location = geolocator.geocode(city)
+		lat = location.latitude
+		lon = location.longitude
+	
 	return lat, lon
 
 #create and return the chart dict
