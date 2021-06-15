@@ -3,6 +3,7 @@
 {% block content %}
  <div class="container">
       <br>
+   <!--   
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Select Location
@@ -12,12 +13,17 @@
           <a class="dropdown-item" href="#">Hyderabad</a>
           <a class="dropdown-item" href="#">Los Angeles</a>
         </div>
-      </div>
+        </div>
+      -->
+      <h3> Daily Panchanga </h3>
+      
+          <br> Place: Visakhapatnam, India
           <br> Date: {{ panchanga_dict['date_fmt'] }}
-          <br> Tithi: {{ panchanga_dict['tithi_name'] }} upto {{ panchanga_dict['tithi_end_time'] }}
-          <br> Vāra: 
-          <br> Nakshatra: 
-          <br> Yoga: 
+          <br> Tithi: {{ panchanga_dict['tithi']['tithi_name'] }} upto {{ panchanga_dict['tithi']['tithi_end_time'] }}
+          <br> Vāra: {{ panchanga_dict['vara'] }}
+          <br> Nakshatra: {{ panchanga_dict['nakshatra'] }} <var><sup>***Beginning with Krittika</sup></var>
+          <br> Yoga: {{ panchanga_dict['yoga'] }}
+          <br> Karana: {{ panchanga_dict['karana'] }}
         </p>
         <br>
 

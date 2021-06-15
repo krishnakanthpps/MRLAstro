@@ -100,14 +100,6 @@ def showchart():
 	country = request.form['country']
 	city = request.form['city']
 	state = request.form['state']
-	#city_lat, city_lon = get_lat_lon(city)
-
-	#generate dob in yyyy/mm/dd format
-	# day = request.form['dob_day']
-	# month = request.form['dob_month']
-	# year = request.form['dob_year']
-	# dob = year+'/'+month+'/'+day
-
 	user_dob = request.form['user_dob']
 	dob = user_dob.replace("-","/")
 
@@ -190,34 +182,7 @@ def showchart():
 	shadvarga_dict['navamsa_dict'] = navamsa_dict
 	shadvarga_dict['trimsamsa_dict'] = trimsamsa_dict
 	shadvarga_dict['saptamsa_dict'] = saptamsa_dict
-
-	# print("########### SHADVARGA DICT ##############")
-	#print(shadvarga_dict)
-	# print("########### END ##############")
-
 	shadbala_dict = calc_shadbalas(planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, shadvarga_dict, chart)
-	## DEBUG ##
-	# print("############PRINTING progressions PR DICT###########")
-	#print(houses_dict_signlon)
-	#print("###########################################")
-	#print(shadbala_dict)
-	
-	#print(f"prg date: {prg_date}")
-	#print("Name: "+birth_name)
-	#print("DOB: "+dob)
-	#print("City: "+city+" "+str(city_lat)+" "+str(city_lon))
-	#print("Time: "+str(tob))
-	#print("Timezone: "+tz)
-	# #print("############# P, H POSITIONS ##########")
-	#print(p_and_h_dict)
-	#print("####### PRINTING PLANETS_DICT ##########")
-	#print(hora_dict)
-	#print(png_dict)
-	# print("####### PRINTING HOUSES_DICT ##########")
-	# print(houses_dict)
-	# print("####### PRINTING P AND H DICT ##########")
-	# print(p_and_h_dict)
-	#print(trimsamsa_dict)
 
 	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict, trimsamsa_dict=trimsamsa_dict, shadbala_dict=shadbala_dict, png_dict=png_dict, unicode_dict=unicode_dict)
 
@@ -230,67 +195,14 @@ def shadbala():
 
 	return render_template('shadbala.html',shadbala_dict=shadbala_dict)
 
-#Displays current planetary positions
-@app.route('/ephemeris')	
-def ephemeris():
-	# date = Datetime('2020/04/21', '12:06', '-07:00')
-	# pos = GeoPos('38n32', '8w54')
-	# chart = Chart(date, pos, hsys=const.HOUSES_PLACIDUS)
-	# all_objs = chart.objects
 
-	# #get planets and signs
-	# sun = chart.getObject(const.SUN)
-	# moon = chart.getObject(const.MOON)
-	# mars = chart.getObject(const.MARS)
-	# mercury = chart.getObject(const.MERCURY)
-	# jupiter = chart.getObject(const.JUPITER)
-	# venus = chart.getObject(const.VENUS)
-	# saturn = chart.getObject(const.SATURN)
-	# rahu = chart.getObject(const.NORTH_NODE)
-	# ketu = chart.getObject(const.SOUTH_NODE)
-
-	# #to access attributes
-	# #sun.id, sun.lon, sun.sign, son.signlon, sun.lonspeed
-
-	# #Get house objects
-	# asc = chart.get(const.ASC)
-	# house1 = chart.get(const.HOUSE1)
-	# house2 = chart.get(const.HOUSE2)
-	# house3 = chart.get(const.HOUSE3)
-	# house4 = chart.get(const.HOUSE4)
-	# house5 = chart.get(const.HOUSE5)
-	# house6 = chart.get(const.HOUSE6)
-	# house7 = chart.get(const.HOUSE7)
-	# house8 = chart.get(const.HOUSE8)
-	# house9 = chart.get(const.HOUSE9)
-	# house10 = chart.get(const.HOUSE10)
-	# house11 = chart.get(const.HOUSE11)
-	# house12 = chart.get(const.HOUSE12)
-
-	#pass chart object to template
-	#return render_template('ephemeris.html', all_objs=all_objs)
-	return redirect("https://www.astro.com/swisseph/swepha_e.htm", code=302)
-
-@app.route('/panchanga', methods=['GET'])
+@app.route('/panchanga', methods=['GET','POST'])
 def panchanga():
 
-	time_of_day = "5:30"
-	city = "hyderabad"
-	tz = 5.5
-
-	#Get the current date, time in India
-	curr_date = datetime.datetime.now(pytz.timezone("Asia/Calcutta"))
-	curr_date_fmt = curr_date.strftime('%d-%m-%Y')
-	date_swisseph_fmt_date = curr_date.strftime('%Y/%m/%d')
-
-	date_dict = { "date": date_swisseph_fmt_date, "date_fmt":curr_date_fmt, "time_of_day": time_of_day, "city": city, "tz": tz } 
-
-	#Get the required information
-	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, chart = calc_allpos(date_swisseph_fmt_date, time_of_day, city, tz)
-
-	#print(date_dict)
+	date_dict = {}
 	#Generate the panchanga
-	panchanga_dict = get_tithi(planets_dict_lon_only, date_dict)
+	panchanga_dict = get_panchanga(date_dict, monthly=False)
+
 	
 	return render_template('panchanga.html', panchanga_dict=panchanga_dict)
 
