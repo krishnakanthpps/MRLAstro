@@ -196,7 +196,8 @@ def panchangam():
 
 @app.route('/api/horoscope', methods=['POST'])
 def horo():
-    	json_data = request.json
+	
+	json_data = request.json
     	a_value = json_data["a_key"]
 	dob = json_data["dob"]
 	tob = json_data["tob"]
