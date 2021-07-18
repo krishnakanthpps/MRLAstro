@@ -194,6 +194,12 @@ def panchangam():
 	panchanga_dict = get_panchanga(date_dict, monthly=False)
 	return panchanga_dict
 
+@app.route('/api/horoscope', methods=['POST'])
+def panchangam():
+    	json_data = flask.request.json
+    	a_value = json_data["a_key"]
+    	return "JSON value sent: " + a_value
+
 
 #Displays Shadbala
 @app.route('/shadbala')
