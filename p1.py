@@ -46,8 +46,8 @@ planet_list = [swe.SUN, swe.MOON, swe.MARS, swe.MERCURY, swe.JUPITER,
                swe.VENUS, swe.SATURN, swe.MEAN_NODE, # Rahu = MEAN_NODE
                swe.KETU, swe.URANUS, swe.NEPTUNE ]
 
-revati_359_50 = lambda: swe.set_sid_mode(swe.SIDM_USER, 1926892.343164331, 0)
-galc_cent_mid_mula = lambda: swe.set_sid_mode(swe.SIDM_USER, 1922011.128853056, 0)
+revati_359_50 = lambda: swe.set_sid_mode(swe.SIDM_LAHIRI, 1926892.343164331, 0)
+galc_cent_mid_mula = lambda: swe.set_sid_mode(swe.SIDM_LAHIRI, 1922011.128853056, 0)
 
 set_ayanamsa_mode = lambda: swe.set_sid_mode(swe.SIDM_LAHIRI)
 reset_ayanamsa_mode = lambda: swe.set_sid_mode(swe.SIDM_FAGAN_BRADLEY)
@@ -95,8 +95,8 @@ norm360 = lambda angle: angle % 360
 ketu = lambda rahu: (rahu + 180) % 360
 
 def function(point):
-    swe.set_sid_mode(swe.SIDM_USER, point, 0.0)
-    #swe.set_sid_mode(swe.SIDM_LAHIRI)
+    #swe.set_sid_mode(swe.SIDM_USER, point, 0.0)
+    swe.set_sid_mode(swe.SIDM_LAHIRI)
     # Place Revati at 359°50'
     #fval = norm180(swe.fixstar_ut("Revati", point, flag = swe.FLG_SWIEPH | swe.FLG_SIDEREAL)[0]) - ((359 + 49/60 + 59/3600) - 360)
     # Place Revati at 0°0'0"
