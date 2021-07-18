@@ -198,20 +198,20 @@ def panchangam():
 def horo():
 	
 	json_data = request.json
-    	a_value = json_data["a_key"]
-	dob = json_data["dob"]
-	tob = json_data["tob"]
-	city = json_data["city"]
-	tz = json_data["tz"]
+    		a_value = json_data["a_key"]
+		dob = json_data["dob"]
+		tob = json_data["tob"]
+		city = json_data["city"]
+		tz = json_data["tz"]
 	#get all the planet and house positions (raw - no formatting)
-	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, chart = calc_allpos(dob, tob, city, tz)
+		planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, chart = calc_allpos(dob, tob, city, tz)
 	
 	#zodiac sign list
-	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
+		zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
 	
 	#dicts to store formatted objects in zodiac sign - [planet_positions] format
-	p_and_h_dict = {}
-	navamsa_dict = {}
+		p_and_h_dict = {}
+		navamsa_dict = {}
 
 	#Generate dict for jinja2 with planets, houses and their positions
 	for sign in zs_list:
