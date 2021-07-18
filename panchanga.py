@@ -47,7 +47,8 @@ varas_dict = {
            3: "Budhavāra",
            4: "Guruvāra",
            5: "Śukravāra",
-           6: "Śanivāra"
+           6: "Śanivāra",
+           7: "Aadivāra"
          }
 
 nakshatras_dict = { 
