@@ -196,7 +196,7 @@ def panchangam():
 
 @app.route('/api/horoscope', methods=['POST'])
 def horo():
-    	json_data = flask.request.json
+    	json_data = request.json
     	a_value = json_data["a_key"]
     	return "JSON value sent: " + a_value
 
