@@ -220,8 +220,7 @@ def horo():
 	for sign in zs_list:
 		navamsa_dict[sign] = navamsa_from_long(sign, planets_dict_lon_only)
 		
-	
-    	return planets_dict
+	return planets_dict
 
 
 #Displays Shadbala
