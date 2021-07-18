@@ -189,7 +189,8 @@ def showchart():
 
 @app.route('/api/panchanga', methods=['POST'])
 def panchangam():
-	return 'hello'
+	date_dict = {}
+	return date_dict
 
 
 #Displays Shadbala
