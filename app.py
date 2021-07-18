@@ -10,6 +10,7 @@ from progressions import *
 from shadvarga import *
 from shadbala import *
 from panchanga import *
+import json
 from flask_moment import Moment
 import pytz
 
@@ -190,7 +191,8 @@ def showchart():
 @app.route('/api/panchanga', methods=['POST'])
 def panchangam():
 	date_dict = {}
-	return date_dict
+	panchanga_dict = get_panchanga(date_dict, monthly=False)
+	return jsonify(panchanga_dict)
 
 
 #Displays Shadbala
