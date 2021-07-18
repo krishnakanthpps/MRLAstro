@@ -192,7 +192,7 @@ def showchart():
 def panchangam():
 	date_dict = {}
 	panchanga_dict = get_panchanga(date_dict, monthly=False)
-	return jsonify(panchanga_dict)
+	return panchanga_dict
 
 
 #Displays Shadbala
