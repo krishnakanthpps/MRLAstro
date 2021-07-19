@@ -137,6 +137,12 @@ def showchart():
 
 
 	#get all the planet and house positions (raw - no formatting)
+	print("Input Data ***********************************************************");
+	print(dob);
+	print(tob);
+	print(city);
+	print(tz);
+	print("Data End *************************************************************);
 	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, chart = calc_allpos(dob, tob, city, tz)
 	
 	#zodiac sign list
