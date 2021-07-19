@@ -102,6 +102,7 @@ def showchart():
 	city = request.form['city']
 	state = request.form['state']
 	user_dob = request.form['user_dob']
+	print(user_dob);
 	dob = user_dob.replace("-","/")
 
 	#Also get the day, month, year for jinja display
