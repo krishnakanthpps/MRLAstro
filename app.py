@@ -203,7 +203,7 @@ def horo():
 	dob = json_data["dob"]
 	tob = json_data["tob"]
 	city=json_data["city"]
-	tz = json_data["tz]
+	tz = json_data["tz"]
 #	birth_name = request.form['birth_name']
 #	country = request.form['country']
 #	city = request.form['city']
