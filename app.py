@@ -307,7 +307,7 @@ def horo():
 #	shadbala_dict = calc_shadbalas(planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, shadvarga_dict, chart)
 #
 #	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict, trimsamsa_dict=trimsamsa_dict, shadbala_dict=shadbala_dict, png_dict=png_dict, unicode_dict=unicode_dict)
-	return(planets_dict)
+	return ({planets_dict, houses_dict, planets_dict_lon_only} )
 
 #Displays Shadbala
 @app.route('/shadbala')
