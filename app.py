@@ -312,7 +312,7 @@ def horo():
 		"Houses":houses_dict,
 		"Planets_Long":planets_dict_lon_only
 	}
-	return jsonify(payload)
+	return (payload)
 
 #Displays Shadbala
 @app.route('/shadbala')
