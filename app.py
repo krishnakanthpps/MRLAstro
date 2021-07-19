@@ -188,41 +188,6 @@ def showchart():
 	return render_template('display_chart.html', birth_name=birth_name, dob=dob_jinja, city=city, tob=tob, tz=tz, p_and_h_dict=p_and_h_dict, planets_dict=planets_dict, houses_dict=houses_dict, navamsa_dict=navamsa_dict, progressions_dict_pr=progressions_dict_pr, prg_details=prg_details, p_and_h_dict_transits=p_and_h_dict_transits, hora_dict=hora_dict, drekkana_dict=drekkana_dict, dwa_dict=dwa_dict, trimsamsa_dict=trimsamsa_dict, shadbala_dict=shadbala_dict, png_dict=png_dict, unicode_dict=unicode_dict)
 
 
-@app.route('/api/panchanga', methods=['POST'])
-def panchangam():
-	date_dict = {}
-	panchanga_dict = get_panchanga(date_dict, monthly=False)
-	return panchanga_dict
-
-@app.route('/api/horoscope', methods=['POST'])
-def horo():
-	
-	json_data = request.json
-	dob = json_data["dob"]
-	tob = json_data["tob"]
-	city = json_data["city"]
-	tz = json_data["tz"]
-	#get all the planet and house positions (raw - no formatting)
-	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, chart = calc_allpos(dob, tob, city, tz)
-	
-	#zodiac sign list
-	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
-	
-	#dicts to store formatted objects in zodiac sign - [planet_positions] format
-	p_and_h_dict = {}
-	navamsa_dict = {}
-
-	#Generate dict for jinja2 with planets, houses and their positions
-	for sign in zs_list:
-		p_and_h_dict[sign] = getPrintableObjects(sign, planets_dict, houses_dict)
-
-	#Navamsa dict - keys = zodiac sign; value = list of planets in that navamsa
-	for sign in zs_list:
-		navamsa_dict[sign] = navamsa_from_long(sign, planets_dict_lon_only)
-		
-	return planets_dict
-
-
 #Displays Shadbala
 @app.route('/shadbala')
 def shadbala():
