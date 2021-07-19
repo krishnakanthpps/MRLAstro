@@ -254,17 +254,22 @@ def horo():
 	planets_dict, houses_dict, planets_dict_lon_only, houses_dict_signlon, chart = calc_allpos(dob, tob, city, tz)
 	print(planets_dict);
 	print(houses_dict);
+	print(planets_dict_lon_only);
+	print(houses_dict_signlon);
+	print(chart);
 	#zodiac sign list
 	zs_list = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
 	
 	#dicts to store formatted objects in zodiac sign - [planet_positions] format
-#	p_and_h_dict = {}
-#	navamsa_dict = {}
+	p_and_h_dict = {}
+	navamsa_dict = {}
 
 	#Generate dict for jinja2 with planets, houses and their positions
-#	for sign in zs_list:
-#		p_and_h_dict[sign] = getPrintableObjects(sign, planets_dict, houses_dict)
+	for sign in zs_list:
+		p_and_h_dict[sign] = getPrintableObjects(sign, planets_dict, houses_dict)
+		print(p_and_h_dict[sign]);
 
+		
 	#Navamsa dict - keys = zodiac sign; value = list of planets in that navamsa
 #	for sign in zs_list:
 #		navamsa_dict[sign] = navamsa_from_long(sign, planets_dict_lon_only)
