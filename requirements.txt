@@ -13,7 +13,7 @@ durationpy==0.5
 Flask==1.1.2
 Flask-Moment==0.9.0
 flatlib==0.2.3
-git+https://github.com/flatangle/flatlib/tree/sidereal
+git+https://github.com/flatangle/flatlib/tree/sidereal@0.2.1
 future==0.18.2
 geographiclib==1.50
 geopy==1.21.0
