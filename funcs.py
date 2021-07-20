@@ -67,7 +67,7 @@ def calc_allpos(dob, tob, city, tz):
 	date = Datetime(dob, tob, tz)
 	city_lat, city_lon = get_lat_lon(city)
 	geopos = GeoPos(city_lat, city_lon)
-	chart = Chart(date, geopos, hsys=const.HOUSES_PLACIDUS, IDs=const.LIST_OBJECTS)
+	chart = Chart(date, geopos, hsys=const.HOUSES_EQUAL, IDs=const.LIST_OBJECTS)
 
 	sun = chart.getObject(const.SUN)
 	moon = chart.getObject(const.MOON)
